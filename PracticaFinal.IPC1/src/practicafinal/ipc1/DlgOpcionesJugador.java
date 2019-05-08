@@ -1,6 +1,7 @@
 package practicafinal.ipc1;
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,11 +16,15 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     private int[][] tipoTerreno, valores;
     JLabel[][] mapa;
     private int posX, posY, x, y, i, j, casillas, numCelda;
-    private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha;
-    private JLabel numAuto;
-    private int[][] enemigos;
+    private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
+    private JLabel numAuto, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto;
+    private int[][] enemigos, ocupado;
+    Object [] fila;
+    private DefaultTableModel modelMapa2;
+    private int[] vida;
+    private JPanel panelEnemigos;
     
-    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int casillas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos) {
+    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int casillas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, int[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -45,6 +50,18 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.balaDerecha = balaDerecha;
         this.enemigo = enemigo;
         this.enemigos = enemigos;
+        this.ocupado = ocupado;
+        this.torreta = torreta;
+        this.fila = fila;
+        this.modelMapa2 = modelMapa2;
+        this.vida = vida;
+        this.panelEnemigos = panelEnemigos;
+        this.enemigo1 = enemigo1;
+        this.enemigo2 = enemigo2;
+        this.enemigo3 = enemigo3;
+        this.enemigo4 = enemigo4; 
+        this.vidaAuto = vidaAuto;
+        this.nivelAuto = nivelAuto;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -114,22 +131,22 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void cambioAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioAutoActionPerformed
         this.dispose();
-        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto);
+        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto);
         auto.setVisible(true);
         
     }//GEN-LAST:event_cambioAutoActionPerformed
 
     private void dadoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoMovActionPerformed
         this.dispose();
-        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, casillas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos);
+        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, casillas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado);
         movimientos.setVisible(true);
     }//GEN-LAST:event_dadoMovActionPerformed
 
     private void ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ataqueActionPerformed
-        DlgAtaque ataque = new DlgAtaque(null, true, i, j, casillas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno);
+        DlgAtaque ataque = new DlgAtaque(null, true, i, j, casillas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores);
         ataque.setVisible(true);
     }//GEN-LAST:event_ataqueActionPerformed
-
+                        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ataque;
     private javax.swing.JButton cambioAuto;

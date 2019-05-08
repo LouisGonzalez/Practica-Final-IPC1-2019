@@ -14,7 +14,7 @@ public class MovDerecha extends TimerTask{
     private Icon autoTanque;
     
     @Override
-    public void run(){
+    public void run() {
         if(j<valor){
             mapa[i][j+1].setIcon(autoTanque);
         } j++;

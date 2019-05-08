@@ -17,7 +17,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
     private NuevoAvatar<NombreJugador> miLista;
     private int numCelda;
     private String auto;
-    private int ataque, armadura, experiencia, nivel;
+    private int ataque, armadura, experiencia, nivel, vida;
     ImageIcon avion = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Avion.jpg");
     ImageIcon tanque = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Tanque.jpg");
     
@@ -90,16 +90,18 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
                 ataque = 10;
                 armadura = 6;
                 experiencia = 0;
-                nivel = 0;
+                nivel = 1;
+                vida = 100;
             } else if (auto.equals("Avion")){
                 ataque = 7;
                 armadura = 3;
                 experiencia = 0;
-                nivel = 0;
+                nivel = 1;
+                vida = 100;
             }
             Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
             NombreJugador agregar = elemento.obtenerContenido();
-            NombreAuto nombre = new NombreAuto(nuevoAuto.getText(), auto, ataque, armadura, experiencia, nivel);
+            NombreAuto nombre = new NombreAuto(nuevoAuto.getText(), auto, ataque, armadura, experiencia, nivel, vida);
             agregar.getMiLista().insertarContenido(nombre);
             nuevoAuto.setText("");
             JOptionPane.showMessageDialog(null, "Su auto ha sido guardado con exito");

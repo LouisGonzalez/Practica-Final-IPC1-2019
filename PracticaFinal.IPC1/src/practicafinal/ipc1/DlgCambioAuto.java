@@ -15,17 +15,15 @@ public class DlgCambioAuto extends javax.swing.JDialog {
     NuevoAvatar<NombreJugador> misAutos;
     private int numCelda, numCelda2;
     private DefaultTableModel modelo;
-    private JLabel numAuto;
     
-    public DlgCambioAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, JLabel numAuto) {
+    public DlgCambioAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, JLabel numAuto, JLabel vidaAuto, JLabel nivelAuto) {
         super(parent, modal);
         initComponents();
         this.numCelda = numCelda;
         this.misAutos = misAutos;
-        this.numAuto = numAuto;
         setLocationRelativeTo(null);
         cargarValores();
-        cambiarAuto(mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto);
+        cambiarAuto(mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto);
         this.dispose();
     }
     
@@ -50,7 +48,7 @@ public class DlgCambioAuto extends javax.swing.JDialog {
         }
     }
     
-    private void cambiarAuto(JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] respaldo, int x, int y, int[][] valores, JLabel numAuto){
+    private void cambiarAuto(JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] respaldo, int x, int y, int[][] valores, JLabel numAuto, JLabel vidaAuto, JLabel nivelAuto){
         cambioAuto.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e){
@@ -63,13 +61,15 @@ public class DlgCambioAuto extends javax.swing.JDialog {
                     if(nombre.getTipoAuto().equals("Tanque") && (respaldo[posX][posY] ==1 || respaldo[posX][posY] ==3)){
                         mapa[posX][posY].setIcon(autoTanque);
                         valores[posX][posY] = 1;
-                        
                         numAuto.setText(String.valueOf(numCelda2));
-                        
+                        vidaAuto.setText(Integer.toString(nombre.getVida()));
+                        nivelAuto.setText(Integer.toString(nombre.getNivel()));
                     } else if(nombre.getTipoAuto().equals("Avion") && (respaldo[posX][posY] == 2 || respaldo[posX][posY] ==3)){
                         mapa[posX][posY].setIcon(autoAvion);
-                        valores[posX][posY] = 1;
+                        valores[posX][posY] = 2;
                         numAuto.setText(String.valueOf(numCelda2));
+                        vidaAuto.setText(Integer.toString(nombre.getVida()));
+                        nivelAuto.setText(Integer.toString(nombre.getNivel()));
                     } else {
                             JOptionPane.showMessageDialog(null, "Este auto no puede pasar en este tipo de terreno");
                     

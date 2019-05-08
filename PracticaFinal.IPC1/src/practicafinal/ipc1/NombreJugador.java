@@ -7,6 +7,7 @@ public class NombreJugador {
     private String nombre;
     private NuevoAuto<NombreAuto> miLista = new NuevoAuto<>();
     
+    
     public NombreJugador(String nombre, NuevoAuto<NombreAuto> miLista){
         this.nombre = nombre;
         this.miLista = miLista;
@@ -24,6 +25,6 @@ public class NombreJugador {
         return miLista;
     }
     
-    
+    //TERMINA DE IMPLEMENTAR TUS LISTAS ENLAZADAS PE COMPADRE
     
 }

@@ -17,12 +17,12 @@ public class DlgMovimientos extends javax.swing.JDialog {
     private ImageIcon dados = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Dados.jpg");
     private int posX, posY, casillas, i, j, numCelda;
     private JLabel[][] mapa;
-    private int[][] valores, tipoTerreno, enemigos;
-    Icon autoTanque, autoAvion, cumbres, mar, campo;
+    private int[][] valores, tipoTerreno, enemigos, ocupado;
+    private Icon autoTanque, autoAvion, cumbres, mar, campo, torreta;
     private NuevoAvatar<NombreJugador> misAutos;
-    JLabel numAuto;
+    private JLabel numAuto;
     
-    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int casillas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos){
+    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int casillas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado){
         super(parent, modal);
         initComponents();
         this.posX = posX;
@@ -42,6 +42,8 @@ public class DlgMovimientos extends javax.swing.JDialog {
         this.numAuto = numAuto;
         this.numCelda = numCelda;
         this.enemigos = enemigos;
+        this.torreta = torreta;
+        this.ocupado = ocupado;
         setLocationRelativeTo(null);
         Icon dadito = new ImageIcon(dados.getImage().getScaledInstance(dadoMov.getWidth(), dadoMov.getHeight(), Image.SCALE_DEFAULT));
         dadoMov.setIcon(dadito);
@@ -102,9 +104,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Su posicion actual es "+posX+" "+posY);
                 this.dispose();
                 if(nombre.getTipoAuto().equals("Tanque")){
-                    cinematica(autoTanque, 2, dadoRandom, direccion, nuevaPosX, nuevaPosY, segundaPosX, segundaPosY);
+                    cinematica(autoTanque, 2, dadoRandom, direccion, nuevaPosX, nuevaPosY, segundaPosX, segundaPosY, 1);
                 } else if (nombre.getTipoAuto().equals("Avion")){
-                    cinematica(autoAvion, 1, dadoRandom, direccion, nuevaPosX, nuevaPosY, segundaPosX, segundaPosY);
+                    cinematica(autoAvion, 1, dadoRandom, direccion, nuevaPosX, nuevaPosY, segundaPosX, segundaPosY, 2);
                 }
             } catch(Exception ex){
                 Logger.getLogger(DlgListaAvatares.class.getName()).log(Level.SEVERE, null, ex);    
@@ -118,7 +120,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                 
     }//GEN-LAST:event_dadoActionPerformed
     
-    private void cinematica(Icon tipoAuto, int tipoCampo, int dadoRandom, int direccion, int nuevaPosX, int nuevaPosY, int segundaPosX, int segundaPosY){
+    private void cinematica(Icon tipoAuto, int tipoCampo, int dadoRandom, int direccion, int nuevaPosX, int nuevaPosY, int segundaPosX, int segundaPosY, int valorAuto){
         Timer timer = new Timer();
         MovAbajo abajo = new MovAbajo();
         MovAbajo2 abajo2 = new MovAbajo2();
@@ -137,11 +139,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         arriba.valores(i, j, segundaPosX+1, mapa, tipoAuto);
-                        arriba2.valores(i, j, segundaPosX+1, mapa, cumbres, mar, campo, tipoTerreno);
+                        arriba2.valores(i, j, segundaPosX+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(arriba, 0, 1000);
                         timer.schedule(arriba2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[segundaPosX][posY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[segundaPosX][posY] = valorAuto;
+                        ocupado[segundaPosX][posY] = 1;
                     }
                 } else if (segundaPosX<=0){
                     if(tipoTerreno[0][posY]==tipoCampo || enemigos[0][posY]==1){
@@ -149,11 +153,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         arriba.valores(i, j, 0+1, mapa, tipoAuto);
-                        arriba2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno);
+                        arriba2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(arriba, 0, 1000);
                         timer.schedule(arriba2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[0][posY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[0][posY] = valorAuto;
+                        ocupado[0][posY] = 1;
                     }
                 }
             break;
@@ -165,11 +171,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         abajo.valores(i, j, casillas-1, mapa, tipoAuto);
-                        abajo2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno);
+                        abajo2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(abajo, 0, 1000);
                         timer.schedule(abajo2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[casillas-1][posY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[casillas-1][posY] = valorAuto;
+                        ocupado[casillas-1][posY] = 1;
                     }
                 } else if (nuevaPosX<casillas){
                     if(tipoTerreno[nuevaPosX][posY]==tipoCampo || enemigos[nuevaPosX][posY]==1){
@@ -177,11 +185,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         abajo.valores(i, j, nuevaPosX, mapa, tipoAuto);
-                        abajo2.valores(i, j, nuevaPosX, mapa, cumbres, mar, campo, tipoTerreno);
+                        abajo2.valores(i, j, nuevaPosX, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(abajo, 0, 1000);
                         timer.schedule(abajo2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[nuevaPosX][posY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[nuevaPosX][posY] = valorAuto;
+                        ocupado[nuevaPosX][posY] = 1;
                     }
                 } 
             break;
@@ -193,11 +203,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         derecha.valores(i, j, casillas-1, mapa, tipoAuto);
-                        derecha2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno);
+                        derecha2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(derecha, 0, 1000);
                         timer.schedule(derecha2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[posX][casillas-1] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[posX][casillas-1] = valorAuto;
+                        ocupado[posX][casillas-1] = 1;
                     }
                 } else if (nuevaPosY<casillas){
                     if(tipoTerreno[posX][nuevaPosY]==tipoCampo || enemigos[posX][nuevaPosY]==1){
@@ -205,11 +217,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         derecha.valores(i, j, nuevaPosY, mapa, tipoAuto);
-                        derecha2.valores(i, j, nuevaPosY, mapa, cumbres, mar, campo, tipoTerreno);
+                        derecha2.valores(i, j, nuevaPosY, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(derecha, 0, 1000);
                         timer.schedule(derecha2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[posX][nuevaPosY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[posX][nuevaPosY] = valorAuto;
+                        ocupado[posX][nuevaPosY] = 1;
                     }
                 }   
             break;
@@ -221,11 +235,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         izquierda.valores(i, j, segundaPosY+1, mapa, tipoAuto);
-                        izquierda2.valores(i, j, segundaPosY+1, mapa, cumbres, mar, campo, tipoTerreno);
+                        izquierda2.valores(i, j, segundaPosY+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(izquierda, 0, 1000);
                         timer.schedule(izquierda2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[posX][segundaPosY] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[posX][segundaPosY] = valorAuto;
+                        ocupado[posX][segundaPosY] = 1;
                     }
                 } else if (segundaPosY<0){
                     if(tipoTerreno[posX][0]==tipoCampo || enemigos[posX][0]==1){
@@ -233,11 +249,13 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         izquierda.valores(i, j, 0+1, mapa, tipoAuto);
-                        izquierda2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno);
+                        izquierda2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(izquierda, 0, 1000);
                         timer.schedule(izquierda2, 0, 1000);
                         valores[posX][posY] = 0;
-                        valores[posX][0] = 1;
+                        ocupado[posX][posY] = 0;
+                        valores[posX][0] = valorAuto;
+                        ocupado[posX][0] = 1;
                     }
                 }  
             break;                
