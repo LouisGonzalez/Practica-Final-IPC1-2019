@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 public class DlgMenuJugador extends javax.swing.JDialog {
     
     private NuevoAvatar<NombreJugador> miLista;  
-    private NuevoAuto<NombreAuto> miLista2;
     private int numCelda;
     
     public DlgMenuJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, int fila, int columna, NuevoAvatar<NombreJugador> miLista, int numCelda) {
@@ -28,6 +27,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
         verAutos = new javax.swing.JButton();
         crearAutos = new javax.swing.JButton();
         juegoNuevo = new javax.swing.JButton();
+        tienda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,6 +52,13 @@ public class DlgMenuJugador extends javax.swing.JDialog {
             }
         });
 
+        tienda.setText("Tienda");
+        tienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiendaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,6 +66,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tienda)
                     .addComponent(juegoNuevo)
                     .addComponent(crearAutos)
                     .addComponent(verAutos)
@@ -76,7 +84,9 @@ public class DlgMenuJugador extends javax.swing.JDialog {
                 .addComponent(verAutos)
                 .addGap(18, 18, 18)
                 .addComponent(crearAutos)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tienda)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
@@ -98,10 +108,16 @@ public class DlgMenuJugador extends javax.swing.JDialog {
         jugar.setVisible(true);
     }//GEN-LAST:event_juegoNuevoActionPerformed
 
+    private void tiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendaActionPerformed
+        DlgTienda tienda = new DlgTienda(null, true, numCelda, miLista);
+        tienda.setVisible(true);
+    }//GEN-LAST:event_tiendaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crearAutos;
     private javax.swing.JButton juegoNuevo;
     private javax.swing.JLabel nombreJugador;
+    private javax.swing.JButton tienda;
     private javax.swing.JButton verAutos;
     // End of variables declaration//GEN-END:variables
 }

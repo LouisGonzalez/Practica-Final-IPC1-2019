@@ -17,14 +17,14 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     JLabel[][] mapa;
     private int posX, posY, x, y, i, j, casillas, numCelda;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
-    private JLabel numAuto, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto;
+    private JLabel numAuto, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto;
     private int[][] enemigos, ocupado;
     Object [] fila;
     private DefaultTableModel modelMapa2;
-    private int[] vida;
+    private double[] vida;
     private JPanel panelEnemigos;
     
-    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int casillas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, int[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto) {
+    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int casillas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -62,6 +62,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.enemigo4 = enemigo4; 
         this.vidaAuto = vidaAuto;
         this.nivelAuto = nivelAuto;
+        this.ataqueAuto = ataqueAuto;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -131,7 +132,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void cambioAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioAutoActionPerformed
         this.dispose();
-        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto);
+        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto, ataqueAuto);
         auto.setVisible(true);
         
     }//GEN-LAST:event_cambioAutoActionPerformed
@@ -143,7 +144,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     }//GEN-LAST:event_dadoMovActionPerformed
 
     private void ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ataqueActionPerformed
-        DlgAtaque ataque = new DlgAtaque(null, true, i, j, casillas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores);
+        DlgAtaque ataque = new DlgAtaque(null, true, i, j, casillas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores, numCelda, misAutos, ataqueAuto);
         ataque.setVisible(true);
     }//GEN-LAST:event_ataqueActionPerformed
                         

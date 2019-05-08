@@ -26,11 +26,12 @@ public class DlgEnemigos extends javax.swing.JDialog {
     private int posX, posY;
     private int x, cantidad, j;
     private JLabel vidaEnemigo, enemigo1, enemigo2, enemigo3, enemigo4;
-    private int[] vida, guardarX, guardarY;
+    private double[] vida;
+    private int[] guardarX, guardarY;
     private final Border borde = LineBorder.createGrayLineBorder();
     private JPanel panelEnemigos;
     
-    public DlgEnemigos(java.awt.Frame parent, boolean modal, NuevoEnemigo<Enemigo> enemigo, JLabel[][] mapa, Icon torretaEnemigo, int[][] enemigos, int posX, int posY, int[][] ocupado, int[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4) {
+    public DlgEnemigos(java.awt.Frame parent, boolean modal, NuevoEnemigo<Enemigo> enemigo, JLabel[][] mapa, Icon torretaEnemigo, int[][] enemigos, int posX, int posY, int[][] ocupado, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4) {
         super(parent, modal);
         this.enemigo = enemigo;     
         this.torretaEnemigo = torretaEnemigo;
@@ -82,7 +83,7 @@ public class DlgEnemigos extends javax.swing.JDialog {
     private void botonEnemigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnemigoActionPerformed
         contador++;
         this.cantidad = cantEnemigos.getSelectedIndex();
-        this.vida = new int[4];
+        this.vida = new double[4];
         this.guardarX = new int[4];
         this.guardarY = new int[4];
         if(contador==1){
@@ -119,10 +120,10 @@ public class DlgEnemigos extends javax.swing.JDialog {
                 }
             }   
                       
-            enemigo1.setText(Integer.toString(vida[0]));
-            enemigo2.setText(Integer.toString(vida[1]));
-            enemigo3.setText(Integer.toString(vida[2]));
-            enemigo4.setText(Integer.toString(vida[3]));
+            enemigo1.setText(Double.toString(vida[0]));
+            enemigo2.setText(Double.toString(vida[1]));
+            enemigo3.setText(Double.toString(vida[2]));
+            enemigo4.setText(Double.toString(vida[3]));
             JOptionPane.showMessageDialog(null, "Sus enemigos han sido agregados con exito, A PELEAR!!");
         } else {
                 JOptionPane.showMessageDialog(null, "Solo una vez se pueden instanciar vehiculos");

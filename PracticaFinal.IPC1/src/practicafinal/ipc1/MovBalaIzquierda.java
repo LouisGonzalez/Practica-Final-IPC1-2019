@@ -14,37 +14,39 @@ public class MovBalaIzquierda extends TimerTask {
     private JLabel[][] mapa;
     private Icon bala, torreta;
     private int[][] ocupado, enemigos;
-    private JLabel enemigo1, enemigo2, enemigo3, enemigo4;
+    private JLabel enemigo1, enemigo2, enemigo3, enemigo4, resultado;
     
     @Override
     public void run(){
+        double valorFinal = Double.parseDouble(resultado.getText());
         if(j>=0){
             mapa[i][j].setIcon(bala);
+            valorFinal = valorFinal-(valorFinal*0.04);
             if(ocupado[i][j] == 1){
                 mapa[i][j].setIcon(torreta);
                 switch(enemigos[i][j]){
                 case 1:
                     JOptionPane.showMessageDialog(null, "le has disparado al enemigo 1");
-                    enemigo1.setText(Integer.toString(Integer.parseInt(enemigo1.getText()) - 10));
+                    enemigo1.setText(Double.toString(Double.parseDouble(enemigo1.getText()) - valorFinal));                    
                     break;
                 case 2:
                     JOptionPane.showMessageDialog(null, "Le has disparado al enemigo 2");
-                    enemigo2.setText(Integer.toString(Integer.parseInt(enemigo2.getText()) - 10));
+                    enemigo2.setText(Double.toString(Double.parseDouble(enemigo2.getText()) - valorFinal));                    
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Le has disparado al enemigo 3");
-                    enemigo3.setText(Integer.toString(Integer.parseInt(enemigo3.getText()) - 10));
+                    enemigo3.setText(Double.toString(Double.parseDouble(enemigo3.getText()) - valorFinal));                    
                     break;
                 case 4: 
                     JOptionPane.showMessageDialog(null, "Le has disparado al enemigo 4");
-                    enemigo4.setText(Integer.toString(Integer.parseInt(enemigo4.getText()) - 10)); 
+                    enemigo4.setText(Double.toString(Double.parseDouble(enemigo4.getText()) - valorFinal));                    
                     break;
                 }this.cancel();
             }
         } j--;
     }
           
-    public void valores(int i, int j, JLabel[][] mapa, Icon bala, int[][] ocupado, Icon torreta, int[][] enemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4){
+    public void valores(int i, int j, JLabel[][] mapa, Icon bala, int[][] ocupado, Icon torreta, int[][] enemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel resultado){
         this.i = i;
         this.j = j;
         this.mapa = mapa;
@@ -56,5 +58,6 @@ public class MovBalaIzquierda extends TimerTask {
         this.enemigo2 = enemigo2;
         this.enemigo3 = enemigo3;
         this.enemigo4 = enemigo4;
+        this.resultado = resultado;
     }
 }

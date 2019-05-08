@@ -73,7 +73,9 @@ public class FrmNuevoAvatar extends javax.swing.JDialog {
 
     private void crearAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearAvatarActionPerformed
         NuevoAuto<NombreAuto> miLista2 = new NuevoAuto<>();
-        NombreJugador nombre = new NombreJugador(ingreseAvatar.getText(), miLista2);       
+        NuevaArma<Armas> misArmas = new NuevaArma<>();
+        NuevoBot<Bot> misBots = new NuevoBot<>();
+        NombreJugador nombre = new NombreJugador(ingreseAvatar.getText(), miLista2, misArmas, misBots, 50);       
         miLista.insertarContenido(nombre);
         ingreseAvatar.setText("");
         JOptionPane.showMessageDialog(null, "Su nuevo avatar ha sido guardado exitosamente");
