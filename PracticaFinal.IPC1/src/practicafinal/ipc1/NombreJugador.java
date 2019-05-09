@@ -41,6 +41,26 @@ public class NombreJugador {
     public NuevoBot<Bot> getMisBots() {
         return misBots;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setOro(double oro) {
+        this.oro = oro;
+    }
+
+    public void setMiLista(NuevoAuto<NombreAuto> miLista) {
+        this.miLista = miLista;
+    }
+
+    public void setMisArmas(NuevaArma<Armas> misArmas) {
+        this.misArmas = misArmas;
+    }
+
+    public void setMisBots(NuevoBot<Bot> misBots) {
+        this.misBots = misBots;
+    }
     
     
     

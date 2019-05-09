@@ -12,15 +12,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DlgCambioAuto extends javax.swing.JDialog {
 
-    NuevoAvatar<NombreJugador> misAutos;
+    private NuevoAvatar<NombreJugador> misAutos;
     private int numCelda, numCelda2;
     private DefaultTableModel modelo;
+    Nodo<NombreJugador> elemento;
+    NombreJugador lista;
+    Nodo2<NombreAuto> elemento2;
+    NombreAuto nombre;
     
-    public DlgCambioAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, JLabel numAuto, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto) {
+    public DlgCambioAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, JLabel numAuto, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre) {
         super(parent, modal);
         initComponents();
         this.numCelda = numCelda;
         this.misAutos = misAutos;
+        this.elemento = elemento;
+        this.lista = lista;
+        this.elemento2 = elemento2;
+        this.nombre = nombre;
         setLocationRelativeTo(null);
         cargarValores();
         cambiarAuto(mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto, ataqueAuto);
@@ -29,14 +37,14 @@ public class DlgCambioAuto extends javax.swing.JDialog {
     
     private void cargarValores(){
         try {
-            Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
-            NombreJugador tabla = elemento.obtenerContenido();
+            elemento = misAutos.obtenerElemento(numCelda);
+            lista = elemento.obtenerContenido();
             modelo = (DefaultTableModel) cambioAuto.getModel();
             Object[] fila = new Object[modelo.getColumnCount()];
-            for(int i=0; i<tabla.getMiLista().obtenerCantidadElementos(); i++){
+            for(int i=0; i<lista.getMiLista().obtenerCantidadElementos(); i++){
                 try{
-                    Nodo2<NombreAuto> elemento2 = tabla.getMiLista().obtenerElemento(i);
-                    NombreAuto nombre = elemento2.obtenerContenido();
+                    elemento2 = lista.getMiLista().obtenerElemento(i);
+                    nombre = elemento2.obtenerContenido();
                     fila[0] = nombre.getNombre();
                     fila[1] = nombre.getTipoAuto();
                     modelo.addRow(fila);
@@ -54,10 +62,10 @@ public class DlgCambioAuto extends javax.swing.JDialog {
             public void mouseClicked(java.awt.event.MouseEvent e){
                 try{
                     numCelda2 = cambioAuto.rowAtPoint(e.getPoint());
-                    Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
-                    NombreJugador lista = elemento.obtenerContenido();
-                    Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(numCelda2);
-                    NombreAuto nombre = elemento2.obtenerContenido();
+                    elemento = misAutos.obtenerElemento(numCelda);
+                    lista = elemento.obtenerContenido();
+                    elemento2 = lista.getMiLista().obtenerElemento(numCelda2);
+                    nombre = elemento2.obtenerContenido();
                     if(nombre.getTipoAuto().equals("Tanque") && (respaldo[posX][posY] ==1 || respaldo[posX][posY] ==3)){
                         mapa[posX][posY].setIcon(autoTanque);
                         valores[posX][posY] = 1;

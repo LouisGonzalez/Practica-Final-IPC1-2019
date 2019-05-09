@@ -49,6 +49,34 @@ public class NombreAuto {
     public int getVida() {
         return vida;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTipoAuto(String tipoAuto) {
+        this.tipoAuto = tipoAuto;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public void setArmadura(int armadura) {
+        this.armadura = armadura;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
     
     
     

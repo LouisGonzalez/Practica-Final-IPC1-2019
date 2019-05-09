@@ -19,6 +19,15 @@ public class Armas {
     public double getAtaque() {
         return ataque;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setAtaque(double ataque) {
+        this.ataque = ataque;
+    }
+    
     
     
 }

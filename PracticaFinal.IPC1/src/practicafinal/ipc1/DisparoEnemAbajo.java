@@ -1,6 +1,8 @@
 package practicafinal.ipc1;
 
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,27 +17,48 @@ public class DisparoEnemAbajo extends TimerTask{
     private Icon bala, autoTanque, autoAvion;
     private JLabel[][] mapa;
     private int[][] valores;
-    private JLabel vidaAuto;
+    private JLabel vidaAuto, numAuto;
+    private NuevoAvatar<NombreJugador> miLista;
+    private int numCelda;
+    private int vida;
+    private Nodo<NombreJugador> elemento;
+    private NombreJugador lista;
+    private Nodo2<NombreAuto> elemento2;
+    private NombreAuto nombre;
+    private int valor;
     
     @Override
     public void run(){
-        if(i<casillas){
-            mapa[i][j].setIcon(bala);
-            if(valores[i][j]==1){
-                mapa[i][j].setIcon(autoTanque);
-                JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
-                vidaAuto.setText(Double.toString(Double.parseDouble(vidaAuto.getText())-10));
-                this.cancel();
-            } else if(valores[i][j]==2){
-                mapa[i][j].setIcon(autoAvion);
-                JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
-                vidaAuto.setText(Double.toString(Double.parseDouble(vidaAuto.getText())-10));
-                this.cancel();
+        try {
+            elemento = miLista.obtenerElemento(numCelda);
+            lista = elemento.obtenerContenido();       
+            elemento2 = lista.getMiLista().obtenerElemento(Integer.parseInt(numAuto.getText()));
+            nombre = elemento2.obtenerContenido(); 
+            valor = nombre.getVida();
+            if(i<casillas){
+                mapa[i][j].setIcon(bala);
+                if(valores[i][j]==1){
+                    mapa[i][j].setIcon(autoTanque);
+                    JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
+                    valor = valor - 10;
+                    vidaAuto.setText(Integer.toString(valor));
+                    nombre.setVida(valor);
+                    this.cancel();
+                } else if(valores[i][j]==2){
+                    mapa[i][j].setIcon(autoAvion);
+                    JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
+                    valor = valor - 10;
+                    vidaAuto.setText(Integer.toString(valor));
+                    nombre.setVida(valor);
+                    this.cancel();               
+                }            
             }
-        } i++; 
+            i++; 
+        } catch(Exception e){         
+        } 
     }
     
-    public void valores(int i, int j, int casillas, Icon bala, Icon autoTanque, Icon autoAvion, JLabel[][] mapa, int[][] valores, JLabel vidaAuto){
+    public void valores(int i, int j, int casillas, Icon bala, Icon autoTanque, Icon autoAvion, JLabel[][] mapa, int[][] valores, JLabel vidaAuto, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre){
         this.i = i;
         this.j = j;
         this.casillas = casillas;
@@ -45,5 +68,18 @@ public class DisparoEnemAbajo extends TimerTask{
         this.mapa = mapa;
         this.valores = valores;
         this.vidaAuto = vidaAuto;
+        this.miLista = miLista;
+        this.numCelda = numCelda;
+        this.numAuto = numAuto;
+        this.elemento = elemento;
+        this.lista = lista;
+        this.elemento2 = elemento2;
+        this.nombre = nombre;
     }
+
+    public int getVida() {
+        return vida;
+    }
+    
+    
 }
