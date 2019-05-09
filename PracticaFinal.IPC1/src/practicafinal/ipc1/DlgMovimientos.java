@@ -15,20 +15,21 @@ import javax.swing.JOptionPane;
 public class DlgMovimientos extends javax.swing.JDialog {
     
     private ImageIcon dados = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Dados.jpg");
-    private int posX, posY, casillas, i, j, numCelda;
+    private int posX, posY, filas, columnas, i, j, numCelda;
     private JLabel[][] mapa;
     private int[][] valores, tipoTerreno, enemigos, ocupado;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, torreta;
     private NuevoAvatar<NombreJugador> misAutos;
     private JLabel numAuto;
     
-    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int casillas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado){
+    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int filas, int columnas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado){
         super(parent, modal);
         initComponents();
         this.posX = posX;
         this.posY = posY;
         this.mapa = mapa;
-        this.casillas = casillas;
+        this.filas = filas;
+        this.columnas = columnas;
         this.i = i;
         this.j = j;
         this.autoTanque = autoTanque;
@@ -165,21 +166,21 @@ public class DlgMovimientos extends javax.swing.JDialog {
             break;
             case 2:
                 //metodo para mover abajo
-                if(nuevaPosX>=casillas){
-                    if(tipoTerreno[casillas-1][posY]==tipoCampo || enemigos[casillas-1][posY]==1){
+                if(nuevaPosX>=filas){
+                    if(tipoTerreno[filas-1][posY]==tipoCampo || enemigos[filas-1][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
-                        abajo.valores(i, j, casillas-1, mapa, tipoAuto);
-                        abajo2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        abajo.valores(i, j, filas-1, mapa, tipoAuto);
+                        abajo2.valores(i, j, filas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(abajo, 0, 1000);
                         timer.schedule(abajo2, 0, 1000);
                         valores[posX][posY] = 0;
                         ocupado[posX][posY] = 0;
-                        valores[casillas-1][posY] = valorAuto;
-                        ocupado[casillas-1][posY] = 1;
+                        valores[filas-1][posY] = valorAuto;
+                        ocupado[filas-1][posY] = 1;
                     }
-                } else if (nuevaPosX<casillas){
+                } else if (nuevaPosX<filas){
                     if(tipoTerreno[nuevaPosX][posY]==tipoCampo || enemigos[nuevaPosX][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
@@ -197,21 +198,21 @@ public class DlgMovimientos extends javax.swing.JDialog {
             break;
             case 3:
                 //metodo para mover derecha
-                if(nuevaPosY>=casillas){
-                    if(tipoTerreno[posX][casillas-1]==tipoCampo || enemigos[posX][casillas-1]==1){
+                if(nuevaPosY>=columnas){
+                    if(tipoTerreno[posX][columnas-1]==tipoCampo || enemigos[posX][columnas-1]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
-                        derecha.valores(i, j, casillas-1, mapa, tipoAuto);
-                        derecha2.valores(i, j, casillas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        derecha.valores(i, j, columnas-1, mapa, tipoAuto);
+                        derecha2.valores(i, j, columnas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                         timer.schedule(derecha, 0, 1000);
                         timer.schedule(derecha2, 0, 1000);
                         valores[posX][posY] = 0;
                         ocupado[posX][posY] = 0;
-                        valores[posX][casillas-1] = valorAuto;
-                        ocupado[posX][casillas-1] = 1;
+                        valores[posX][columnas-1] = valorAuto;
+                        ocupado[posX][columnas-1] = 1;
                     }
-                } else if (nuevaPosY<casillas){
+                } else if (nuevaPosY<columnas){
                     if(tipoTerreno[posX][nuevaPosY]==tipoCampo || enemigos[posX][nuevaPosY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);

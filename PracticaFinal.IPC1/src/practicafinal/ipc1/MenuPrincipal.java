@@ -13,6 +13,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     private NuevoAvatar<NombreJugador> miLista = new NuevoAvatar<>();
     ImageIcon foto = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/world-of-warcraft-computer-games-wallpaper-2029.jpg");           
+    DefaultTableModel tabla;
     
     public MenuPrincipal() {      
         initComponents();   
@@ -99,13 +100,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void solitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solitarioActionPerformed
        DlgListaAvatares listas = new DlgListaAvatares(miLista);      
-       DefaultTableModel tabla = (DefaultTableModel) listas.tablaDatos.getModel();
+       tabla = (DefaultTableModel) listas.tablaDatos.getModel();
        MostrarAvatares nuevo = new MostrarAvatares(this, true, tabla, miLista);
        nuevo.setVisible(true);
     }//GEN-LAST:event_solitarioActionPerformed
 
     private void multijugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multijugadorActionPerformed
-
+       DlgListaAvatares listas = new DlgListaAvatares(miLista);
+       tabla = (DefaultTableModel) listas.tablaDatos.getModel();
+       DlgEleccionMultiJugador multiJugador = new DlgEleccionMultiJugador(this, true, tabla, miLista);
+       multiJugador.setVisible(true);
     }//GEN-LAST:event_multijugadorActionPerformed
 
     private void nuevoAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAvatarActionPerformed

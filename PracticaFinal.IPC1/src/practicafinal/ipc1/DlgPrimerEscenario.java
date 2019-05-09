@@ -24,7 +24,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
     private int[][] enemigos;
     private int x, y, numCelda;
     private int[][] ocupado, bots;
-    private static final int casillas = 4;
+    private static final int filas = 4;
+    private static final int columnas = 4;
     private final ImageIcon cumbre = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/cumbre4.jpg");
     private final ImageIcon agua = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/mar.jpg");
     private final ImageIcon campoAbierto = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/campoAbierto.jpg");    
@@ -46,10 +47,10 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
     private int[] posBotY = new int[10];
     DlgEnemigos enemigos2;
     private int contadorTurnos=0;
-    Nodo<NombreJugador> elemento;
-    NombreJugador lista;
-    Nodo2<NombreAuto> elemento2;
-    NombreAuto nombre;
+    private Nodo<NombreJugador> elemento;
+    private NombreJugador lista;
+    private Nodo2<NombreAuto> elemento2;
+    private NombreAuto nombre;
     
     public DlgPrimerEscenario(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda) {
         super(parent, modal);
@@ -71,15 +72,15 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
     }
 
     private void cargarEscenario(Icon cumbres, Icon mar, Icon campo){       
-        this.mapa = new JLabel[casillas][casillas];
-        this.tipoTerreno = new int[casillas][casillas];
-        this.valores = new int[casillas][casillas];
-        this.enemigos = new int[casillas][casillas];
-        this.ocupado = new int[casillas][casillas];
-        this.bots = new int[casillas][casillas];
-        tableroJuego.setLayout(new GridLayout(casillas, casillas));
-        for (x = 0; x < casillas; x++) {    //doble for para la creacion de la matriz de labels
-            for (y = 0; y < casillas; y++) {
+        this.mapa = new JLabel[filas][columnas];
+        this.tipoTerreno = new int[filas][columnas];
+        this.valores = new int[filas][columnas];
+        this.enemigos = new int[filas][columnas];
+        this.ocupado = new int[filas][columnas];
+        this.bots = new int[filas][columnas];
+        tableroJuego.setLayout(new GridLayout(filas, columnas));
+        for (x = 0; x < filas; x++) {    //doble for para la creacion de la matriz de labels
+            for (y = 0; y < columnas; y++) {
                 valores[x][y] = 0;
                 enemigos[x][y] = 0;
                 ocupado[x][y] = 0;   
@@ -131,7 +132,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                         contadorTurnos++;
                                         
                                         contTurnos.setText(Integer.toString(contadorTurnos));
-                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, casillas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre);
+                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre);
                                         camibo.setVisible(true);
                                         disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
                                     } else if(matriz == mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]==0){
@@ -253,29 +254,24 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         MovIzquierda2 limpiarIzquierda2 = new MovIzquierda2();
         MovIzquierda2 limpiarIzquierda3 = new MovIzquierda2();
         MovIzquierda2 limpiarIzquierda4 = new MovIzquierda2();
-        /*try {
-        elemento = misAutos.obtenerElemento(numCelda);
-        lista = elemento.obtenerContenido();       
-        elemento2 = lista.getMiLista().obtenerElemento(Integer.parseInt(numAuto.getText()));
-        nombre = elemento2.obtenerContenido();*/
         
         switch (enemigos2.getCantidad()) {
             case 0:
             
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo, 0, 1000);
                     timer.schedule(arriba, 0, 1000);
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda, 0, 1000);
                     timer.schedule(derecha, 0, 1000);
                     timer.schedule(limpiarIzquierda, 1000, 1000);
@@ -285,38 +281,38 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             case 1:
                 
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo, 0, 1000);
                     timer.schedule(arriba, 0, 1000);
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda, 0, 1000);
                     timer.schedule(derecha, 0, 1000);
                     timer.schedule(limpiarIzquierda, 1000, 1000);
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo2, 0, 1000);
                     timer.schedule(arriba2, 0, 1000);
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda2, 0, 1000);
                     timer.schedule(derecha2, 0, 1000);
                     timer.schedule(limpiarIzquierda2, 1000, 1000);
@@ -326,57 +322,57 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             case 2:
                
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo, 0, 1000);
                     timer.schedule(arriba, 0, 1000);
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda, 0, 1000);
                     timer.schedule(derecha, 0, 1000);
                     timer.schedule(limpiarIzquierda, 1000, 1000);
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo2, 0, 1000);
                     timer.schedule(arriba2, 0, 1000);
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda2, 0, 1000);
                     timer.schedule(derecha2, 0, 1000);
                     timer.schedule(limpiarIzquierda2, 1000, 1000);
                     timer.schedule(limpiarDerecha2, 1000, 1000);                   
                 }
                 if(aleatorio3==1){
-                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo3, 0, 1000);
                     timer.schedule(arriba3, 0, 1000);
                     timer.schedule(limpiarAbajo3, 1000, 1000);
                     timer.schedule(limpiarArriba3, 1000, 1000);                  
                 } else if(aleatorio3==2){
-                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda3, 0, 1000);
                     timer.schedule(derecha3, 0, 1000);
                     timer.schedule(limpiarIzquierda3, 1000, 1000);
@@ -385,76 +381,76 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                 break;
             case 3:  
                 if(aleatorio==1){                
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo, 0, 1000);
                     timer.schedule(arriba, 0, 1000);
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){                
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda, 0, 1000);
                     timer.schedule(derecha, 0, 1000);
                     timer.schedule(limpiarIzquierda, 1000, 1000);
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo2, 0, 1000);
                     timer.schedule(arriba2, 0, 1000);
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda2, 0, 1000);
                     timer.schedule(derecha2, 0, 1000);
                     timer.schedule(limpiarIzquierda2, 1000, 1000);
                     timer.schedule(limpiarDerecha2, 1000, 1000);                   
                 }
                 if(aleatorio3==1){
-                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo3, 0, 1000);
                     timer.schedule(arriba3, 0, 1000);
                     timer.schedule(limpiarAbajo3, 1000, 1000);
                     timer.schedule(limpiarArriba3, 1000, 1000);                  
                 } else if(aleatorio3==2){
-                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda3, 0, 1000);
                     timer.schedule(derecha3, 0, 1000);
                     timer.schedule(limpiarIzquierda3, 1000, 1000);
                     timer.schedule(limpiarDerecha3, 1000, 1000);                   
                 }
                 if(aleatorio4==1){
-                    abajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], casillas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
+                    abajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
                     arriba4.valores(enemigos2.getGuardarX()[3]-1, enemigos2.getGuardarY()[3], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarArriba4.valores(enemigos2.getGuardarX()[3]-1, enemigos2.getGuardarY()[3], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarAbajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarAbajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(abajo4, 0, 1000);
                     timer.schedule(arriba4, 0, 1000);
                     timer.schedule(limpiarAbajo4, 1000, 1000);
                     timer.schedule(limpiarArriba4, 1000, 1000);                  
                 } else if(aleatorio4==2){
-                    derecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, casillas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     izquierda4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
                     limpiarIzquierda4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
-                    limpiarDerecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
+                    limpiarDerecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores);
                     timer.schedule(izquierda4, 0, 1000);
                     timer.schedule(derecha4, 0, 1000);
                     timer.schedule(limpiarIzquierda4, 1000, 1000);
@@ -462,9 +458,6 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                 }
         
         }
-        /*} catch(Exception e){
-            
-        }*/
         
        
     }

@@ -15,7 +15,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     private NuevoEnemigo<Enemigo> enemigo;
     private int[][] tipoTerreno, valores;
     JLabel[][] mapa;
-    private int posX, posY, x, y, i, j, casillas, numCelda;
+    private int posX, posY, x, y, i, j, filas, columnas, numCelda;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
     private JLabel numAuto, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto;
     private int[][] enemigos, ocupado;
@@ -29,7 +29,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     NombreAuto nombre;
     
     
-    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int casillas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre) {
+    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -45,7 +45,8 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.x = x;
         this.y = y;
         this.valores = valores;
-        this.casillas = casillas;
+        this.filas = filas;
+        this.columnas = columnas;
         this.i = i;
         this.j = j;
         this.numAuto = numAuto;
@@ -148,12 +149,12 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void dadoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoMovActionPerformed
         this.dispose();
-        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, casillas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado);
+        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado);
         movimientos.setVisible(true);
     }//GEN-LAST:event_dadoMovActionPerformed
 
     private void ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ataqueActionPerformed
-        DlgAtaque ataque = new DlgAtaque(null, true, i, j, casillas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores, numCelda, misAutos, ataqueAuto);
+        DlgAtaque ataque = new DlgAtaque(null, true, i, j, filas, columnas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores, numCelda, misAutos, ataqueAuto);
         ataque.setVisible(true);
     }//GEN-LAST:event_ataqueActionPerformed
                         

@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class DlgAtaque extends javax.swing.JDialog {
 
     private String movDisparo;
-    private int i, j, casillas, numCelda, numCelda2;
+    private int i, j, filas, columnas, numCelda, numCelda2;
     private JLabel[][] mapa;
     private Icon balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, torreta, autoTanque, autoAvion;
     private int[][] tipoTerreno, ocupado, enemigos, valores;
@@ -30,11 +30,12 @@ public class DlgAtaque extends javax.swing.JDialog {
     private int contador=0;
     
     
-    public DlgAtaque(java.awt.Frame parent, boolean modal, int i, int j, int casillas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, Object[] fila, NuevoEnemigo<Enemigo> ataque, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, Icon autoTanque, Icon autoAvion, int[][] valores, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto) {
+    public DlgAtaque(java.awt.Frame parent, boolean modal, int i, int j, int filas, int columnas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, Object[] fila, NuevoEnemigo<Enemigo> ataque, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, Icon autoTanque, Icon autoAvion, int[][] valores, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto) {
         super(parent, modal);
         this.i = i;
         this.j = j;
-        this.casillas = casillas;
+        this.filas = filas;
+        this.columnas = columnas;
         this.mapa = mapa;
         this.balaArriba = balaArriba;
         this.balaAbajo = balaAbajo;
@@ -194,8 +195,8 @@ public class DlgAtaque extends javax.swing.JDialog {
                 timer.schedule(arriba2, 1000, 1000);
                 break;
             case "Abajo":
-                abajo.valores(i+1, j, casillas, mapa, balaAbajo, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                abajo2.valores(i+1, j, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                abajo.valores(i+1, j, filas, mapa, balaAbajo, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
+                abajo2.valores(i+1, j, filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                 timer.schedule(abajo, 0, 1000);
                 timer.schedule(abajo2, 1000, 1000);
                 break;
@@ -206,8 +207,8 @@ public class DlgAtaque extends javax.swing.JDialog {
                 timer.schedule(izquierda2, 1000, 1000);
                 break;
             case "Derecha":
-                derecha.valores(i, j+1, casillas, mapa, balaDerecha, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                derecha2.valores(i, j+1, casillas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                derecha.valores(i, j+1, columnas, mapa, balaDerecha, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
+                derecha2.valores(i, j+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
                 timer.schedule(derecha, 0, 1000);
                 timer.schedule(derecha2, 1000, 1000);
                 break;

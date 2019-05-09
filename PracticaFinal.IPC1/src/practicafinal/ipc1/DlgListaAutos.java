@@ -37,6 +37,7 @@ public class DlgListaAutos extends javax.swing.JDialog {
                     fila[3] = nombre.getArmadura();
                     fila[4] = nombre.getExperiencia();
                     fila[5] = nombre.getNivel();
+                    fila[6] = nombre.getVida();
                     dtmModel2.addRow(fila);
                 } catch (Exception ex){
                     Logger.getLogger(DlgListaAvatares.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,11 +62,11 @@ public class DlgListaAutos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Autos:", "Tipo Auto:", "Ataque:", "Armadura:", "Experiencia:", "Nivel:"
+                "Autos:", "Tipo Auto:", "Ataque:", "Armadura:", "Experiencia:", "Nivel:", "Vida:"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
