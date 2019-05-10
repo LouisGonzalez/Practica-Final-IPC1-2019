@@ -140,7 +140,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         arriba.valores(i, j, segundaPosX+1, mapa, tipoAuto);
-                        arriba2.valores(i, j, segundaPosX+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        arriba2.valores(i, j, segundaPosX+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(arriba, 0, 1000);
                         timer.schedule(arriba2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -154,7 +154,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         arriba.valores(i, j, 0+1, mapa, tipoAuto);
-                        arriba2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        arriba2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(arriba, 0, 1000);
                         timer.schedule(arriba2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -172,7 +172,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         abajo.valores(i, j, filas-1, mapa, tipoAuto);
-                        abajo2.valores(i, j, filas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        abajo2.valores(i, j, filas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(abajo, 0, 1000);
                         timer.schedule(abajo2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -186,7 +186,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         abajo.valores(i, j, nuevaPosX, mapa, tipoAuto);
-                        abajo2.valores(i, j, nuevaPosX, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        abajo2.valores(i, j, nuevaPosX, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(abajo, 0, 1000);
                         timer.schedule(abajo2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -204,7 +204,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         derecha.valores(i, j, columnas-1, mapa, tipoAuto);
-                        derecha2.valores(i, j, columnas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        derecha2.valores(i, j, columnas-1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(derecha, 0, 1000);
                         timer.schedule(derecha2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -218,7 +218,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         derecha.valores(i, j, nuevaPosY, mapa, tipoAuto);
-                        derecha2.valores(i, j, nuevaPosY, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        derecha2.valores(i, j, nuevaPosY, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(derecha, 0, 1000);
                         timer.schedule(derecha2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -236,7 +236,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         izquierda.valores(i, j, segundaPosY+1, mapa, tipoAuto);
-                        izquierda2.valores(i, j, segundaPosY+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        izquierda2.valores(i, j, segundaPosY+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(izquierda, 0, 1000);
                         timer.schedule(izquierda2, 0, 1000);
                         valores[posX][posY] = 0;
@@ -250,7 +250,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         setVisible(true);
                     } else {
                         izquierda.valores(i, j, 0+1, mapa, tipoAuto);
-                        izquierda2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                        izquierda2.valores(i, j, 0+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(izquierda, 0, 1000);
                         timer.schedule(izquierda2, 0, 1000);
                         valores[posX][posY] = 0;

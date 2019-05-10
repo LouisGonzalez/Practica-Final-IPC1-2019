@@ -9,35 +9,51 @@ import javax.swing.JOptionPane;
  */
 public class DisparoAbajoMult extends TimerTask{
     
-    private int i, j, casillas;
+    private int i, j, casillas, numCelda;
     int[][] ocupado, valoresJugador;
-    private JLabel resultado;
+    private JLabel resultado, numAuto, vidaAuto;
     private JLabel[][] mapa;
     private Icon bala, autoTanque, autoAvion;
+    private NuevoAvatar<NombreJugador> miLista;
+    private double vida;
     
     @Override
     public void run(){
-        double valorFinal = Double.parseDouble(resultado.getText());    
-        if(i<casillas){
-            mapa[i][j].setIcon(bala);
-            valorFinal = valorFinal-(valorFinal*0.04);
-            if(ocupado[i][j]==1){
-                switch(valoresJugador[i][j]){
-                case 1:
-                    JOptionPane.showMessageDialog(null, "le has disparado al tanque de tu enemigo");
-                    mapa[i][j].setIcon(autoTanque);
-                    break;
-                case 2:
-                    JOptionPane.showMessageDialog(null, "Le has disparado al avion de tu enemigo"); 
-                    mapa[i][j].setIcon(autoAvion);
-                    break;
+        try{
+            Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
+            NombreJugador lista = elemento.obtenerContenido();
+            Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(Integer.parseInt(numAuto.getText()));
+            NombreAuto nombre = elemento2.obtenerContenido();
+            double valorFinal = Double.parseDouble(resultado.getText()); 
+            vida = nombre.getVida();
+            if(i<casillas){
+                mapa[i][j].setIcon(bala);
+                valorFinal = valorFinal-(valorFinal*0.04);
+                if(ocupado[i][j]==1){
+                    switch(valoresJugador[i][j]){
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "le has disparado al tanque de tu enemigo");
+                        mapa[i][j].setIcon(autoTanque);
+                        vida = vida - valorFinal;
+                        vidaAuto.setText(Double.toString(vida));
+                        nombre.setVida(vida);
+                        break;
+                    case 2:
+                        JOptionPane.showMessageDialog(null, "Le has disparado al avion de tu enemigo"); 
+                        mapa[i][j].setIcon(autoAvion);
+                        vida = vida - valorFinal;
+                        vidaAuto.setText(Double.toString(vida));
+                        nombre.setVida(vida);
+                        break;
+                    }
+                    this.cancel();    
                 }
-                this.cancel();    
-            }
-        } i++;
+            } i++;
+        } catch(Exception e){           
+        }
     }
     
-    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon autoTanque, Icon autoAvion, Icon bala){
+    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto){
         this.i = i;
         this.j = j;
         this.casillas = casillas;
@@ -48,5 +64,9 @@ public class DisparoAbajoMult extends TimerTask{
         this.bala = bala;
         this.autoAvion = autoAvion;
         this.autoTanque = autoTanque;
+        this.miLista = miLista;
+        this.numCelda = numCelda;
+        this.numAuto = numAuto;
+        this.vidaAuto = vidaAuto;
     }
 }

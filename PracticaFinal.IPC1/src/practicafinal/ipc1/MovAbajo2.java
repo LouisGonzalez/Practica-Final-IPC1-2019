@@ -12,7 +12,7 @@ public class MovAbajo2 extends TimerTask {
     private int i, j, valor;
     private JLabel[][] mapa;
     private int[][] tipoTerreno, enemigos, valores;
-    private Icon cumbres, mar, campo, torreta, autoTanque, autoAvion;
+    private Icon cumbres, mar, campo, torreta, autoTanque, autoAvion, torreta1;
     
     @Override
     public void run(){
@@ -27,7 +27,11 @@ public class MovAbajo2 extends TimerTask {
                 case 3: 
                     mapa[i][j].setIcon(campo);
             }
-            if(enemigos[i][j]!=0){
+            if(enemigos[i][j]==1){
+                mapa[i][j].setIcon(torreta);
+            } else if(enemigos[i][j]==2){
+                mapa[i][j].setIcon(torreta1);
+            } else if(enemigos[i][j]>2){
                 mapa[i][j].setIcon(torreta);
             } else if(valores[i][j]==1){
                 mapa[i][j].setIcon(autoTanque);
@@ -37,7 +41,7 @@ public class MovAbajo2 extends TimerTask {
         } i++;
     }
     
-    public void valores(int i, int j, int valor, JLabel[][] mapa, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] enemigos, Icon torreta, Icon autoTanque, Icon autoAvion, int[][] valores){
+    public void valores(int i, int j, int valor, JLabel[][] mapa, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] enemigos, Icon torreta, Icon autoTanque, Icon autoAvion, int[][] valores, Icon torreta1){
         this.i = i;
         this.j = j;
         this.valor = valor;
@@ -51,6 +55,7 @@ public class MovAbajo2 extends TimerTask {
         this.autoTanque = autoTanque;
         this.autoAvion = autoAvion;
         this.valores = valores;
+        this.torreta1 = torreta1;
     }
     
 }

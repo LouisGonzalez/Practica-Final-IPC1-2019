@@ -87,7 +87,7 @@ public class DlgAtaque extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         disparo = new javax.swing.JButton();
         resultado = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        calcularAtaque = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaArmas = new javax.swing.JTable();
@@ -135,13 +135,13 @@ public class DlgAtaque extends javax.swing.JDialog {
         jPanel1.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
         jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 50, 20));
 
-        jButton1.setText("Calcular Daño");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        calcularAtaque.setText("Calcular Daño");
+        calcularAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                calcularAtaqueActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel1.add(calcularAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 490, 70));
 
@@ -169,7 +169,7 @@ public class DlgAtaque extends javax.swing.JDialog {
 
         txt3.setText("Daño Arma:");
         jPanel2.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
-        jPanel2.add(ataqueArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 60, 60));
+        jPanel2.add(ataqueArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 60, 60));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 280, 170));
 
@@ -190,25 +190,25 @@ public class DlgAtaque extends javax.swing.JDialog {
         switch(movDisparo){
             case "Arriba":
                 arriba.valores(i-1, j, mapa, balaArriba, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                arriba2.valores(i-1, j, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                arriba2.valores(i-1, j, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                 timer.schedule(arriba, 0, 1000);
                 timer.schedule(arriba2, 1000, 1000);
                 break;
             case "Abajo":
                 abajo.valores(i+1, j, filas, mapa, balaAbajo, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                abajo2.valores(i+1, j, filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                abajo2.valores(i+1, j, filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                 timer.schedule(abajo, 0, 1000);
                 timer.schedule(abajo2, 1000, 1000);
                 break;
             case "Izquierda":
                 izquierda.valores(i, j-1, mapa, balaIzquierda, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                izquierda2.valores(i, j-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                izquierda2.valores(i, j-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                 timer.schedule(izquierda, 0, 1000);
                 timer.schedule(izquierda2, 1000, 1000);
                 break;
             case "Derecha":
                 derecha.valores(i, j+1, columnas, mapa, balaDerecha, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
-                derecha2.valores(i, j+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores);
+                derecha2.valores(i, j+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                 timer.schedule(derecha, 0, 1000);
                 timer.schedule(derecha2, 1000, 1000);
                 break;
@@ -223,11 +223,11 @@ public class DlgAtaque extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_dadoAtaqueActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void calcularAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularAtaqueActionPerformed
         contador++;
         resultado.setText(Double.toString((Double.parseDouble(ataqueTotal.getText()) + Double.parseDouble(ataqueArma.getText()))+((Double.parseDouble(ataqueTotal.getText()) + Double.parseDouble(ataqueArma.getText()))*(Double.parseDouble(mostrarDado.getText())/100))/2));
                
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_calcularAtaqueActionPerformed
     
     private void cargarValores(JLabel ataqueAuto){
          try {
@@ -275,10 +275,10 @@ public class DlgAtaque extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ataqueArma;
     private javax.swing.JLabel ataqueTotal;
+    private javax.swing.JButton calcularAtaque;
     private javax.swing.JButton dadoAtaque;
     private javax.swing.JComboBox<String> direccionAtaque;
     private javax.swing.JButton disparo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

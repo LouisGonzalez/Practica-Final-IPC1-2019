@@ -1,5 +1,4 @@
 package practicafinal.ipc1;
-
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -21,7 +20,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     
     private JLabel[][] mapa;
     private NuevoAvatar<NombreJugador> miLista;
-    private int[][] tipoTerreno, valoresJugador1, valoresJugador2, ocupado1, ocupado2;
+    private int[][] tipoTerreno, valoresJugador1, valoresJugador2, ocupado1, ocupado2, enemigos;
     private DefaultTableModel modelMapa1, modelMapa2;
     private int numCelda, numCelda2, filas, columnas, x, y;
     private int contTurnos = 0;
@@ -69,11 +68,13 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         this.valoresJugador2 = new int[filas][columnas];
         this.ocupado1 = new int[filas][columnas];
         this.ocupado2 = new int[filas][columnas];
+        this.enemigos = new int[filas][columnas];
         tableroJuego.setLayout(new GridLayout(filas, columnas));
         for (x = 0; x < filas; x++) {    //doble for para la creacion de la matriz de labels
             for (y = 0; y < columnas; y++) {
                 valoresJugador1[x][y] = 0;
                 valoresJugador2[x][y] = 0;
+                enemigos[x][y] = 0;
                 JLabel matriz = new JLabel();   //se inicializa el label unitario y se le dan caracteristicas iniciales
                 matriz.setBounds(100*x,75*y,100,75);
                 matriz.setOpaque(true);
@@ -113,44 +114,55 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                                     }
                                 }
                             }
-                        }                                                   
-                        else if(contTurnos%2 != 0 && contTurnos != 1){
-                            turnoJugador.setText(nombre1);
-                            for(int posX=0; posX<x; posX++){
-                                for(int posY=0; posY<y; posY++){
-                                    if(matriz==mapa[posX][posY] && valoresJugador1[posX][posY]==1 || valoresJugador1[posX][posY]==2){
-                                        int i = posX;
-                                        int j = posY;
-                                        DlgOpcionesMultiJugador jugador1 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador1, filas, columnas, i, j, numAuto1, balaArriba, balaAbajo, balaIzquierda, balaDerecha, ocupado2, ocupado1, vidaAuto1, nivelAuto1, ataqueAuto1, elemento, lista, elemento2, nombre);
-                                        jugador1.setVisible(true);
-                                    } else if (matriz==mapa[posX][posY] && ocupado1[posX][posY]==0 && ocupado2[posX][posY]==0){
-                                        contTurnos = contTurnos-1; 
-                                        JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion");                                    
-                                    }else if (matriz==mapa[posX][posY] && ocupado1[posX][posY]==0 && ocupado2[posX][posY]!=0){
-                                        contTurnos = contTurnos-1; 
-                                        JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion pero te has topado con el auto del jugador 2");                                    
+                        }
+                        else if(contTurnos>2){    
+                            if(contTurnos%2 != 0 && contTurnos != 1){
+                                turnoJugador.setText(nombre1);
+                                for(int posX=0; posX<x; posX++){
+                                    for(int posY=0; posY<y; posY++){
+                                        if(matriz==mapa[posX][posY] && valoresJugador1[posX][posY]==1 || valoresJugador1[posX][posY]==2){
+                                            int i = posX;
+                                            int j = posY;
+                                            DlgOpcionesMultiJugador jugador1 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador1, filas, columnas, i, j, numAuto1, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado2, vidaAuto1, nivelAuto1, ataqueAuto1, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador2, numCelda2, numAuto2, vidaAuto2);
+                                            jugador1.setVisible(true);
+                                        } else if (matriz==mapa[posX][posY] && ocupado1[posX][posY]==0 && ocupado2[posX][posY]==0){
+                                            contTurnos = contTurnos-1; 
+                                            JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion");                                    
+                                        }else if (matriz==mapa[posX][posY] && ocupado1[posX][posY]==0 && ocupado2[posX][posY]!=0){
+                                            contTurnos = contTurnos-1; 
+                                            JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion pero te has topado con el auto del jugador 2");                                    
+                                        }
                                     }
                                 }
-                            }
-                        } else if (contTurnos%2 == 0 && contTurnos !=2){
-                            turnoJugador.setText(nombre2);
-                            for(int posX=0; posX<x; posX++){
-                                for(int posY=0; posY<y; posY++){
-                                    if(matriz==mapa[posX][posY] && valoresJugador2[posX][posY]==1 || valoresJugador2[posX][posY]==2){
-                                        int i = posX;
-                                        int j = posY;
-                                        DlgOpcionesMultiJugador jugador2 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda2, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador2, filas, columnas, i, j, numAuto2, balaArriba, balaAbajo, balaIzquierda, balaDerecha, ocupado1, ocupado2, vidaAuto2, nivelAuto2, ataqueAuto2, elemento, lista, elemento2, nombre);
-                                        jugador2.setVisible(true);
-                                    } else if (matriz==mapa[posX][posY] && ocupado2[posX][posY]==0 && ocupado1[posX][posY]==0){
-                                        contTurnos = contTurnos-1;
-                                        JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion");
-                                    } else if (matriz==mapa[posX][posY] && ocupado2[posX][posY]==0 && ocupado1[posX][posY]!=0){
-                                        contTurnos = contTurnos-1; 
-                                        JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion pero te has topado con el auto del jugador 1");                                    
+                            } else if (contTurnos%2 == 0 && contTurnos !=2){
+                                turnoJugador.setText(nombre2);
+                                for(int posX=0; posX<x; posX++){
+                                    for(int posY=0; posY<y; posY++){
+                                        if(matriz==mapa[posX][posY] && valoresJugador2[posX][posY]==1 || valoresJugador2[posX][posY]==2){
+                                            int i = posX;
+                                            int j = posY;
+                                            DlgOpcionesMultiJugador jugador2 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda2, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador2, filas, columnas, i, j, numAuto2, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado1, vidaAuto2, nivelAuto2, ataqueAuto2, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador1, numCelda, numAuto1, vidaAuto1);
+                                            jugador2.setVisible(true);
+                                        } else if (matriz==mapa[posX][posY] && ocupado2[posX][posY]==0 && ocupado1[posX][posY]==0){
+                                            contTurnos = contTurnos-1;
+                                            JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion");
+                                        } else if (matriz==mapa[posX][posY] && ocupado2[posX][posY]==0 && ocupado1[posX][posY]!=0){
+                                            contTurnos = contTurnos-1; 
+                                            JOptionPane.showMessageDialog(null, "no contiene un auto en esta posicion pero te has topado con el auto del jugador 1");                                    
+                                        }
                                     }
-                                }
+                            
+                                }      
+                        
+                            } if(Double.parseDouble(vidaAuto1.getText())<=0 ){
+                                JOptionPane.showMessageDialog(null, "Jugador 1 ha sido derrotado");
+                                dispose();
+                            }else if(Double.parseDouble(vidaAuto2.getText())<=0 ){
+                                JOptionPane.showMessageDialog(null, "Jugador 2 ha sido derrotado");
+                                dispose();
                             }
                         }
+                        
                     }
                 });
                 

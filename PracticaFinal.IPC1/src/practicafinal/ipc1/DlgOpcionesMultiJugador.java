@@ -12,18 +12,19 @@ import javax.swing.table.DefaultTableModel;
 public class DlgOpcionesMultiJugador extends javax.swing.JDialog {
 
     private NuevoAvatar<NombreJugador> misAutos;
-    private int[][] tipoTerreno, valores;
+    private int[][] tipoTerreno, valores, valores2;
     JLabel[][] mapa;
-    private int posX, posY, x, y, i, j, filas, columnas, numCelda;
+    private int posX, posY, x, y, i, j, filas, columnas, numCelda, numCelda2;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
-    private JLabel numAuto, vidaAuto, nivelAuto, ataqueAuto;
+    private JLabel numAuto, vidaAuto, nivelAuto, ataqueAuto, vidaAuto2, numAuto2;
     private int[][] enemigos, ocupado;
-    Nodo<NombreJugador> elemento;
-    NombreJugador lista;
-    Nodo2<NombreAuto> elemento2;
-    NombreAuto nombre;
+    private Nodo<NombreJugador> elemento;
+    private NombreJugador lista;
+    private Nodo2<NombreAuto> elemento2;
+    private NombreAuto nombre;
+    private DefaultTableModel modelMapa2;
     
-    public DlgOpcionesMultiJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, int[][] enemigos, int[][] ocupado, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre) {
+    public DlgOpcionesMultiJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, int[][] enemigos, int[][] ocupado, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, DefaultTableModel modelMapa2, int[][] valores2, int numCelda2, JLabel numAuto2, JLabel vidaAuto2) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -57,6 +58,11 @@ public class DlgOpcionesMultiJugador extends javax.swing.JDialog {
         this.elemento2 = elemento2;
         this.lista = lista;
         this.nombre = nombre;
+        this.modelMapa2 = modelMapa2;
+        this.valores2 = valores2;
+        this.numCelda2 = numCelda;
+        this.numAuto2 = numAuto2;
+        this.vidaAuto2 = vidaAuto2;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -124,7 +130,8 @@ public class DlgOpcionesMultiJugador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAtaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtaqueActionPerformed
-
+        DlgAtaqueMult ataque = new DlgAtaqueMult(null, true, i, j, filas, columnas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, modelMapa2, autoTanque, autoAvion, valores, valores2, numCelda, misAutos, ataqueAuto, numCelda2, numAuto2, vidaAuto2);
+        ataque.setVisible(true);
     }//GEN-LAST:event_botonAtaqueActionPerformed
 
     private void cambioAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioAutoActionPerformed
