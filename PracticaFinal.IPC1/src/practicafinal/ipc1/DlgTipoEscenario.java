@@ -81,18 +81,19 @@ public class DlgTipoEscenario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dimension1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension1ActionPerformed
-        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 4);
         primero.setVisible(true);
     }//GEN-LAST:event_dimension1ActionPerformed
 
     private void dimension2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension2ActionPerformed
-        DlgSegundoEscenario segundo = new DlgSegundoEscenario(null, true, miLista, numCelda);
-        segundo.setVisible(true);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 6);
+        primero.setVisible(true);
+    
     }//GEN-LAST:event_dimension2ActionPerformed
 
     private void dimension3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension3ActionPerformed
-        DlgTercerEscenario tercero = new DlgTercerEscenario(null, true, miLista, numCelda);
-        tercero.setVisible(true);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 8, 9);
+        primero.setVisible(true);
     }//GEN-LAST:event_dimension3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,9 +6,10 @@ package practicafinal.ipc1;
 public class NombreAuto {
     private String nombre;
     private String tipoAuto;
-    private int ataque, armadura, experiencia, nivel, vida;
+    private int armadura, experiencia, nivel;
+    private double ataque, vida;
     
-    public NombreAuto(String nombre, String tipoAuto, int ataque, int armadura, int experiencia, int nivel, int vida){
+    public NombreAuto(String nombre, String tipoAuto, double ataque, int armadura, int experiencia, int nivel, double vida){
         this.nombre = nombre;
         this.tipoAuto = tipoAuto;
         this.ataque = ataque;
@@ -30,7 +31,7 @@ public class NombreAuto {
         return tipoAuto;
     }
 
-    public int getAtaque() {
+    public double getAtaque() {
         return ataque;
     }
 
@@ -46,7 +47,7 @@ public class NombreAuto {
         return nivel;
     }
 
-    public int getVida() {
+    public double getVida() {
         return vida;
     }
 
@@ -58,7 +59,7 @@ public class NombreAuto {
         this.tipoAuto = tipoAuto;
     }
 
-    public void setAtaque(int ataque) {
+    public void setAtaque(double ataque) {
         this.ataque = ataque;
     }
 
@@ -74,7 +75,7 @@ public class NombreAuto {
         this.nivel = nivel;
     }
 
-    public void setVida(int vida) {
+    public void setVida(double vida) {
         this.vida = vida;
     }
     

@@ -25,7 +25,7 @@ public class DisparoEnemAbajo extends TimerTask{
     private NombreJugador lista;
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
-    private int valor;
+    private double valor;
     
     @Override
     public void run(){
@@ -41,14 +41,14 @@ public class DisparoEnemAbajo extends TimerTask{
                     mapa[i][j].setIcon(autoTanque);
                     JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
                     valor = valor - 10;
-                    vidaAuto.setText(Integer.toString(valor));
+                    vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
                     this.cancel();
                 } else if(valores[i][j]==2){
                     mapa[i][j].setIcon(autoAvion);
                     JOptionPane.showMessageDialog(null, "Un enemigo a acertado un golpe contra ti :/");
                     valor = valor - 10;
-                    vidaAuto.setText(Integer.toString(valor));
+                    vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
                     this.cancel();               
                 }            

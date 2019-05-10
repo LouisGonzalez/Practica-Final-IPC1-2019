@@ -3,24 +3,19 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 /**
  *
  * @author luisGonzalez
  */
 public class MovBalaArriba extends TimerTask{
     
-    Timer timer;
     private int i, j;
     private JLabel[][] mapa;
     private Icon bala, torreta;
     private int[][] ocupado;
-    ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
     private int[][] enemigos;   
     private JLabel enemigo1, enemigo2, enemigo3, enemigo4, resultado;
     

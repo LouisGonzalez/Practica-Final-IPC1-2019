@@ -2,7 +2,6 @@ package practicafinal.ipc1;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -142,7 +141,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void cambioAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambioAutoActionPerformed
         this.dispose();
-        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre);
+        DlgCambioAuto auto = new DlgCambioAuto(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, numAuto, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, ocupado);
         auto.setVisible(true);
         
     }//GEN-LAST:event_cambioAutoActionPerformed
@@ -154,6 +153,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     }//GEN-LAST:event_dadoMovActionPerformed
 
     private void ataqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ataqueActionPerformed
+        this.dispose();
         DlgAtaque ataque = new DlgAtaque(null, true, i, j, filas, columnas, mapa, balaArriba, balaAbajo, balaIzquierda, balaDerecha, cumbres, mar, campo, tipoTerreno, ocupado, torreta, enemigos, fila, enemigo, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, autoTanque, autoAvion, valores, numCelda, misAutos, ataqueAuto);
         ataque.setVisible(true);
     }//GEN-LAST:event_ataqueActionPerformed

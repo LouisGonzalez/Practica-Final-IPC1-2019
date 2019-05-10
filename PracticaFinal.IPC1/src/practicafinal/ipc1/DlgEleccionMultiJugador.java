@@ -1,8 +1,6 @@
 package practicafinal.ipc1;
-
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-
 /**
  *
  * @author luisGonzalez
@@ -10,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 public class DlgEleccionMultiJugador extends javax.swing.JDialog {
     
     private NuevoAvatar<NombreJugador> miLista;
+    private int contadorClicks = 0;
+    private int numCelda, numCelda2;
     
     public DlgEleccionMultiJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista) {
         super(parent, modal);
@@ -19,13 +19,18 @@ public class DlgEleccionMultiJugador extends javax.swing.JDialog {
         tablaJugadores.setModel(dtm);
         tablaJugadores.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override                                                                                                                   
-            public void mouseClicked(java.awt.event.MouseEvent e){                      
-                if(e.getClickCount()==1){                  
-                    int fila = tablaJugadores.rowAtPoint(e.getPoint());
-                    int columna = tablaJugadores.columnAtPoint(e.getPoint()); 
-                    int numCelda = tablaJugadores.rowAtPoint(e.getPoint());
-                    DlgMenuJugador menu = new DlgMenuJugador(null, true, dtm, fila, columna, miLista, numCelda);
-                    menu.setVisible(true);                     
+            public void mouseClicked(java.awt.event.MouseEvent e){  
+                contadorClicks++;
+                if(contadorClicks==1){                  
+                    numCelda = tablaJugadores.rowAtPoint(e.getPoint());
+                    dtm.removeRow(numCelda);
+                } else if(contadorClicks>1){
+                    numCelda2 = tablaJugadores.rowAtPoint(e.getPoint());
+                    if(numCelda<=numCelda2){
+                        numCelda2 = numCelda2 + 1;
+                    }
+                    DlgEscenarioMultiJugador escena = new DlgEscenarioMultiJugador(null, true, miLista, numCelda, numCelda2);
+                    escena.setVisible(true);
                 }
             }
         });
