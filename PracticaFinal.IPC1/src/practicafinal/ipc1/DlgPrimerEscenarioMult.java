@@ -32,8 +32,11 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     private final ImageIcon bala1 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/balaArriba.png");
     private final ImageIcon bala2 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/balaAbajo.png");
     private final ImageIcon bala3 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/balaDerecha.png");
-    private final Border borde = LineBorder.createGrayLineBorder();
     private final ImageIcon bala4 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/balaIzquierda.png");
+    private final ImageIcon botito = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/bot.jpg");
+    private final ImageIcon fondos = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/f.jpg");
+    private final ImageIcon imagen = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/qw.jpg");
+    private final Border borde = LineBorder.createGrayLineBorder();
     private Nodo<NombreJugador> elemento;
     private NombreJugador lista;
     private Nodo2<NombreAuto> elemento2;
@@ -51,6 +54,12 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         Icon cumbres = new ImageIcon(cumbre.getImage().getScaledInstance(segunda.getWidth(), segunda.getHeight(), Image.SCALE_DEFAULT));
         Icon mar = new ImageIcon(agua.getImage().getScaledInstance(tercera.getWidth(), tercera.getHeight(), Image.SCALE_DEFAULT));
         Icon campo = new ImageIcon(campoAbierto.getImage().getScaledInstance(primera.getWidth(), primera.getHeight(), Image.SCALE_DEFAULT)); 
+        Icon pantalla = new ImageIcon(fondos.getImage().getScaledInstance(fondoPantalla.getWidth(), fondoPantalla.getHeight(), Image.SCALE_DEFAULT)); 
+        Icon imagen1 = new ImageIcon(imagen.getImage().getScaledInstance(fondoAliado.getWidth(), fondoAliado.getHeight(), Image.SCALE_DEFAULT)); 
+        Icon imagen2 = new ImageIcon(imagen.getImage().getScaledInstance(fondoEnemigo.getWidth(), fondoEnemigo.getHeight(), Image.SCALE_DEFAULT)); 
+        fondoPantalla.setIcon(pantalla);
+        fondoAliado.setIcon(imagen1);
+        fondoEnemigo.setIcon(imagen2);
         primera.setIcon(campo);
         segunda.setIcon(cumbres);
         tercera.setIcon(mar);
@@ -109,8 +118,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                                 for(int posY=0; posY<y; posY++){
                                     if(matriz==mapa[posX][posY]){
                                         DlgCambioAuto auto = new DlgCambioAuto(null, true, miLista, numCelda2, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador2, numAuto2, vidaAuto2, nivelAuto2, ataqueAuto2, elemento, lista, elemento2, nombre, ocupado2);
-                                        auto.setVisible(true);
-                                        
+                                        auto.setVisible(true);                                      
                                     }
                                 }
                             }
@@ -152,14 +160,33 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                                         }
                                     }
                             
-                                }      
-                        
+                                }                             
                             } if(Double.parseDouble(vidaAuto1.getText())<=0 ){
+                                try{
+                                    int valor = Integer.parseInt(numAuto1.getText());
+                                    Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
+                                    NombreJugador lista = elemento.obtenerContenido();
+                                    Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(valor);
+                                    NombreAuto nombre = elemento2.obtenerContenido();
                                 JOptionPane.showMessageDialog(null, "Jugador 1 ha sido derrotado");
+                                vidaAuto1.setText(Double.toString(0));
+                                nombre.setVida(0);
                                 dispose();
+                                } catch(Exception ex){           
+                                }
                             }else if(Double.parseDouble(vidaAuto2.getText())<=0 ){
-                                JOptionPane.showMessageDialog(null, "Jugador 2 ha sido derrotado");
-                                dispose();
+                                try{
+                                    int valor = Integer.parseInt(numAuto2.getText());
+                                    Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda2);
+                                    NombreJugador lista = elemento.obtenerContenido();
+                                    Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(valor);
+                                    NombreAuto nombre = elemento2.obtenerContenido();                                
+                                    JOptionPane.showMessageDialog(null, "Jugador 2 ha sido derrotado");
+                                    vidaAuto2.setText(Double.toString(0));
+                                    nombre.setVida(0);
+                                    dispose();
+                                } catch(Exception ex){                                    
+                                }
                             }
                         }
                         
@@ -257,15 +284,18 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         vidaAuto1 = new javax.swing.JLabel();
         nivelAuto1 = new javax.swing.JLabel();
         ataqueAuto1 = new javax.swing.JLabel();
+        fondoAliado = new javax.swing.JLabel();
         panelJugador2 = new javax.swing.JPanel();
         numAuto2 = new javax.swing.JLabel();
         vidaAuto2 = new javax.swing.JLabel();
         nivelAuto2 = new javax.swing.JLabel();
         ataqueAuto2 = new javax.swing.JLabel();
+        fondoEnemigo = new javax.swing.JLabel();
         txt = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txt3 = new javax.swing.JLabel();
         turnoJugador = new javax.swing.JLabel();
+        fondoPantalla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -286,12 +316,18 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         getContentPane().add(segunda, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 80, 60));
         getContentPane().add(tercera, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 80, 60));
 
+        txtTitulo1.setBackground(new java.awt.Color(255, 255, 255));
+        txtTitulo1.setForeground(new java.awt.Color(255, 255, 255));
         txtTitulo1.setText("Campo de las mil batallas");
         getContentPane().add(txtTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, -1, -1));
 
+        txtTitulo2.setBackground(new java.awt.Color(255, 255, 255));
+        txtTitulo2.setForeground(new java.awt.Color(255, 255, 255));
         txtTitulo2.setText("Montañas de Idrazil");
         getContentPane().add(txtTitulo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
 
+        txtTitulo3.setBackground(new java.awt.Color(255, 255, 255));
+        txtTitulo3.setForeground(new java.awt.Color(255, 255, 255));
         txtTitulo3.setText("Mar de Atlantis");
         getContentPane().add(txtTitulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 250, -1, -1));
 
@@ -335,61 +371,21 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 150, 160));
 
-        javax.swing.GroupLayout panelJugador1Layout = new javax.swing.GroupLayout(panelJugador1);
-        panelJugador1.setLayout(panelJugador1Layout);
-        panelJugador1Layout.setHorizontalGroup(
-            panelJugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelJugador1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelJugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numAuto1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(vidaAuto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nivelAuto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ataqueAuto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(119, Short.MAX_VALUE))
-        );
-        panelJugador1Layout.setVerticalGroup(
-            panelJugador1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelJugador1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(numAuto1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vidaAuto1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nivelAuto1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ataqueAuto1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        panelJugador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelJugador1.add(numAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 39, 26));
+        panelJugador1.add(vidaAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 44, 39, 27));
+        panelJugador1.add(nivelAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 77, 39, 26));
+        panelJugador1.add(ataqueAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 109, 39, 28));
+        panelJugador1.add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 160));
 
         getContentPane().add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 170, 160));
 
-        javax.swing.GroupLayout panelJugador2Layout = new javax.swing.GroupLayout(panelJugador2);
-        panelJugador2.setLayout(panelJugador2Layout);
-        panelJugador2Layout.setHorizontalGroup(
-            panelJugador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelJugador2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelJugador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nivelAuto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(numAuto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vidaAuto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ataqueAuto2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-                .addContainerGap(123, Short.MAX_VALUE))
-        );
-        panelJugador2Layout.setVerticalGroup(
-            panelJugador2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelJugador2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(numAuto2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vidaAuto2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nivelAuto2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ataqueAuto2, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        panelJugador2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelJugador2.add(numAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 45, 32));
+        panelJugador2.add(vidaAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 45, 29));
+        panelJugador2.add(nivelAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 91, 45, 29));
+        panelJugador2.add(ataqueAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 126, 45, 22));
+        panelJugador2.add(fondoEnemigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 180, 150));
 
         getContentPane().add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 180, 160));
         getContentPane().add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, 40, 10));
@@ -420,6 +416,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 350, 40));
+        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -428,6 +425,9 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ataqueAuto1;
     private javax.swing.JLabel ataqueAuto2;
+    private javax.swing.JLabel fondoAliado;
+    private javax.swing.JLabel fondoEnemigo;
+    private javax.swing.JLabel fondoPantalla;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

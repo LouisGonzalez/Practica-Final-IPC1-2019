@@ -19,9 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class DlgSegundoEscenario extends javax.swing.JDialog {
 
     private JLabel[][] mapa;
-    private int[][] tipoTerreno;
-    private int[][] valores;
-    private int[][] enemigos;
+    private int[][] tipoTerreno, valores, enemigos, cajasComodin;
     private int x, y, numCelda;
     private int[][] ocupado, bots;
     private final ImageIcon cumbre = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/cumbre4.jpg");
@@ -129,7 +127,7 @@ public class DlgSegundoEscenario extends javax.swing.JDialog {
                                         contadorTurnos++;
                                         
                                         contTurnos.setText(Integer.toString(contadorTurnos));
-                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre);
+                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, cajasComodin);
                                         camibo.setVisible(true);
                                         disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
                                     } else if(matriz == mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]==0){

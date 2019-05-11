@@ -17,12 +17,12 @@ public class DlgMovimientos extends javax.swing.JDialog {
     private ImageIcon dados = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Dados.jpg");
     private int posX, posY, filas, columnas, i, j, numCelda;
     private JLabel[][] mapa;
-    private int[][] valores, tipoTerreno, enemigos, ocupado;
+    private int[][] valores, tipoTerreno, enemigos, ocupado, cajasComodin;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, torreta;
     private NuevoAvatar<NombreJugador> misAutos;
-    private JLabel numAuto;
+    private JLabel numAuto, vidaAuto;
     
-    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int filas, int columnas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado){
+    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int filas, int columnas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado, int[][] cajasComodin, JLabel vidaAuto){
         super(parent, modal);
         initComponents();
         this.posX = posX;
@@ -45,6 +45,8 @@ public class DlgMovimientos extends javax.swing.JDialog {
         this.enemigos = enemigos;
         this.torreta = torreta;
         this.ocupado = ocupado;
+        this.vidaAuto = vidaAuto;
+        this.cajasComodin = cajasComodin;
         setLocationRelativeTo(null);
         Icon dadito = new ImageIcon(dados.getImage().getScaledInstance(dadoMov.getWidth(), dadoMov.getHeight(), Image.SCALE_DEFAULT));
         dadoMov.setIcon(dadito);
@@ -131,6 +133,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
         MovDerecha2 derecha2 = new MovDerecha2();
         MovIzquierda izquierda = new MovIzquierda();
         MovIzquierda2 izquierda2 = new MovIzquierda2();
+        DlgCajasComodin cajitas = new DlgCajasComodin(null, true, misAutos, numCelda, numAuto, vidaAuto, posX, posY, cajasComodin);
         switch (direccion) {
             case 1:
                 //metodo para mover arriba
@@ -147,6 +150,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[segundaPosX][posY] = valorAuto;
                         ocupado[segundaPosX][posY] = 1;
+                        if(cajasComodin[segundaPosX][posY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 } else if (segundaPosX<=0){
                     if(tipoTerreno[0][posY]==tipoCampo || enemigos[0][posY]==1){
@@ -161,6 +167,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[0][posY] = valorAuto;
                         ocupado[0][posY] = 1;
+                        if(cajasComodin[0][posY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 }
             break;
@@ -179,6 +188,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[filas-1][posY] = valorAuto;
                         ocupado[filas-1][posY] = 1;
+                        if(cajasComodin[filas-1][posY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 } else if (nuevaPosX<filas){
                     if(tipoTerreno[nuevaPosX][posY]==tipoCampo || enemigos[nuevaPosX][posY]==1){
@@ -193,6 +205,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[nuevaPosX][posY] = valorAuto;
                         ocupado[nuevaPosX][posY] = 1;
+                        if(cajasComodin[nuevaPosX][posY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 } 
             break;
@@ -211,6 +226,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[posX][columnas-1] = valorAuto;
                         ocupado[posX][columnas-1] = 1;
+                        if(cajasComodin[posX][columnas-1]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 } else if (nuevaPosY<columnas){
                     if(tipoTerreno[posX][nuevaPosY]==tipoCampo || enemigos[posX][nuevaPosY]==1){
@@ -225,6 +243,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[posX][nuevaPosY] = valorAuto;
                         ocupado[posX][nuevaPosY] = 1;
+                        if(cajasComodin[posX][nuevaPosY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 }   
             break;
@@ -243,6 +264,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[posX][segundaPosY] = valorAuto;
                         ocupado[posX][segundaPosY] = 1;
+                        if(cajasComodin[posX][segundaPosY]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 } else if (segundaPosY<0){
                     if(tipoTerreno[posX][0]==tipoCampo || enemigos[posX][0]==1){
@@ -257,6 +281,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][posY] = 0;
                         valores[posX][0] = valorAuto;
                         ocupado[posX][0] = 1;
+                        if(cajasComodin[posX][0]==1){
+                            cajitas.setVisible(true);
+                        }
                     }
                 }  
             break;                

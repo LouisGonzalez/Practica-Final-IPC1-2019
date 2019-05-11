@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
  */
 public class DlgTiendaArmas extends javax.swing.JDialog {
     
-    ImageIcon arma1 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/mp40.jpg");
-    ImageIcon arma2 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/AWM.jpg");
-    ImageIcon arma3 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/grooza.jpg");
-    ImageIcon arma4 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/escopeta.jpg");
+    private ImageIcon arma1 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/mp40.jpg");
+    private ImageIcon arma2 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/AWM.jpg");
+    private ImageIcon arma3 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/grooza.jpg");
+    private ImageIcon arma4 = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/escopeta.jpg");
+    private ImageIcon armas = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/armas.jpg");
     private String arma;
     private int numCelda;
-    private double costo, ataque;
+    private double costo, ataque, vida;
     private NuevoAvatar<NombreJugador> miLista;
     
     public DlgTiendaArmas(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista) {
@@ -32,6 +33,8 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
         Icon awm = new ImageIcon(arma2.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
         Icon grooza = new ImageIcon(arma3.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
         Icon mp1040 = new ImageIcon(arma4.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(armas.getImage().getScaledInstance(fondoArmas.getWidth(), fondoArmas.getHeight(), Image.SCALE_DEFAULT));
+        fondoArmas.setIcon(fondo);
         imagenArma.setIcon(awm);
         mostrarAtaque.setText(Integer.toString(15));
         mostrarCosto.setText(Integer.toString(30));
@@ -86,100 +89,56 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
         txt3 = new javax.swing.JLabel();
         mostrarCosto = new javax.swing.JLabel();
         comprarArma = new javax.swing.JButton();
+        fondoArmas = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelArmas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Elige tipo de arma:");
+        panelArmas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 29, 177, -1));
 
         listadoArmas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rifle AWM", "GROZA", "MP40", "Escopeta M1014" }));
+        panelArmas.add(listadoArmas, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 93, 157, -1));
+        panelArmas.add(imagenArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 72, 50));
 
+        txt2.setBackground(new java.awt.Color(255, 255, 255));
+        txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Daño:");
+        panelArmas.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
 
+        mostrarAtaque.setBackground(new java.awt.Color(255, 255, 255));
+        mostrarAtaque.setForeground(new java.awt.Color(255, 255, 255));
+        panelArmas.add(mostrarAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 48, 20));
+
+        txt3.setBackground(new java.awt.Color(255, 255, 255));
+        txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Costo:");
+        panelArmas.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, 22));
 
+        mostrarCosto.setBackground(new java.awt.Color(255, 255, 255));
+        mostrarCosto.setForeground(new java.awt.Color(255, 255, 255));
+        panelArmas.add(mostrarCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 50, 20));
+
+        comprarArma.setBackground(new java.awt.Color(255, 255, 255));
+        comprarArma.setForeground(new java.awt.Color(255, 255, 255));
         comprarArma.setText("Comprar");
+        comprarArma.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        comprarArma.setContentAreaFilled(false);
         comprarArma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comprarArmaActionPerformed(evt);
             }
         });
+        panelArmas.add(comprarArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 130, 30));
+        panelArmas.add(fondoArmas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 440, 210));
 
-        javax.swing.GroupLayout panelArmasLayout = new javax.swing.GroupLayout(panelArmas);
-        panelArmas.setLayout(panelArmasLayout);
-        panelArmasLayout.setHorizontalGroup(
-            panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelArmasLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelArmasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(listadoArmas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imagenArma, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelArmasLayout.createSequentialGroup()
-                        .addComponent(txt3)
-                        .addGap(18, 18, 18)
-                        .addComponent(mostrarCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelArmasLayout.createSequentialGroup()
-                        .addComponent(txt2)
-                        .addGap(18, 18, 18)
-                        .addComponent(mostrarAtaque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(comprarArma, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
-        );
-        panelArmasLayout.setVerticalGroup(
-            panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelArmasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelArmasLayout.createSequentialGroup()
-                        .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelArmasLayout.createSequentialGroup()
-                                .addComponent(txt2)
-                                .addGap(23, 23, 23))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelArmasLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelArmasLayout.createSequentialGroup()
-                                .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelArmasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(comprarArma, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(listadoArmas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(imagenArma, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelArmasLayout.createSequentialGroup()
-                        .addComponent(mostrarAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(mostrarCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98))))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelArmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(panelArmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2))
-        );
+        getContentPane().add(panelArmas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 440, 200));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(438, 178, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,9 +147,15 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
         try {    
             Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
             NombreJugador agregar = elemento.obtenerContenido();
+            if(agregar.getOro()>Double.parseDouble(mostrarCosto.getText())){
             Armas nueva = new Armas(listadoArmas.getSelectedItem().toString(), Double.parseDouble(mostrarAtaque.getText()));
             agregar.getMisArmas().insertarContenido(nueva);
             JOptionPane.showMessageDialog(null, "Felicidades, su arma ha sido agregada con exito");
+            vida = agregar.getOro() - Double.parseDouble(mostrarCosto.getText());
+            agregar.setOro(vida);
+            } else{
+                JOptionPane.showMessageDialog(null, "Lo sentimos, no tienes el suficiente dinero como para hacer esta compra");
+            }
         } catch(Exception e){            
         }
     }//GEN-LAST:event_comprarArmaActionPerformed
@@ -198,6 +163,7 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton comprarArma;
+    private javax.swing.JLabel fondoArmas;
     private javax.swing.JLabel imagenArma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

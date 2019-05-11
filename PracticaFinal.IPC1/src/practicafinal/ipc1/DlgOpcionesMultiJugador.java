@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class DlgOpcionesMultiJugador extends javax.swing.JDialog {
 
     private NuevoAvatar<NombreJugador> misAutos;
-    private int[][] tipoTerreno, valores, valores2;
+    private int[][] tipoTerreno, valores, valores2, cajasComodin;
     JLabel[][] mapa;
     private int posX, posY, x, y, i, j, filas, columnas, numCelda, numCelda2;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
@@ -143,7 +143,7 @@ public class DlgOpcionesMultiJugador extends javax.swing.JDialog {
 
     private void movimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movimientosActionPerformed
         this.dispose();
-        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado);
+        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado, cajasComodin, vidaAuto);
         movimientos.setVisible(true);
     }//GEN-LAST:event_movimientosActionPerformed
 

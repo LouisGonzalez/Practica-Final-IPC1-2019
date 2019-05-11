@@ -1,8 +1,10 @@
 package practicafinal.ipc1;
+import java.awt.Image;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,6 +30,8 @@ public class DlgAtaque extends javax.swing.JDialog {
     private NuevoAvatar<NombreJugador> miLista;
     private int aleatorio = (int)(Math.random()*100)+1; 
     private int contador=0;
+    private ImageIcon bala = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/hit.jpg");
+    private ImageIcon mini = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/qw.jpg");
     
     
     public DlgAtaque(java.awt.Frame parent, boolean modal, int i, int j, int filas, int columnas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, Object[] fila, NuevoEnemigo<Enemigo> ataque, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, Icon autoTanque, Icon autoAvion, int[][] valores, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto) {
@@ -65,6 +69,16 @@ public class DlgAtaque extends javax.swing.JDialog {
         this.ataqueAuto = ataqueAuto;
         initComponents();
         setLocationRelativeTo(null);
+        Icon balita = new ImageIcon(bala.getImage().getScaledInstance(fondo3.getWidth(), fondo3.getHeight(), Image.SCALE_DEFAULT));        
+        Icon mini2 = new ImageIcon(mini.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini3 = new ImageIcon(mini.getImage().getScaledInstance(fondo2.getWidth(), fondo2.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini4 = new ImageIcon(mini.getImage().getScaledInstance(fondo4.getWidth(), fondo4.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini5 = new ImageIcon(mini.getImage().getScaledInstance(fondo5.getWidth(), fondo5.getHeight(), Image.SCALE_DEFAULT));
+        fondo3.setIcon(balita);
+        fondo1.setIcon(mini2);
+        fondo2.setIcon(mini3);
+        fondo4.setIcon(mini4);
+        fondo5.setIcon(mini5);
         ataqueTotal.setText(ataqueAuto.getText());
         ataqueArma.setText(Integer.toString(0));
         mostrarDado.setText(Integer.toString(0));
@@ -80,68 +94,104 @@ public class DlgAtaque extends javax.swing.JDialog {
         panel1 = new javax.swing.JPanel();
         txt1 = new javax.swing.JLabel();
         ataqueTotal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        fondo4 = new javax.swing.JLabel();
         panel2 = new javax.swing.JPanel();
         dadoAtaque = new javax.swing.JButton();
         txt2 = new javax.swing.JLabel();
         mostrarDado = new javax.swing.JLabel();
+        fondo2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         disparo = new javax.swing.JButton();
         resultado = new javax.swing.JLabel();
         calcularAtaque = new javax.swing.JButton();
+        fondo5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaArmas = new javax.swing.JTable();
         txt3 = new javax.swing.JLabel();
         ataqueArma = new javax.swing.JLabel();
+        fondo1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        fondo3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         direccionAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arriba", "Abajo", "Izquierda", "Derecha" }));
-        getContentPane().add(direccionAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 100, -1));
+        getContentPane().add(direccionAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, -1));
 
         panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt1.setBackground(new java.awt.Color(255, 255, 255));
+        txt1.setForeground(new java.awt.Color(255, 255, 255));
         txt1.setText("Daño Inicial:");
         panel1.add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 20));
-        panel1.add(ataqueTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 60, 20));
 
-        getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 180, 60));
+        ataqueTotal.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueTotal.setForeground(new java.awt.Color(255, 255, 255));
+        panel1.add(ataqueTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 60, 20));
+        panel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, -10, 40, 10));
+        panel1.add(fondo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 50));
+
+        getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 180, 50));
 
         panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        dadoAtaque.setBackground(new java.awt.Color(255, 255, 255));
+        dadoAtaque.setForeground(new java.awt.Color(255, 255, 255));
         dadoAtaque.setText("Girar dado:");
+        dadoAtaque.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        dadoAtaque.setContentAreaFilled(false);
         dadoAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoAtaqueActionPerformed(evt);
             }
         });
-        panel2.add(dadoAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        panel2.add(dadoAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 100, 30));
 
+        txt2.setBackground(new java.awt.Color(255, 255, 255));
+        txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Resultado:");
         panel2.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 70, -1));
-        panel2.add(mostrarDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 40, 20));
 
-        getContentPane().add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 180, 150));
+        mostrarDado.setBackground(new java.awt.Color(255, 255, 255));
+        mostrarDado.setForeground(new java.awt.Color(255, 255, 255));
+        panel2.add(mostrarDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 40, 20));
+        panel2.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 150));
+
+        getContentPane().add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 180, 150));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        disparo.setBackground(new java.awt.Color(255, 255, 255));
+        disparo.setForeground(new java.awt.Color(255, 255, 255));
         disparo.setText("Disparar");
+        disparo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        disparo.setContentAreaFilled(false);
         disparo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 disparoActionPerformed(evt);
             }
         });
-        jPanel1.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        jPanel1.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 80, 30));
+
+        resultado.setBackground(new java.awt.Color(255, 255, 255));
+        resultado.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 50, 20));
 
+        calcularAtaque.setBackground(new java.awt.Color(255, 255, 255));
+        calcularAtaque.setForeground(new java.awt.Color(255, 255, 255));
         calcularAtaque.setText("Calcular Daño");
+        calcularAtaque.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        calcularAtaque.setContentAreaFilled(false);
         calcularAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcularAtaqueActionPerformed(evt);
             }
         });
-        jPanel1.add(calcularAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel1.add(calcularAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 110, 30));
+        jPanel1.add(fondo5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 70));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 490, 70));
 
@@ -167,16 +217,29 @@ public class DlgAtaque extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 140));
 
+        txt3.setBackground(new java.awt.Color(255, 255, 255));
+        txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Daño Arma:");
         jPanel2.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
-        jPanel2.add(ataqueArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 60, 60));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 280, 170));
+        ataqueArma.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueArma.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(ataqueArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 60, 60));
+        jPanel2.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 170));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 280, 170));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Selecciona la direccion a disparar:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 240, -1));
+        getContentPane().add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void disparoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disparoActionPerformed
+        this.dispose();
         Timer timer = new Timer();
         MovBalaAbajo abajo = new MovBalaAbajo();
         MovAbajo2 abajo2 = new MovAbajo2();
@@ -279,6 +342,13 @@ public class DlgAtaque extends javax.swing.JDialog {
     private javax.swing.JButton dadoAtaque;
     private javax.swing.JComboBox<String> direccionAtaque;
     private javax.swing.JButton disparo;
+    private javax.swing.JLabel fondo1;
+    private javax.swing.JLabel fondo2;
+    private javax.swing.JLabel fondo3;
+    private javax.swing.JLabel fondo4;
+    private javax.swing.JLabel fondo5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

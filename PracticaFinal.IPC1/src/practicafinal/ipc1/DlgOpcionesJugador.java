@@ -12,7 +12,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     
     private NuevoAvatar<NombreJugador> misAutos;
     private NuevoEnemigo<Enemigo> enemigo;
-    private int[][] tipoTerreno, valores;
+    private int[][] tipoTerreno, valores, cajasComodin;
     JLabel[][] mapa;
     private int posX, posY, x, y, i, j, filas, columnas, numCelda;
     private Icon autoTanque, autoAvion, cumbres, mar, campo, balaArriba, balaAbajo, balaIzquierda, balaDerecha, torreta;
@@ -28,7 +28,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     NombreAuto nombre;
     
     
-    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre) {
+    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, int[][] cajasComodin) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -72,6 +72,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.elemento2 = elemento2;
         this.lista = lista;
         this.nombre = nombre;
+        this.cajasComodin = cajasComodin;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -148,7 +149,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void dadoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoMovActionPerformed
         this.dispose();
-        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado);
+        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado, cajasComodin, vidaAuto);
         movimientos.setVisible(true);
     }//GEN-LAST:event_dadoMovActionPerformed
 
