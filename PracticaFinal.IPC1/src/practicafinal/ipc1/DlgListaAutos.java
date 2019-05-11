@@ -23,6 +23,7 @@ public class DlgListaAutos extends javax.swing.JDialog {
     
     protected void cargarTabla(){
         try {
+            //metodo encargado de mostrar los datos que ya se crearon pero en un tabla
             Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
             NombreJugador tabla = elemento.obtenerContenido();
             dtmModel2 = (DefaultTableModel) tablaAutos.getModel();

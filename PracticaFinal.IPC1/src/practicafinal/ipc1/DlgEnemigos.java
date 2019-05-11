@@ -82,6 +82,7 @@ public class DlgEnemigos extends javax.swing.JDialog {
 
     private void botonEnemigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnemigoActionPerformed
         contador++;
+        //metodo encargado de la creacion de enemigos de forma dinamica con un limite de 4 enemigos
         this.cantidad = cantEnemigos.getSelectedIndex();
         this.vida = new double[4];
         this.guardarX = new int[4];
@@ -97,6 +98,7 @@ public class DlgEnemigos extends javax.swing.JDialog {
                     vida[x] = nombre.getVida();
                 } catch(Exception e) {
                 }
+                //segun el nivel de alienigenas nos ataquen
                 posEnemigoX = new int[cantidad+1];
                 posEnemigoY = new int[cantidad+1];
                 posEnemigoX2 = new int[cantidad+1];

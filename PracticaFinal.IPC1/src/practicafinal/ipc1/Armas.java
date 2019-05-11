@@ -11,7 +11,8 @@ public class Armas {
         this.nombre = nombre;
         this.ataque = ataque;
     }
-
+    
+    //metodos GET Y SET 
     public String getNombre() {
         return nombre;
     }

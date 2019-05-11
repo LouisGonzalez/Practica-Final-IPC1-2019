@@ -61,6 +61,7 @@ public class DlgCambioAuto extends javax.swing.JDialog {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e){
                 try{
+                    //segun la casilla donde se va clickando, sera donde el nuevo vehiculo se situara
                     numCelda2 = cambioAuto.rowAtPoint(e.getPoint());
                     elemento = misAutos.obtenerElemento(numCelda);
                     lista = elemento.obtenerContenido();

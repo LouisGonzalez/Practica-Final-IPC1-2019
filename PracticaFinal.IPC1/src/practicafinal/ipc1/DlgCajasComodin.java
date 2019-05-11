@@ -99,6 +99,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
 
     private void resultadoCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadoCajaActionPerformed
         try{   
+            //CAJAS COMODIN SEGUN LO QUE PIDE LA IMPLEMENTACION DEL JUEGO
             int valor = Integer.parseInt(numAuto.getText());
             Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
             NombreJugador lista = elemento.obtenerContenido();
@@ -108,6 +109,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
             armadura = nombre.getArmadura();
             int aleatorio = (int)(Math.random()*1)+1;
             switch(aleatorio){
+                // SEGUN EL VALOR DE ALETORIO LA CAJA LE BRINDA UNA SORPRESA AL JUGADOR
                 case 1:
                     resultado = vida + (vida*0.25);
                     if(resultado>=100){

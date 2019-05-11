@@ -17,7 +17,7 @@ public class DlgListaAvatares extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargarTabla();
       }
-    
+     // metodo encargado de mostrar los usuarios y personajes que se acaban de crear
     protected void cargarTabla() {
         dtmModel = (DefaultTableModel) tablaDatos.getModel();
         Object[] fila = new Object[dtmModel.getColumnCount()];  

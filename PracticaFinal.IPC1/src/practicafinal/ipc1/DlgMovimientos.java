@@ -146,6 +146,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         arriba2.valores(i, j, segundaPosX+1, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                         timer.schedule(arriba, 0, 1000);
                         timer.schedule(arriba2, 0, 1000);
+                        //valores que se le ingresan a las matrices y de esta forma poder identificar en que posicion se encuentran
                         valores[posX][posY] = 0;
                         ocupado[posX][posY] = 0;
                         valores[segundaPosX][posY] = valorAuto;

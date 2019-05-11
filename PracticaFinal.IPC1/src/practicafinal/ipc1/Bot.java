@@ -12,6 +12,7 @@ public class Bot {
         this.ataque = ataque;
     }
 
+    //metodos GET y SET
     public String getNombre() {
         return nombre;
     }

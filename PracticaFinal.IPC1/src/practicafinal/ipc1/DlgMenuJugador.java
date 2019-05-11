@@ -13,6 +13,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
     private int numCelda;
     private ImageIcon menu = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/menu.jpg");
     
+    //clase que muestra las opciones variadas al jugador
     public DlgMenuJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, int fila, int columna, NuevoAvatar<NombreJugador> miLista, int numCelda) {
         super(parent, modal);
         initComponents();

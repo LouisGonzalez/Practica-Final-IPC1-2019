@@ -24,6 +24,7 @@ public class DisparoEnemIzquierda extends TimerTask {
     private double valor;
     
     
+    //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
     public void run(){
         try{

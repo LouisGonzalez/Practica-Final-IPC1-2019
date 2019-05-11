@@ -17,6 +17,7 @@ public class DisparoAbajoMult extends TimerTask{
     private NuevoAvatar<NombreJugador> miLista;
     private double vida;
     
+    //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
     public void run(){
         try{

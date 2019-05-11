@@ -10,7 +10,7 @@ public class DlgEleccionMultiJugador extends javax.swing.JDialog {
     private NuevoAvatar<NombreJugador> miLista;
     private int contadorClicks = 0;
     private int numCelda, numCelda2;
-    
+    //clase encargada de la inovacion de los jueces 
     public DlgEleccionMultiJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista) {
         super(parent, modal);
         initComponents();

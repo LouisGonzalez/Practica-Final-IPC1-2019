@@ -1,9 +1,11 @@
 package practicafinal.ipc1;
 
+import java.awt.Image;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +27,8 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     private int aleatorio = (int)(Math.random()*100)+1; 
     private int contador=0;
     private JLabel numAuto2, vidaAuto2;
+    private ImageIcon bala = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/hit.jpg");
+    private ImageIcon mini = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/qw.jpg");
     
     public DlgAtaqueMult(java.awt.Frame parent, boolean modal, int i, int j, int filas, int columnas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, DefaultTableModel modelMapa2, Icon autoTanque, Icon autoAvion, int[][] valores, int[][] valores2, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto, int numCelda3, JLabel numAuto2, JLabel vidaAuto2) {
         super(parent, modal);
@@ -55,6 +59,16 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         this.numCelda3 = numCelda3;
         this.vidaAuto2 = vidaAuto2;
         initComponents();
+        Icon balita = new ImageIcon(bala.getImage().getScaledInstance(fondoPantalla.getWidth(), fondoPantalla.getHeight(), Image.SCALE_DEFAULT));        
+        Icon mini2 = new ImageIcon(mini.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini3 = new ImageIcon(mini.getImage().getScaledInstance(fondo2.getWidth(), fondo2.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini4 = new ImageIcon(mini.getImage().getScaledInstance(fondo3.getWidth(), fondo3.getHeight(), Image.SCALE_DEFAULT));
+        Icon mini5 = new ImageIcon(mini.getImage().getScaledInstance(fondo4.getWidth(), fondo4.getHeight(), Image.SCALE_DEFAULT));
+        fondoPantalla.setIcon(balita);
+        fondo1.setIcon(mini2);
+        fondo2.setIcon(mini3);
+        fondo3.setIcon(mini4);
+        fondo4.setIcon(mini5);
         ataqueTotal.setText(ataqueAuto.getText());
         ataqueArma.setText(Integer.toString(0));
         mostrarDado.setText(Integer.toString(0));
@@ -69,27 +83,43 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
 
         direccionAtaque = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaArmas = new javax.swing.JTable();
         txt = new javax.swing.JLabel();
         ataqueArma = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaArmas = new javax.swing.JTable();
+        fondo1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txt2 = new javax.swing.JLabel();
         ataqueTotal = new javax.swing.JLabel();
+        fondo4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         dadoAtaque = new javax.swing.JButton();
         txt3 = new javax.swing.JLabel();
         mostrarDado = new javax.swing.JLabel();
+        fondo2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         resultado = new javax.swing.JLabel();
         disparo = new javax.swing.JButton();
+        fondo3 = new javax.swing.JLabel();
+        fondoPantalla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         direccionAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arriba", "Abajo", "Izquierda", "Derecha" }));
         getContentPane().add(direccionAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 130, 30));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt.setBackground(new java.awt.Color(255, 255, 255));
+        txt.setForeground(new java.awt.Color(255, 255, 255));
+        txt.setText("Daño Arma:");
+        jPanel1.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 33, -1, -1));
+
+        ataqueArma.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueArma.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(ataqueArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 73, 38, 18));
 
         tablaArmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,150 +139,84 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tablaArmas);
 
-        txt.setText("Daño Arma:");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 122, 136));
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 170));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(ataqueArma, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(txt)
-                .addGap(26, 26, 26)
-                .addComponent(ataqueArma, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 250, 170));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 240, 160));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt2.setBackground(new java.awt.Color(255, 255, 255));
+        txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Daño Inicial:");
+        jPanel2.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 12, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(txt2)
-                .addGap(41, 41, 41)
-                .addComponent(ataqueTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ataqueTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txt2)
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        ataqueTotal.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueTotal.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(ataqueTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 12, 75, 16));
+        jPanel2.add(fondo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 40));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 290, 40));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 290, 40));
 
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dadoAtaque.setBackground(new java.awt.Color(255, 255, 255));
+        dadoAtaque.setForeground(new java.awt.Color(255, 255, 255));
         dadoAtaque.setText("Girar dado:");
+        dadoAtaque.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        dadoAtaque.setContentAreaFilled(false);
         dadoAtaque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoAtaqueActionPerformed(evt);
             }
         });
+        jPanel3.add(dadoAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 15, 120, 30));
 
+        txt3.setBackground(new java.awt.Color(255, 255, 255));
+        txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Resultado:");
+        jPanel3.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 62, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(txt3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(dadoAtaque)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(mostrarDado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89))))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(dadoAtaque)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt3)
-                .addGap(18, 18, 18)
-                .addComponent(mostrarDado, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
+        mostrarDado.setBackground(new java.awt.Color(255, 255, 255));
+        mostrarDado.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(mostrarDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 94, 36, 17));
+        jPanel3.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 170));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 230, 160));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 230, 170));
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Calcular Daño");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 19, 120, 30));
 
+        resultado.setBackground(new java.awt.Color(255, 255, 255));
+        resultado.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 21, 56, 24));
+
+        disparo.setBackground(new java.awt.Color(255, 255, 255));
+        disparo.setForeground(new java.awt.Color(255, 255, 255));
         disparo.setText("DISPARA!");
+        disparo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        disparo.setContentAreaFilled(false);
         disparo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 disparoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton1)
-                .addGap(43, 43, 43)
-                .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addComponent(disparo)
-                .addGap(55, 55, 55))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(disparo)
-                .addGap(22, 22, 22))
-        );
+        jPanel4.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 100, 30));
+        jPanel4.add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 70));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 470, 70));
+        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,6 +230,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     }//GEN-LAST:event_dadoAtaqueActionPerformed
 
     private void disparoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disparoActionPerformed
+        //INVOCACION A LOS METODOS PARA ATAQUE EN MODO MULTIJUGADOR
         Timer timer = new Timer();
         DisparoAbajoMult abajo = new DisparoAbajoMult();
         MovAbajo2 abajo2 = new MovAbajo2();
@@ -331,6 +296,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     }
     
     private void mostrarDatos(){
+        //METODO QUE GENERA QUE UNA TABLA SEA USADA MEDIANTE CLICKS
         tablaArmas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e){
@@ -360,6 +326,11 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     private javax.swing.JButton dadoAtaque;
     private javax.swing.JComboBox<String> direccionAtaque;
     private javax.swing.JButton disparo;
+    private javax.swing.JLabel fondo1;
+    private javax.swing.JLabel fondo2;
+    private javax.swing.JLabel fondo3;
+    private javax.swing.JLabel fondo4;
+    private javax.swing.JLabel fondoPantalla;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

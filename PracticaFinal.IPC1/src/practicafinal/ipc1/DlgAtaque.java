@@ -69,6 +69,7 @@ public class DlgAtaque extends javax.swing.JDialog {
         this.ataqueAuto = ataqueAuto;
         initComponents();
         setLocationRelativeTo(null);
+        //SETEO DE VALORES PREDETERMINADOS
         Icon balita = new ImageIcon(bala.getImage().getScaledInstance(fondo3.getWidth(), fondo3.getHeight(), Image.SCALE_DEFAULT));        
         Icon mini2 = new ImageIcon(mini.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT));
         Icon mini3 = new ImageIcon(mini.getImage().getScaledInstance(fondo2.getWidth(), fondo2.getHeight(), Image.SCALE_DEFAULT));
@@ -241,6 +242,7 @@ public class DlgAtaque extends javax.swing.JDialog {
     private void disparoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disparoActionPerformed
         this.dispose();
         Timer timer = new Timer();
+        //INVOCACION A CADA UNO DE LOS HILOS Y ASI LOGRAR EL MOVIMIENTO SECUENCIAL
         MovBalaAbajo abajo = new MovBalaAbajo();
         MovAbajo2 abajo2 = new MovAbajo2();
         MovBalaArriba arriba = new MovBalaArriba();
@@ -271,6 +273,7 @@ public class DlgAtaque extends javax.swing.JDialog {
                 break;
             case "Derecha":
                 derecha.valores(i, j+1, columnas, mapa, balaDerecha, ocupado, torreta, enemigos, enemigo1, enemigo2, enemigo3, enemigo4, resultado);
+                //HILOS ENCARGADOS DE LA LIMPIEZA DE PANTALLA SEGUN LO QUE EL HILO ANTERIOR VAYA PINTANDO
                 derecha2.valores(i, j+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torreta, autoTanque, autoAvion, valores, torreta);
                 timer.schedule(derecha, 0, 1000);
                 timer.schedule(derecha2, 1000, 1000);

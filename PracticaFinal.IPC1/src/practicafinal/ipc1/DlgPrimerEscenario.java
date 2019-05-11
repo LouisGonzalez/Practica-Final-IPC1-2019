@@ -98,7 +98,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                 bots[x][y] = 0;
                 cajasComodin[x][y] = 0;
                 JLabel matriz = new JLabel();   //se inicializa el label unitario y se le dan caracteristicas iniciales
-                matriz.setBounds(100*x,75*y,100,75);
+                matriz.setBounds(60*x,60*y,60,60);
                 matriz.setOpaque(true);
                 matriz.setBackground(Color.WHITE);
                 matriz.setBorder(borde);
@@ -564,11 +564,11 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         txt8 = new javax.swing.JLabel();
         txt9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        fondoAliado = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txt6 = new javax.swing.JLabel();
         contTurnos = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+        fondoAliado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -723,7 +723,6 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Daño Actual");
         panelAliado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 155, -1, -1));
-        panelAliado.add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 190));
 
         getContentPane().add(panelAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 200, 190));
 
@@ -754,6 +753,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 260, 40));
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 560));
+        getContentPane().add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 200, 190));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

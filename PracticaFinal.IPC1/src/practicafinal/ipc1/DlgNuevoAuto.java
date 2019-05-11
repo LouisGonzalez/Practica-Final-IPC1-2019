@@ -85,6 +85,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         try {
+            //valores iniciales que se le dan al auto segun el tipo que sea ya fuera tanque o avion
             auto = tipoAuto.getSelectedItem().toString();
             if(auto.equals("Tanque")){
                 ataque = 10;
