@@ -61,9 +61,9 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         Icon mar = new ImageIcon(agua.getImage().getScaledInstance(tercera.getWidth(), tercera.getHeight(), Image.SCALE_DEFAULT));
         Icon campo = new ImageIcon(campoAbierto.getImage().getScaledInstance(primera.getWidth(), primera.getHeight(), Image.SCALE_DEFAULT)); 
         Icon pantalla = new ImageIcon(fondos.getImage().getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_DEFAULT)); 
-        Icon imagen1 = new ImageIcon(imagen.getImage().getScaledInstance(fondoAliado.getWidth(), fondoAliado.getHeight(), Image.SCALE_DEFAULT)); 
+        Icon imagen1 = new ImageIcon(imagen.getImage().getScaledInstance(fondoAliado2.getWidth(), fondoAliado2.getHeight(), Image.SCALE_DEFAULT)); 
         Icon imagen2 = new ImageIcon(imagen.getImage().getScaledInstance(fondoEnemigo.getWidth(), fondoEnemigo.getHeight(), Image.SCALE_DEFAULT)); 
-        fondoAliado.setIcon(imagen1);
+        fondoAliado2.setIcon(imagen1);
         fondoEnemigo.setIcon(imagen2);
         this.numCelda = numCelda;
         this.misAutos = misAutos;
@@ -564,6 +564,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         txt8 = new javax.swing.JLabel();
         txt9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        fondoAliado2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txt6 = new javax.swing.JLabel();
         contTurnos = new javax.swing.JLabel();
@@ -723,6 +724,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Daño Actual");
         panelAliado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 155, -1, -1));
+        panelAliado.add(fondoAliado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 200, 180));
 
         getContentPane().add(panelAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 200, 190));
 
@@ -767,6 +769,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
     private javax.swing.JLabel enemigo4;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondoAliado;
+    private javax.swing.JLabel fondoAliado2;
     private javax.swing.JLabel fondoEnemigo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
