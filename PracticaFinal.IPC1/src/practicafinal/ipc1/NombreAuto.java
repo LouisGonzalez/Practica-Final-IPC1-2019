@@ -6,10 +6,10 @@ package practicafinal.ipc1;
 public class NombreAuto {
     private String nombre;
     private String tipoAuto;
-    private int armadura, experiencia, nivel;
+    private int armadura, experiencia, nivel, enemigosDestruidos, autoDestruido;
     private double ataque, vida;
     
-    public NombreAuto(String nombre, String tipoAuto, double ataque, int armadura, int experiencia, int nivel, double vida){
+    public NombreAuto(String nombre, String tipoAuto, double ataque, int armadura, int experiencia, int nivel, double vida, int enemigosDestruidos, int autoDestruido){
         this.nombre = nombre;
         this.tipoAuto = tipoAuto;
         this.ataque = ataque;
@@ -17,6 +17,8 @@ public class NombreAuto {
         this.experiencia = experiencia;
         this.nivel = nivel;
         this.vida = vida;
+        this.enemigosDestruidos = enemigosDestruidos;
+        this.autoDestruido = autoDestruido;
     }
     
     public String mostrarDatos(){
@@ -78,6 +80,23 @@ public class NombreAuto {
     public void setVida(double vida) {
         this.vida = vida;
     }
+
+    public int getEnemigosDestruidos() {
+        return enemigosDestruidos;
+    }
+
+    public void setEnemigosDestruidos(int enemigosDestruidos) {
+        this.enemigosDestruidos = enemigosDestruidos;
+    }
+
+    public int getAutoDestruido() {
+        return autoDestruido;
+    }
+
+    public void setAutoDestruido(int autoDestruido) {
+        this.autoDestruido = autoDestruido;
+    }
+    
     
     
     

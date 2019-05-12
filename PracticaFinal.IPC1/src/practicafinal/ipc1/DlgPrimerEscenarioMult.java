@@ -286,7 +286,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         ataqueAuto1 = new javax.swing.JLabel();
         fondoAliado = new javax.swing.JLabel();
         fondoAliado1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        asdf = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -388,10 +388,10 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         panelJugador1.add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 160));
         panelJugador1.add(fondoAliado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 160));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Num Auto:");
-        panelJugador1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, 10));
+        asdf.setBackground(new java.awt.Color(255, 255, 255));
+        asdf.setForeground(new java.awt.Color(255, 255, 255));
+        asdf.setText("Num Auto:");
+        panelJugador1.add(asdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, 10));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -473,6 +473,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel asdf;
     private javax.swing.JLabel ataqueAuto1;
     private javax.swing.JLabel ataqueAuto2;
     private javax.swing.JLabel fondoAliado;
@@ -483,7 +484,6 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

@@ -149,7 +149,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                     } else if(matriz == mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]==0){
                                         contadorTurnos++;
                                         contTurnos.setText(Integer.toString(contadorTurnos));
-                                        JOptionPane.showMessageDialog(null, "has clickado una caja comodin");
+                                        JOptionPane.showMessageDialog(null, "No posees a un vehiculo en esta casilla");
                                         DlgPosBots qwe = new DlgPosBots(null, true, numCelda, misAutos, mapa, posX, posY, bots, bot, contadorTurnos, posBotX, posBotY);
                                         DlgPreguntaBot pregunta = new DlgPreguntaBot(null, true, numCelda, posX, posY, misAutos, mapa, bots, bot, contadorTurnos, posBotX, posBotY, qwe);
                                         pregunta.setVisible(true);
@@ -161,7 +161,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                 }
                             }
                         } if(Double.parseDouble(enemigo1.getText())<=0 && Double.parseDouble(enemigo2.getText())<=0 && Double.parseDouble(enemigo3.getText())<=0 && Double.parseDouble(enemigo4.getText())<=0){
-                            try{
+                            try {
                                 int sumaxp = (int)(Math.random()*100)+1;
                                 int valor = Integer.parseInt(numAuto.getText());
                                 Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);

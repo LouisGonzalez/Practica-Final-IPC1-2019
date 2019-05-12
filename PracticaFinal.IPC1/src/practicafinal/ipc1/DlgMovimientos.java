@@ -1,10 +1,8 @@
 package practicafinal.ipc1;
-import java.awt.Image;
 import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -14,7 +12,6 @@ import javax.swing.JOptionPane;
  */
 public class DlgMovimientos extends javax.swing.JDialog {
     
-    private ImageIcon dados = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Dados.jpg");
     private int posX, posY, filas, columnas, i, j, numCelda;
     private JLabel[][] mapa;
     private int[][] valores, tipoTerreno, enemigos, ocupado, cajasComodin;
@@ -48,8 +45,6 @@ public class DlgMovimientos extends javax.swing.JDialog {
         this.vidaAuto = vidaAuto;
         this.cajasComodin = cajasComodin;
         setLocationRelativeTo(null);
-        Icon dadito = new ImageIcon(dados.getImage().getScaledInstance(dadoMov.getWidth(), dadoMov.getHeight(), Image.SCALE_DEFAULT));
-        dadoMov.setIcon(dadito);
                 
     }
 
@@ -67,7 +62,10 @@ public class DlgMovimientos extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(dadoMov, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 120, 100));
+
+        dadoMov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practicafinal/ipc1/imagenes/dado-imagen-animada-0016.gif"))); // NOI18N
+        dadoMov.setPreferredSize(new java.awt.Dimension(72, 72));
+        getContentPane().add(dadoMov, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 120, 100));
         getContentPane().add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 40, 20));
 
         dado.setText("Girar Dados");

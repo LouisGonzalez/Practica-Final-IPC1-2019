@@ -26,6 +26,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
         this.posY = posY;
         this.cajaComodin = cajaComodin;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +37,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
         txt = new javax.swing.JLabel();
         txt2 = new javax.swing.JLabel();
         resultadoCaja = new javax.swing.JButton();
+        gifDado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -43,12 +45,19 @@ public class DlgCajasComodin extends javax.swing.JDialog {
 
         txt2.setText("Lanza los dados para saber tu suerte: ");
 
+        resultadoCaja.setBackground(new java.awt.Color(255, 255, 255));
+        resultadoCaja.setForeground(new java.awt.Color(255, 255, 255));
         resultadoCaja.setText("LANZAR DADOS");
+        resultadoCaja.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        resultadoCaja.setContentAreaFilled(false);
         resultadoCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultadoCajaActionPerformed(evt);
             }
         });
+
+        gifDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practicafinal/ipc1/imagenes/dado-imagen-animada-0016.gif"))); // NOI18N
+        gifDado.setPreferredSize(new java.awt.Dimension(72, 72));
 
         javax.swing.GroupLayout panelComodinLayout = new javax.swing.GroupLayout(panelComodin);
         panelComodin.setLayout(panelComodinLayout);
@@ -57,12 +66,15 @@ public class DlgCajasComodin extends javax.swing.JDialog {
             .addGroup(panelComodinLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .addGroup(panelComodinLayout.createSequentialGroup()
-                        .addGroup(panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelComodinLayout.createSequentialGroup()
+                        .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(gifDado, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelComodinLayout.setVerticalGroup(
@@ -72,9 +84,14 @@ public class DlgCajasComodin extends javax.swing.JDialog {
                 .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txt2)
-                .addGap(34, 34, 34)
-                .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addGroup(panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelComodinLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelComodinLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(gifDado, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,7 +124,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
             NombreAuto nombre = elemento2.obtenerContenido();
             vida = nombre.getVida();
             armadura = nombre.getArmadura();
-            int aleatorio = (int)(Math.random()*1)+1;
+            int aleatorio = (int)(Math.random()*3)+1;
             switch(aleatorio){
                 // SEGUN EL VALOR DE ALETORIO LA CAJA LE BRINDA UNA SORPRESA AL JUGADOR
                 case 1:
@@ -141,6 +158,7 @@ public class DlgCajasComodin extends javax.swing.JDialog {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel gifDado;
     private javax.swing.JPanel panelComodin;
     private javax.swing.JButton resultadoCaja;
     private javax.swing.JLabel txt;

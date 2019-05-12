@@ -62,7 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().add(multijugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 170, 30));
 
         verAvatar.setForeground(new java.awt.Color(255, 255, 255));
-        verAvatar.setText("Ver avatares creados");
+        verAvatar.setText("Estadisticas generales");
         verAvatar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         verAvatar.setContentAreaFilled(false);
         verAvatar.setFocusPainted(false);

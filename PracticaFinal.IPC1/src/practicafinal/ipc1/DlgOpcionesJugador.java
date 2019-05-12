@@ -75,67 +75,74 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.cajasComodin = cajasComodin;
         initComponents();
         setLocationRelativeTo(null);
+        txt.setFont(new java.awt.Font("Tahoma", 0, 16));
+        txt2.setFont(new java.awt.Font(null,0,11));
+        txt3.setFont(new java.awt.Font(null,0, 11));
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ataque = new javax.swing.JButton();
-        cambioAuto = new javax.swing.JButton();
+        panelOpciones = new javax.swing.JPanel();
+        txt = new javax.swing.JLabel();
+        txt3 = new javax.swing.JLabel();
+        txt2 = new javax.swing.JLabel();
         dadoMov = new javax.swing.JButton();
+        cambioAuto = new javax.swing.JButton();
+        ataque = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ataque.setText("Atacar");
-        ataque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ataqueActionPerformed(evt);
-            }
-        });
+        panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cambioAuto.setText("Cambiar de Auto");
-        cambioAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambioAutoActionPerformed(evt);
-            }
-        });
+        txt.setText("BIENVENIDO AL MENU DE OPCIONES");
+        panelOpciones.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 360, 40));
 
+        txt3.setText("Si cierras el menu sin elegir alguna opcion el turno aun asi contara.");
+        panelOpciones.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 410, 10));
+
+        txt2.setText("Elige con sabiduria.");
+        panelOpciones.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, -1));
+
+        dadoMov.setBackground(new java.awt.Color(255, 255, 255));
+        dadoMov.setForeground(new java.awt.Color(255, 255, 255));
         dadoMov.setText("Girar dado de movimiento");
+        dadoMov.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        dadoMov.setContentAreaFilled(false);
         dadoMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dadoMovActionPerformed(evt);
             }
         });
+        panelOpciones.add(dadoMov, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 171, 44));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cambioAuto)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ataque)
-                        .addGap(27, 27, 27)))
-                .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(dadoMov)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(ataque)
-                .addGap(35, 35, 35)
-                .addComponent(cambioAuto)
-                .addGap(37, 37, 37)
-                .addComponent(dadoMov, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
+        cambioAuto.setBackground(new java.awt.Color(255, 255, 255));
+        cambioAuto.setForeground(new java.awt.Color(255, 255, 255));
+        cambioAuto.setText("Cambiar de Auto");
+        cambioAuto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cambioAuto.setContentAreaFilled(false);
+        cambioAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambioAutoActionPerformed(evt);
+            }
+        });
+        panelOpciones.add(cambioAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 141, 46));
+
+        ataque.setBackground(new java.awt.Color(255, 255, 255));
+        ataque.setForeground(new java.awt.Color(255, 255, 255));
+        ataque.setText("Atacar");
+        ataque.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ataque.setContentAreaFilled(false);
+        ataque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ataqueActionPerformed(evt);
+            }
+        });
+        panelOpciones.add(ataque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 75, 34));
+
+        getContentPane().add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,5 +171,9 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     private javax.swing.JButton ataque;
     private javax.swing.JButton cambioAuto;
     private javax.swing.JButton dadoMov;
+    private javax.swing.JPanel panelOpciones;
+    private javax.swing.JLabel txt;
+    private javax.swing.JLabel txt2;
+    private javax.swing.JLabel txt3;
     // End of variables declaration//GEN-END:variables
 }

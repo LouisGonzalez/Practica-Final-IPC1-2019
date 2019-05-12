@@ -20,7 +20,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
     private int ataque, armadura, experiencia, nivel, vida;
     ImageIcon avion = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Avion.jpg");
     ImageIcon tanque = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Tanque.jpg");
-    
+    ImageIcon fondo = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/autito.jpg");
     
     public DlgNuevoAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda) {
         super(parent, modal);
@@ -30,7 +30,9 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
         this.numCelda = numCelda;
         Icon primerFoto = new ImageIcon(tanque.getImage().getScaledInstance(modelo.getWidth(), modelo.getHeight(), Image.SCALE_DEFAULT));
         Icon segundaFoto = new ImageIcon(avion.getImage().getScaledInstance(modelo.getWidth(), modelo.getHeight(), Image.SCALE_DEFAULT));      
+        Icon menu = new ImageIcon(fondo.getImage().getScaledInstance(fondoAuto.getWidth(), fondoAuto.getHeight(), Image.SCALE_DEFAULT));      
         modelo.setIcon(primerFoto);
+        fondoAuto.setIcon(menu);
         tipoAuto.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent itemEvent){
@@ -54,21 +56,28 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
         tipoAuto = new javax.swing.JComboBox<>();
         modelo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        fondoAuto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ingrese el nombre de su nuevo auto:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 64, 236, -1));
-        getContentPane().add(nuevoAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 107, 184, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 236, -1));
+        getContentPane().add(nuevoAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 184, -1));
 
+        crear.setBackground(new java.awt.Color(255, 255, 255));
+        crear.setForeground(new java.awt.Color(255, 255, 255));
         crear.setText("crear");
+        crear.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        crear.setContentAreaFilled(false);
         crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearActionPerformed(evt);
             }
         });
-        getContentPane().add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 104, -1, -1));
+        getContentPane().add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 70, 40));
 
         tipoAuto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tanque", "Avion" }));
         tipoAuto.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +88,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
         getContentPane().add(tipoAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 139, -1, -1));
         getContentPane().add(modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 143, 80, 50));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 30, 20));
+        getContentPane().add(fondoAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,7 +112,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
             }
             Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
             NombreJugador agregar = elemento.obtenerContenido();
-            NombreAuto nombre = new NombreAuto(nuevoAuto.getText(), auto, ataque, armadura, experiencia, nivel, vida);
+            NombreAuto nombre = new NombreAuto(nuevoAuto.getText(), auto, ataque, armadura, experiencia, nivel, vida, 0, 0);
             agregar.getMiLista().insertarContenido(nombre);
             nuevoAuto.setText("");
             JOptionPane.showMessageDialog(null, "Su auto ha sido guardado con exito");
@@ -116,6 +126,7 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crear;
+    private javax.swing.JLabel fondoAuto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel modelo;

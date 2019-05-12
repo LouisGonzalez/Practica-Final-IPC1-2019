@@ -11,6 +11,7 @@ public class FrmNuevoAvatar extends javax.swing.JDialog {
     
     protected NuevoAvatar<NombreJugador> miLista;
     MenuPrincipal ver = new MenuPrincipal();
+    Archivos archivoJugador = new Archivos();
     
     
     ImageIcon foto = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/robot-inteligencia-artificial3.jpg");    
@@ -22,6 +23,7 @@ public class FrmNuevoAvatar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Icon fotos = new ImageIcon(foto.getImage().getScaledInstance(contornoGenesis.getWidth(), contornoGenesis.getHeight(), Image.SCALE_DEFAULT));
         contornoGenesis.setIcon(fotos);
+        this.miLista = archivoJugador.leerArchivo();
         this.repaint();   
     }
                                                                                 
@@ -75,8 +77,9 @@ public class FrmNuevoAvatar extends javax.swing.JDialog {
         NuevoAuto<NombreAuto> miLista2 = new NuevoAuto<>();
         NuevaArma<Armas> misArmas = new NuevaArma<>();
         NuevoBot<Bot> misBots = new NuevoBot<>();
-        NombreJugador nombre = new NombreJugador(ingreseAvatar.getText(), miLista2, misArmas, misBots, 50);       
+        NombreJugador nombre = new NombreJugador(ingreseAvatar.getText(), miLista2, misArmas, misBots, 50, 0, 0, 0);       
         miLista.insertarContenido(nombre);
+        archivoJugador.guardarArchivos(miLista);
         ingreseAvatar.setText("");
         JOptionPane.showMessageDialog(null, "Su nuevo avatar ha sido guardado exitosamente");
     }//GEN-LAST:event_crearAvatarActionPerformed

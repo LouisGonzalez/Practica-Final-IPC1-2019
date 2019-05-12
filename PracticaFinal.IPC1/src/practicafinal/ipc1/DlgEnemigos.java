@@ -143,6 +143,16 @@ public class DlgEnemigos extends javax.swing.JDialog {
     public int getCantidad() {
         return cantidad;
     }
+
+    public double[] getVida() {
+        return vida;
+    }
+
+    public void setVida(double[] vida) {
+        this.vida = vida;
+    }
+    
+    
     
     
     

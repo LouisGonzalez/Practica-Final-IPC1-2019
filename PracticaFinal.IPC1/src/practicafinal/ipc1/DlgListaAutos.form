@@ -135,7 +135,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="nombreAuto" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   <Component id="niveles" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="botVida" min="-2" max="-2" attributes="0"/>
@@ -170,6 +170,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nivel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nivelesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="botVida">
           <Properties>

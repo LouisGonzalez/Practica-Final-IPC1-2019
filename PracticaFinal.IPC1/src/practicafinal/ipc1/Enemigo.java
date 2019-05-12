@@ -6,9 +6,10 @@ package practicafinal.ipc1;
 public class Enemigo {
     
     private String nombre;
-    private int vida, ataque, armadura;
+    private double vida;
+    private int ataque, armadura;
     
-    public Enemigo(String nombre, int vida, int ataque, int armadura){
+    public Enemigo(String nombre, double vida, int ataque, int armadura){
         this.nombre = nombre;
         this.vida = vida;
         this.ataque = ataque;
@@ -19,7 +20,7 @@ public class Enemigo {
         return nombre;
     }
 
-    public int getVida() {
+    public double getVida() {
         return vida;
     }
 
@@ -30,6 +31,23 @@ public class Enemigo {
     public int getArmadura() {
         return armadura;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setVida(double vida) {
+        this.vida = vida;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+
+    public void setArmadura(int armadura) {
+        this.armadura = armadura;
+    }
+    
     
     
 }

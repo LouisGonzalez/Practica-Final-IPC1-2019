@@ -26,6 +26,9 @@ public class DlgListaAvatares extends javax.swing.JFrame {
                 Nodo<NombreJugador> elemento = miLista.obtenerElemento(i);
                 NombreJugador jugador = elemento.obtenerContenido();
                 fila[0] = jugador.getNombre();
+                fila[1] = jugador.getContPartidasGanadas();
+                fila[2] = jugador.getContPartidasPerdidas();
+                fila[3] = jugador.getTotalPartidas();
                 dtmModel.addRow(fila);
             } catch (Exception ex) {
                 Logger.getLogger(DlgListaAvatares.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,33 +44,27 @@ public class DlgListaAvatares extends javax.swing.JFrame {
         tablaDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombres:"
+                "Nombres:", "Partidas Ganadas:", "Partidas Perdidas:", "Total de Partidas:"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaDatos);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 580, 217));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

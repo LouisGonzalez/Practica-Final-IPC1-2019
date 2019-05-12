@@ -6,16 +6,22 @@ package practicafinal.ipc1;
 public class NombreJugador {
     private String nombre;
     private double oro;
+    private int contPartidasGanadas;
+    private int contPartidasPerdidas;
+    private int totalPartidas;
     private NuevoAuto<NombreAuto> miLista = new NuevoAuto<>();
     private NuevaArma<Armas> misArmas = new NuevaArma<>();
     private NuevoBot<Bot> misBots = new NuevoBot<>();
     
-    public NombreJugador(String nombre, NuevoAuto<NombreAuto> miLista, NuevaArma<Armas> misArmas, NuevoBot<Bot> misBots, double oro){
+    public NombreJugador(String nombre, NuevoAuto<NombreAuto> miLista, NuevaArma<Armas> misArmas, NuevoBot<Bot> misBots, double oro, int contPartidasGanadas, int contPartidasPerdidas, int totalPartidas){
         this.nombre = nombre;
         this.miLista = miLista;
         this.misArmas = misArmas;
         this.misBots = misBots;
         this.oro = oro;
+        this.contPartidasGanadas = contPartidasGanadas;
+        this.contPartidasPerdidas = contPartidasPerdidas;
+        this.totalPartidas = totalPartidas;
     }
     
     public String mostrarDatos(){
@@ -61,6 +67,34 @@ public class NombreJugador {
     public void setMisBots(NuevoBot<Bot> misBots) {
         this.misBots = misBots;
     }
+
+    public int getContPartidasGanadas() {
+        return contPartidasGanadas;
+    }
+
+    public void setContPartidasGanadas(int contPartidasGanadas) {
+        this.contPartidasGanadas = contPartidasGanadas;
+    }
+
+    public int getContPartidasPerdidas() {
+        return contPartidasPerdidas;
+    }
+
+    public void setContPartidasPerdidas(int contPartidasPerdidas) {
+        this.contPartidasPerdidas = contPartidasPerdidas;
+    }
+
+    public int getTotalPartidas() {
+        return totalPartidas;
+    }
+
+    public void setTotalPartidas(int totalPartidas) {
+        this.totalPartidas = totalPartidas;
+    }
+    
+    
+    
+    
     
     
     

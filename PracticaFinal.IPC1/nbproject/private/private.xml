@@ -10,17 +10,22 @@
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/Bot.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgListaAvatares.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovBalaAbajo.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DisparoArribaMult.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgOpcionesMultiJugador.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NuevoAuto.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovArriba2.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NuevoBot.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/Enemigo.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/OrdenacionNombre.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/PracticaFinalIPC1.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgTienda.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovAbajo2.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgPosBots.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgCajasComodin.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgPrimerEscenario.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovBalaDerecha.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovBalaArriba.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DisparoAbajoMult.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovBalaIzquierda.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgEnemigos.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgEleccionMultiJugador.java</file>
@@ -33,6 +38,7 @@
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgTipoEscenario.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovIzquierda.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/MovIzquierda2.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgPrimerEscenarioMult.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgAtaque.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgOpcionesJugador.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgCambioAuto.java</file>
@@ -45,6 +51,8 @@
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/FrmNuevoAvatar.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgTiendaBots.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgTercerEscenario.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DisparoDerechaMult.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DisparoIzquierdaMult.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgSegundoEscenario.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DisparoEnemAbajo.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NuevoEnemigo.java</file>
@@ -56,6 +64,8 @@
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NombreJugador.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NuevoAvatar.java</file>
             <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/NuevaArma.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgAtaqueMult.java</file>
+            <file>file:/home/luisitopapurey/Escritorio/PRACTICA%20FINAL%20201731766%202019/PracticaFinal.IPC1/src/practicafinal/ipc1/DlgEscenarioMultiJugador.java</file>
         </group>
     </open-files>
 </project-private>

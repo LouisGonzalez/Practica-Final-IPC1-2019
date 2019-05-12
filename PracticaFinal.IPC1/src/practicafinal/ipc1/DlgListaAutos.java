@@ -9,9 +9,11 @@ import javax.swing.table.DefaultTableModel;
 public class DlgListaAutos extends javax.swing.JDialog {
     
     private NuevoAvatar<NombreJugador> misAutos;
-    public DefaultTableModel dtmModel2;
     private int numCelda;
-
+    private int contClicks = 0;
+    private int contClicks2 = 0;
+    private int contClicks3 = 0;
+    
     public DlgListaAutos(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda) {
         super(parent, modal);
         initComponents();
@@ -26,7 +28,7 @@ public class DlgListaAutos extends javax.swing.JDialog {
             //metodo encargado de mostrar los datos que ya se crearon pero en un tabla
             Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
             NombreJugador tabla = elemento.obtenerContenido();
-            dtmModel2 = (DefaultTableModel) tablaAutos.getModel();
+            DefaultTableModel dtmModel2 = (DefaultTableModel) tablaAutos.getModel();
             Object[] fila = new Object[dtmModel2.getColumnCount()];
             for(int i=0; i<tabla.getMiLista().obtenerCantidadElementos(); i++){
                 try{
@@ -91,6 +93,11 @@ public class DlgListaAutos extends javax.swing.JDialog {
         });
 
         niveles.setText("Nivel");
+        niveles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nivelesActionPerformed(evt);
+            }
+        });
 
         botVida.setText("Vida");
         botVida.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +113,7 @@ public class DlgListaAutos extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nombreAuto)
-                .addGap(145, 145, 145)
+                .addGap(81, 81, 81)
                 .addComponent(niveles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botVida)
@@ -154,13 +161,93 @@ public class DlgListaAutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botVidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botVidaActionPerformed
-
+        OrdenacionNombre ordenar = new OrdenacionNombre();
+        contClicks3++;
+        try{
+            Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
+            NombreJugador lista = elemento.obtenerContenido();
+            NombreAuto[] ordenado = ordenar.ordenarVidaAs(lista.getMiLista());
+            NombreAuto[] ordenado2 = ordenar.ordenarVidaDes(lista.getMiLista());
+            DefaultTableModel dtmModel2 = (DefaultTableModel) tablaAutos.getModel();
+            dtmModel2.setRowCount(0);
+            Object[] fila = new Object[dtmModel2.getColumnCount()];           
+            if(contClicks3%2!=0){
+                for (NombreAuto nombre : ordenado) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }                
+            } else if (contClicks3%2==0){
+                for (NombreAuto nombre : ordenado2) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }
+            }
+        }catch(Exception e){
+        }
     }//GEN-LAST:event_botVidaActionPerformed
 
     private void nombreAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreAutoActionPerformed
-        
+        OrdenacionNombre ordenar = new OrdenacionNombre();
+        contClicks++;
+        try{
+            Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
+            NombreJugador lista = elemento.obtenerContenido();
+            NombreAuto[] ordenado = ordenar.ordenarNombreAs(lista.getMiLista());
+            NombreAuto[] ordenado2 = ordenar.ordenarNombreDes(lista.getMiLista());
+            DefaultTableModel dtmModel2 = (DefaultTableModel) tablaAutos.getModel();
+            dtmModel2.setRowCount(0);
+            Object[] fila = new Object[dtmModel2.getColumnCount()];           
+            if(contClicks%2!=0){
+                for (NombreAuto nombre : ordenado) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }                
+            } else if (contClicks%2==0){
+                for (NombreAuto nombre : ordenado2) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }
+            }
+        }catch(Exception e){
+        }
     }//GEN-LAST:event_nombreAutoActionPerformed
 
+    private void nivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelesActionPerformed
+        OrdenacionNombre ordenar = new OrdenacionNombre();
+        contClicks2++;
+        try{
+            Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
+            NombreJugador lista = elemento.obtenerContenido();
+            NombreAuto[] ordenado = ordenar.ordenarNivelAs(lista.getMiLista());
+            NombreAuto[] ordenado2 = ordenar.ordenarNivelDes(lista.getMiLista());
+            DefaultTableModel dtmModel2 = (DefaultTableModel) tablaAutos.getModel();
+            dtmModel2.setRowCount(0);
+            Object[] fila = new Object[dtmModel2.getColumnCount()];           
+            if(contClicks2%2!=0){
+                for (NombreAuto nombre : ordenado) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }                
+            } else if (contClicks2%2==0){
+                for (NombreAuto nombre : ordenado2) {
+                    mostrarDatos(fila, nombre);
+                    dtmModel2.addRow(fila);
+                }
+            }
+        }catch(Exception e){
+        }
+    }//GEN-LAST:event_nivelesActionPerformed
+
+    
+    private void mostrarDatos(Object[] fila, NombreAuto nombre){
+        fila[0] = nombre.getNombre();
+        fila[1] = nombre.getTipoAuto();
+        fila[2] = nombre.getAtaque();
+        fila[3] = nombre.getArmadura();
+        fila[4] = nombre.getExperiencia();
+        fila[5] = nombre.getNivel();
+        fila[6] = nombre.getVida();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botVida;
     private javax.swing.JPanel jPanel1;

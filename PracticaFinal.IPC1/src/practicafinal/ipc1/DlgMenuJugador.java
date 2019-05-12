@@ -2,6 +2,7 @@ package practicafinal.ipc1;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -62,7 +63,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
                 crearAutosActionPerformed(evt);
             }
         });
-        getContentPane().add(crearAutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 80, 40));
+        getContentPane().add(crearAutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 100, 40));
 
         verAutos.setBackground(new java.awt.Color(255, 255, 255));
         verAutos.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,7 +87,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
                 juegoNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(juegoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 60, 30));
+        getContentPane().add(juegoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 70, 30));
 
         nombreJugador.setBackground(new java.awt.Color(255, 255, 255));
         nombreJugador.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,8 +103,17 @@ public class DlgMenuJugador extends javax.swing.JDialog {
     }//GEN-LAST:event_tiendaActionPerformed
 
     private void juegoNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juegoNuevoActionPerformed
-        DlgTipoEscenario jugar = new DlgTipoEscenario(null, true, miLista, numCelda);
-        jugar.setVisible(true);
+        try{
+            Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
+            NombreJugador lista = elemento.obtenerContenido();
+            if(lista.getMiLista().obtenerCantidadElementos()<3){
+                JOptionPane.showMessageDialog(null, "Para empezar a jugar necesitas almenos 3 vehiculo iniciales");
+            } else {
+                DlgTipoEscenario jugar = new DlgTipoEscenario(null, true, miLista, numCelda);
+                jugar.setVisible(true);
+            }
+        } catch(Exception e){         
+        }
     }//GEN-LAST:event_juegoNuevoActionPerformed
 
     private void crearAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearAutosActionPerformed
