@@ -1,9 +1,12 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  */
-public class NombreAuto {
+public class NombreAuto implements Serializable{
     private String nombre;
     private String tipoAuto;
     private int armadura, experiencia, nivel, enemigosDestruidos, autoDestruido;

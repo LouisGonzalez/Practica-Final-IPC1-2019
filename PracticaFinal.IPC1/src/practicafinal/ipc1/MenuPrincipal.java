@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -12,8 +13,11 @@ import javax.swing.table.DefaultTableModel;
 public class MenuPrincipal extends javax.swing.JFrame {
     
     private NuevoAvatar<NombreJugador> miLista = new NuevoAvatar<>();
+    
+    
     ImageIcon foto = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/world-of-warcraft-computer-games-wallpaper-2029.jpg");           
     DefaultTableModel tabla;
+    Archivos archivos = new Archivos();
     
     public MenuPrincipal() {      
         initComponents();   
@@ -21,6 +25,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Icon fotos = new ImageIcon(foto.getImage().getScaledInstance(contornoMenu.getWidth(), contornoMenu.getHeight(), Image.SCALE_DEFAULT));
         contornoMenu.setIcon(fotos);
         this.repaint();
+    }
+
+    public Archivos getArchivos() {
+        return archivos;
     }
 
     @SuppressWarnings("unchecked")
@@ -99,22 +107,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void solitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solitarioActionPerformed
-       DlgListaAvatares listas = new DlgListaAvatares(miLista);      
-       tabla = (DefaultTableModel) listas.tablaDatos.getModel();
-       MostrarAvatares nuevo = new MostrarAvatares(this, true, tabla, miLista);
-       nuevo.setVisible(true);
+        miLista = archivos.leerArchivo();
+        DlgListaAvatares listas = new DlgListaAvatares(miLista);      
+        tabla = (DefaultTableModel) listas.tablaDatos.getModel();
+        MostrarAvatares nuevo = new MostrarAvatares(this, true, tabla, miLista, archivos);
+        nuevo.setVisible(true);
+         
+      
     }//GEN-LAST:event_solitarioActionPerformed
 
     private void multijugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multijugadorActionPerformed
+       miLista = archivos.leerArchivo();
        DlgListaAvatares listas = new DlgListaAvatares(miLista);
        tabla = (DefaultTableModel) listas.tablaDatos.getModel();
-       DlgEleccionMultiJugador multiJugador = new DlgEleccionMultiJugador(this, true, tabla, miLista);
+       DlgEleccionMultiJugador multiJugador = new DlgEleccionMultiJugador(this, true, tabla, miLista, archivos);
        multiJugador.setVisible(true);
     }//GEN-LAST:event_multijugadorActionPerformed
 
     private void nuevoAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAvatarActionPerformed
-        FrmNuevoAvatar avatar = new FrmNuevoAvatar(this, true, miLista);
+        FrmNuevoAvatar avatar = new FrmNuevoAvatar(this, true, miLista, archivos);
         avatar.setVisible(true);
+        
     }//GEN-LAST:event_nuevoAvatarActionPerformed
     
     protected void mostrarTabla(NuevoAvatar<NombreJugador> miLista){
@@ -126,7 +139,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
     private void verAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAvatarActionPerformed
+        miLista = archivos.leerArchivo();
         mostrarTabla(miLista);
+            
+
+        
     }//GEN-LAST:event_verAvatarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

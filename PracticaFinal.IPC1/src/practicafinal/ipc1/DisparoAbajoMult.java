@@ -10,12 +10,13 @@ import javax.swing.JOptionPane;
 public class DisparoAbajoMult extends TimerTask{
     
     private int i, j, casillas, numCelda;
-    int[][] ocupado, valoresJugador;
+    private int[][] ocupado, valoresJugador;
     private JLabel resultado, numAuto, vidaAuto;
     private JLabel[][] mapa;
     private Icon bala, autoTanque, autoAvion;
     private NuevoAvatar<NombreJugador> miLista;
     private double vida;
+    private Archivos archivos;
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
@@ -38,6 +39,7 @@ public class DisparoAbajoMult extends TimerTask{
                         vida = vida - valorFinal;
                         vidaAuto.setText(Double.toString(vida));
                         nombre.setVida(vida);
+                        this.cancel();    
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Le has disparado al avion de tu enemigo"); 
@@ -45,16 +47,17 @@ public class DisparoAbajoMult extends TimerTask{
                         vida = vida - valorFinal;
                         vidaAuto.setText(Double.toString(vida));
                         nombre.setVida(vida);
+                        this.cancel();    
                         break;
                     }
-                    this.cancel();    
+                    
                 }
             } i++;
         } catch(Exception e){           
         }
     }
     
-    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto){
+    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto, Archivos archivos){
         this.i = i;
         this.j = j;
         this.casillas = casillas;
@@ -69,5 +72,7 @@ public class DisparoAbajoMult extends TimerTask{
         this.numCelda = numCelda;
         this.numAuto = numAuto;
         this.vidaAuto = vidaAuto;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
     }
 }

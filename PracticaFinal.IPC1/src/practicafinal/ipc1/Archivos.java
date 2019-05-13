@@ -5,31 +5,35 @@ import javax.swing.JOptionPane;
  *
  * @author luisGonzalez
  */
-public class Archivos {
+public class Archivos implements Serializable {
     
-    FileOutputStream archivoJugadores = null;
-    ObjectOutputStream objetoArchivo;
-    FileInputStream archivoSalida;
-    
-    public void guardarArchivos(NuevoAvatar jugador){
+    public void guardarArchivos(NuevoAvatar<NombreJugador> jugador){
+        String fichero = "Jugadores.dat";
         try{
-            archivoJugadores = new FileOutputStream("Jugadores.dat");
-            objetoArchivo = new ObjectOutputStream(archivoJugadores);
+            ObjectOutputStream objetoArchivo = new ObjectOutputStream(new FileOutputStream(fichero));
             objetoArchivo.writeObject(jugador);
-        } catch(IOException e){
+            objetoArchivo.flush();
+            objetoArchivo.close();
+        } catch(FileNotFoundException e){
+            JOptionPane.showMessageDialog(null, "bvc");
+        } catch(IOException ioe){
+            JOptionPane.showMessageDialog(null, "No hay archivos por el momento");
         }
     }
     
-    public NuevoAvatar leerArchivo(){     
-        NuevoAvatar<NombreJugador> miLista = new NuevoAvatar<>();
+    public NuevoAvatar<NombreJugador> leerArchivo() {     
+            NuevoAvatar<NombreJugador> miLista = new NuevoAvatar<>();
         try{
-            archivoSalida = new FileInputStream("Jugadores.dat");
-            ObjectInputStream salidaArchivo = new ObjectInputStream(archivoSalida);
-            miLista = (NuevoAvatar<NombreJugador>) salidaArchivo.readObject();
-        }
-            catch(ClassNotFoundException | IOException ex){
-                    
-            }
+            
+                try (ObjectInputStream salidaArchivo = new ObjectInputStream(new FileInputStream("Jugadores.dat"))) {
+                    miLista = (NuevoAvatar<NombreJugador>) salidaArchivo.readObject();
+                }
+        }   catch(ClassNotFoundException ex){
+                ex.printStackTrace();
+        
+        }   catch(IOException ioe){
+                JOptionPane.showMessageDialog(null, "No hay archivos por el momento");
+         }   
         return miLista;
     }
 }

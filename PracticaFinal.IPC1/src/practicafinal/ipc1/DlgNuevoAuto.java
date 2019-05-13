@@ -16,18 +16,21 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
 
     private NuevoAvatar<NombreJugador> miLista;
     private int numCelda;
+    private Archivos archivos;
     private String auto;
     private int ataque, armadura, experiencia, nivel, vida;
     ImageIcon avion = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Avion.jpg");
     ImageIcon tanque = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/Tanque.jpg");
     ImageIcon fondo = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/autito.jpg");
     
-    public DlgNuevoAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda) {
+    public DlgNuevoAuto(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, Archivos archivos) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         this.miLista = miLista;
         this.numCelda = numCelda;
+        this.archivos = archivos;
+        this.miLista = this.archivos.leerArchivo();
         Icon primerFoto = new ImageIcon(tanque.getImage().getScaledInstance(modelo.getWidth(), modelo.getHeight(), Image.SCALE_DEFAULT));
         Icon segundaFoto = new ImageIcon(avion.getImage().getScaledInstance(modelo.getWidth(), modelo.getHeight(), Image.SCALE_DEFAULT));      
         Icon menu = new ImageIcon(fondo.getImage().getScaledInstance(fondoAuto.getWidth(), fondoAuto.getHeight(), Image.SCALE_DEFAULT));      
@@ -114,6 +117,8 @@ public class DlgNuevoAuto extends javax.swing.JDialog {
             NombreJugador agregar = elemento.obtenerContenido();
             NombreAuto nombre = new NombreAuto(nuevoAuto.getText(), auto, ataque, armadura, experiencia, nivel, vida, 0, 0);
             agregar.getMiLista().insertarContenido(nombre);
+            archivos.guardarArchivos(miLista);
+            
             nuevoAuto.setText("");
             JOptionPane.showMessageDialog(null, "Su auto ha sido guardado con exito");
         } catch (Exception ex){

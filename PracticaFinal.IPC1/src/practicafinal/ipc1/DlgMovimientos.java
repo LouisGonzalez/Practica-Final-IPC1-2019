@@ -18,8 +18,9 @@ public class DlgMovimientos extends javax.swing.JDialog {
     private Icon autoTanque, autoAvion, cumbres, mar, campo, torreta;
     private NuevoAvatar<NombreJugador> misAutos;
     private JLabel numAuto, vidaAuto;
+    private Archivos archivos;
     
-    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int filas, int columnas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado, int[][] cajasComodin, JLabel vidaAuto){
+    public DlgMovimientos(java.awt.Frame parent, boolean modal, int posX, int posY, JLabel[][] mapa, int filas, int columnas, int i, int j, Icon autoTanque, int[][] valores, Icon autoAvion, int[][] tipoTerreno, Icon cumbres, Icon mar, Icon campo, NuevoAvatar<NombreJugador> misAutos, JLabel numAuto, int numCelda, int[][] enemigos, Icon torreta, int[][] ocupado, int[][] cajasComodin, JLabel vidaAuto, Archivos archivos){
         super(parent, modal);
         initComponents();
         this.posX = posX;
@@ -44,6 +45,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
         this.ocupado = ocupado;
         this.vidaAuto = vidaAuto;
         this.cajasComodin = cajasComodin;
+        this.archivos = archivos;
         setLocationRelativeTo(null);
                 
     }
@@ -131,12 +133,12 @@ public class DlgMovimientos extends javax.swing.JDialog {
         MovDerecha2 derecha2 = new MovDerecha2();
         MovIzquierda izquierda = new MovIzquierda();
         MovIzquierda2 izquierda2 = new MovIzquierda2();
-        DlgCajasComodin cajitas = new DlgCajasComodin(null, true, misAutos, numCelda, numAuto, vidaAuto, posX, posY, cajasComodin);
+        DlgCajasComodin cajitas = new DlgCajasComodin(null, true, misAutos, numCelda, numAuto, vidaAuto, posX, posY, cajasComodin, archivos);
         switch (direccion) {
             case 1:
                 //metodo para mover arriba
                 if(segundaPosX>0){
-                    if(tipoTerreno[segundaPosX][posY]==tipoCampo || enemigos[segundaPosX][posY]==1){
+                    if(tipoTerreno[segundaPosX][posY]==tipoCampo || ocupado[segundaPosX][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -151,10 +153,11 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[segundaPosX][posY] = 1;
                         if(cajasComodin[segundaPosX][posY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[segundaPosX][posY]=0;
                         }
                     }
                 } else if (segundaPosX<=0){
-                    if(tipoTerreno[0][posY]==tipoCampo || enemigos[0][posY]==1){
+                    if(tipoTerreno[0][posY]==tipoCampo || ocupado[0][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -168,6 +171,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[0][posY] = 1;
                         if(cajasComodin[0][posY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[0][posY]=0;
                         }
                     }
                 }
@@ -175,7 +179,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
             case 2:
                 //metodo para mover abajo
                 if(nuevaPosX>=filas){
-                    if(tipoTerreno[filas-1][posY]==tipoCampo || enemigos[filas-1][posY]==1){
+                    if(tipoTerreno[filas-1][posY]==tipoCampo || ocupado[filas-1][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -189,10 +193,11 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[filas-1][posY] = 1;
                         if(cajasComodin[filas-1][posY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[filas-1][posY]=0;
                         }
                     }
                 } else if (nuevaPosX<filas){
-                    if(tipoTerreno[nuevaPosX][posY]==tipoCampo || enemigos[nuevaPosX][posY]==1){
+                    if(tipoTerreno[nuevaPosX][posY]==tipoCampo || ocupado[nuevaPosX][posY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -206,6 +211,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[nuevaPosX][posY] = 1;
                         if(cajasComodin[nuevaPosX][posY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[nuevaPosX][posY]=0;
                         }
                     }
                 } 
@@ -213,7 +219,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
             case 3:
                 //metodo para mover derecha
                 if(nuevaPosY>=columnas){
-                    if(tipoTerreno[posX][columnas-1]==tipoCampo || enemigos[posX][columnas-1]==1){
+                    if(tipoTerreno[posX][columnas-1]==tipoCampo || ocupado[posX][columnas-1]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -227,10 +233,11 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][columnas-1] = 1;
                         if(cajasComodin[posX][columnas-1]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[posX][columnas-1]=0;
                         }
                     }
                 } else if (nuevaPosY<columnas){
-                    if(tipoTerreno[posX][nuevaPosY]==tipoCampo || enemigos[posX][nuevaPosY]==1){
+                    if(tipoTerreno[posX][nuevaPosY]==tipoCampo || ocupado[posX][nuevaPosY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -244,6 +251,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][nuevaPosY] = 1;
                         if(cajasComodin[posX][nuevaPosY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[posX][nuevaPosY]=0;
                         }
                     }
                 }   
@@ -251,7 +259,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
             case 4:
                 //metodo para mover izquierda
                 if(segundaPosY>=0){
-                    if(tipoTerreno[posX][segundaPosY]==tipoCampo || enemigos[posX][segundaPosY]==1){
+                    if(tipoTerreno[posX][segundaPosY]==tipoCampo || ocupado[posX][segundaPosY]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -265,10 +273,11 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][segundaPosY] = 1;
                         if(cajasComodin[posX][segundaPosY]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[posX][segundaPosY]=0;
                         }
                     }
                 } else if (segundaPosY<0){
-                    if(tipoTerreno[posX][0]==tipoCampo || enemigos[posX][0]==1){
+                    if(tipoTerreno[posX][0]==tipoCampo || ocupado[posX][0]==1){
                         JOptionPane.showMessageDialog(null, "Tu vehiculo ha topado con terreno prohibido, porfavor lanza los dados de nuevo");
                         setVisible(true);
                     } else {
@@ -282,6 +291,7 @@ public class DlgMovimientos extends javax.swing.JDialog {
                         ocupado[posX][0] = 1;
                         if(cajasComodin[posX][0]==1){
                             cajitas.setVisible(true);
+                            cajasComodin[posX][0]=0;
                         }
                     }
                 }  

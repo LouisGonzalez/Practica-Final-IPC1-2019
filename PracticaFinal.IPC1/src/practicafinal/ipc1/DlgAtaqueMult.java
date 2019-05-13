@@ -26,11 +26,12 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     private NuevoAvatar<NombreJugador> miLista;
     private int aleatorio = (int)(Math.random()*100)+1; 
     private int contador=0;
+    private Archivos archivos;
     private JLabel numAuto2, vidaAuto2;
     private ImageIcon bala = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/hit.jpg");
     private ImageIcon mini = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/qw.jpg");
     
-    public DlgAtaqueMult(java.awt.Frame parent, boolean modal, int i, int j, int filas, int columnas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, DefaultTableModel modelMapa2, Icon autoTanque, Icon autoAvion, int[][] valores, int[][] valores2, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto, int numCelda3, JLabel numAuto2, JLabel vidaAuto2) {
+    public DlgAtaqueMult(java.awt.Frame parent, boolean modal, int i, int j, int filas, int columnas, JLabel[][]mapa, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int[][] ocupado, Icon torreta, int[][] enemigos, DefaultTableModel modelMapa2, Icon autoTanque, Icon autoAvion, int[][] valores, int[][] valores2, int numCelda, NuevoAvatar<NombreJugador> miLista, JLabel ataqueAuto, int numCelda3, JLabel numAuto2, JLabel vidaAuto2, Archivos archivos) {
         super(parent, modal);
         this.i = i;
         this.j = j;
@@ -58,7 +59,10 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         this.miLista = miLista;
         this.numCelda3 = numCelda3;
         this.vidaAuto2 = vidaAuto2;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         initComponents();
+        setLocationRelativeTo(null);
         Icon balita = new ImageIcon(bala.getImage().getScaledInstance(fondoPantalla.getWidth(), fondoPantalla.getHeight(), Image.SCALE_DEFAULT));        
         Icon mini2 = new ImageIcon(mini.getImage().getScaledInstance(fondo1.getWidth(), fondo1.getHeight(), Image.SCALE_DEFAULT));
         Icon mini3 = new ImageIcon(mini.getImage().getScaledInstance(fondo2.getWidth(), fondo2.getHeight(), Image.SCALE_DEFAULT));
@@ -97,6 +101,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         txt3 = new javax.swing.JLabel();
         mostrarDado = new javax.swing.JLabel();
         fondo2 = new javax.swing.JLabel();
+        dado = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         resultado = new javax.swing.JLabel();
@@ -108,7 +113,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         direccionAtaque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arriba", "Abajo", "Izquierda", "Derecha" }));
-        getContentPane().add(direccionAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 130, 30));
+        getContentPane().add(direccionAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 130, 30));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -154,7 +159,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         ataqueTotal.setBackground(new java.awt.Color(255, 255, 255));
         ataqueTotal.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(ataqueTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 12, 75, 16));
-        jPanel2.add(fondo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 40));
+        jPanel2.add(fondo4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 290, 40));
 
@@ -170,19 +175,22 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
                 dadoAtaqueActionPerformed(evt);
             }
         });
-        jPanel3.add(dadoAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 15, 120, 30));
+        jPanel3.add(dadoAtaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 30));
 
         txt3.setBackground(new java.awt.Color(255, 255, 255));
         txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Resultado:");
-        jPanel3.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 62, -1, -1));
+        jPanel3.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         mostrarDado.setBackground(new java.awt.Color(255, 255, 255));
         mostrarDado.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.add(mostrarDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 94, 36, 17));
-        jPanel3.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 170));
+        jPanel3.add(mostrarDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 36, 17));
+        jPanel3.add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 170));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 230, 170));
+        dado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practicafinal/ipc1/imagenes/dado-imagen-animada-0016.gif"))); // NOI18N
+        jPanel3.add(dado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 80, 50));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 180, 170));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -212,11 +220,11 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
                 disparoActionPerformed(evt);
             }
         });
-        jPanel4.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 100, 30));
-        jPanel4.add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 70));
+        jPanel4.add(disparo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 100, 30));
+        jPanel4.add(fondo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 70));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 470, 70));
-        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 350));
+        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,6 +239,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
 
     private void disparoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disparoActionPerformed
         //INVOCACION A LOS METODOS PARA ATAQUE EN MODO MULTIJUGADOR
+        this.dispose();
         Timer timer = new Timer();
         DisparoAbajoMult abajo = new DisparoAbajoMult();
         MovAbajo2 abajo2 = new MovAbajo2();
@@ -243,25 +252,25 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
         movDisparo = direccionAtaque.getSelectedItem().toString();
         switch(movDisparo){
             case "Arriba":
-                arriba.valores(i-1, j, ocupado, valores2, resultado, mapa, balaArriba, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2);
+                arriba.valores(i-1, j, ocupado, valores2, resultado, mapa, balaArriba, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2, archivos);
                 arriba2.valores(i-1, j, 0, mapa, cumbres, mar, campo, tipoTerreno, valores2, autoTanque, autoTanque, autoAvion, valores, autoAvion);
                 timer.schedule(arriba, 0, 1000);
                 timer.schedule(arriba2, 1000, 1000);
                 break;
             case "Abajo":
-                abajo.valores(i+1, j, filas, ocupado, valores2, resultado, mapa, balaAbajo, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2);
+                abajo.valores(i+1, j, filas, ocupado, valores2, resultado, mapa, balaAbajo, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2, archivos);
                 abajo2.valores(i+1, j, filas, mapa, cumbres, mar, campo, tipoTerreno, valores2, autoTanque, autoTanque, autoAvion, valores, autoAvion);
                 timer.schedule(abajo, 0, 1000);
                 timer.schedule(abajo2, 1000, 1000);
                 break;
             case "Izquierda":
-                izquierda.valores(i, j-1, ocupado, valores2, resultado, mapa, balaIzquierda, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2);
+                izquierda.valores(i, j-1, ocupado, valores2, resultado, mapa, balaIzquierda, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2, archivos);
                 izquierda2.valores(i, j-1, 0, mapa, cumbres, mar, campo, tipoTerreno, valores2, autoTanque, autoTanque, autoAvion, valores, autoAvion);
                 timer.schedule(izquierda, 0, 1000);
                 timer.schedule(izquierda2, 1000, 1000);
                 break;
             case "Derecha":
-                derecha.valores(i, j+1, columnas, ocupado, valores2, resultado, mapa, balaDerecha, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2);
+                derecha.valores(i, j+1, columnas, ocupado, valores2, resultado, mapa, balaDerecha, autoTanque, autoAvion, miLista, numCelda3, numAuto2, vidaAuto2, archivos);
                 derecha2.valores(i, j+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, valores2, autoTanque, autoTanque, autoAvion, valores, autoAvion);
                 timer.schedule(derecha, 0, 1000);
                 timer.schedule(derecha2, 1000, 1000);
@@ -323,6 +332,7 @@ public class DlgAtaqueMult extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ataqueArma;
     private javax.swing.JLabel ataqueTotal;
+    private javax.swing.JLabel dado;
     private javax.swing.JButton dadoAtaque;
     private javax.swing.JComboBox<String> direccionAtaque;
     private javax.swing.JButton disparo;

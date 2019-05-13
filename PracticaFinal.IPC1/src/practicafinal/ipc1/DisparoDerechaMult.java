@@ -18,6 +18,7 @@ public class DisparoDerechaMult extends TimerTask {
     private Icon bala, autoTanque, autoAvion;
     private NuevoAvatar<NombreJugador> miLista;
     private double vida;
+    private Archivos archivos;
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
@@ -56,7 +57,7 @@ public class DisparoDerechaMult extends TimerTask {
         }
     }
     
-    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto){
+    public void valores(int i, int j, int casillas, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto, Archivos archivos){
         this.i = i;
         this.j = j;
         this.casillas = casillas;
@@ -71,5 +72,7 @@ public class DisparoDerechaMult extends TimerTask {
         this.numAuto = numAuto;
         this.vidaAuto = vidaAuto;
         this.numCelda = numCelda;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
     }
 }

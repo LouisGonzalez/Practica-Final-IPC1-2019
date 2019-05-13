@@ -18,6 +18,7 @@ public class DisparoIzquierdaMult extends TimerTask{
     private Icon bala, autoTanque, autoAvion;
     private NuevoAvatar<NombreJugador> miLista;
     private double vida;
+    private Archivos archivos;
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
@@ -43,7 +44,7 @@ public class DisparoIzquierdaMult extends TimerTask{
                         break;
                     case 2:
                         JOptionPane.showMessageDialog(null, "Le has disparado al avion de tu enemigo");
-                        mapa[i][j].setIcon(autoAvion);vida = vida - valorFinal;
+                        mapa[i][j].setIcon(autoAvion);
                         vida = vida - valorFinal;
                         vidaAuto.setText(Double.toString(vida));
                         nombre.setVida(vida);                        
@@ -56,7 +57,7 @@ public class DisparoIzquierdaMult extends TimerTask{
         }         
     }
     
-    public void valores(int i, int j, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto){
+    public void valores(int i, int j, int[][] ocupado, int[][] valoresJugador, JLabel resultado, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto, Archivos archivos){
         this.i = i;
         this.j = j;
         this.ocupado = ocupado;
@@ -70,5 +71,8 @@ public class DisparoIzquierdaMult extends TimerTask{
         this.numCelda = numCelda;
         this.numAuto = numAuto;
         this.vidaAuto = vidaAuto;
+        this.archivos = archivos;
+        this.miLista = miLista;
     }
+    
 }

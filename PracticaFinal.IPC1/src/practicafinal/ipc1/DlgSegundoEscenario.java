@@ -127,9 +127,9 @@ public class DlgSegundoEscenario extends javax.swing.JDialog {
                                         contadorTurnos++;
                                         
                                         contTurnos.setText(Integer.toString(contadorTurnos));
-                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, cajasComodin);
-                                        camibo.setVisible(true);
-                                        disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
+                                  //      DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, cajasComodin);
+                                    //    camibo.setVisible(true);
+                                       // disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
                                     } else if(matriz == mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]==0){
                                         contadorTurnos++;
                                         contTurnos.setText(Integer.toString(contadorTurnos));
@@ -137,7 +137,7 @@ public class DlgSegundoEscenario extends javax.swing.JDialog {
                                         DlgPreguntaBot pregunta = new DlgPreguntaBot(null, true, numCelda, posX, posY, misAutos, mapa, bots, bot, contadorTurnos, posBotX, posBotY, qwe);
                                         pregunta.setVisible(true);
                                         JOptionPane.showMessageDialog(null, posBotX[0]+" "+posBotY[0]);
-                                        disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
+                                        //disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
                                     } else if(matriz==mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]!=0){
                                         JOptionPane.showMessageDialog(null, "has clickado a un enemigo"+enemigos[posX][posY]);          
                                     }                                   
@@ -213,7 +213,7 @@ public class DlgSegundoEscenario extends javax.swing.JDialog {
         }
     }
     
-    private void disparoEnemigos(Icon balaAbajo, Icon balaArriba, Icon balaIzquierda, Icon balaDerecha, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, Icon torretaEnemigo){
+    /*private void disparoEnemigos(Icon balaAbajo, Icon balaArriba, Icon balaIzquierda, Icon balaDerecha, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, Icon torretaEnemigo){
         Timer timer = new Timer();
         int aleatorio = (int)(Math.random()*2)+1;
         int aleatorio2 = (int)(Math.random()*2)+1;
@@ -457,7 +457,7 @@ public class DlgSegundoEscenario extends javax.swing.JDialog {
         }
         
        
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -1,9 +1,12 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  */
-public class NombreJugador {
+public class NombreJugador implements Serializable {
     private String nombre;
     private double oro;
     private int contPartidasGanadas;

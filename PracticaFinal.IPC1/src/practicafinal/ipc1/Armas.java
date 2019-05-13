@@ -1,9 +1,12 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  */
-public class Armas {
+public class Armas implements Serializable{
     private String nombre;
     private double ataque;
     

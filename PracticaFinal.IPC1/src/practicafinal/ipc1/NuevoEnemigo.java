@@ -1,10 +1,13 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  * @param <T>
  */
-public class NuevoEnemigo<T> {
+public class NuevoEnemigo<T> implements Serializable{
      private Nodo3<T> primerElemento;
    private Nodo3<T> ultimoElemento;
    private int cantidadElementos;

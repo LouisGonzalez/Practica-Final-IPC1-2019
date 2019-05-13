@@ -1,9 +1,12 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  */
-public class Enemigo {
+public class Enemigo implements Serializable{
     
     private String nombre;
     private double vida;

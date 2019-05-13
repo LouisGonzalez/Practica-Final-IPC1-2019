@@ -10,11 +10,15 @@ public class DlgEleccionMultiJugador extends javax.swing.JDialog {
     private NuevoAvatar<NombreJugador> miLista;
     private int contadorClicks = 0;
     private int numCelda, numCelda2;
+    private Archivos archivos;
+    
     //clase encargada de la inovacion de los jueces 
-    public DlgEleccionMultiJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista) {
+    public DlgEleccionMultiJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista, Archivos archivos) {
         super(parent, modal);
         initComponents();
         this.miLista = miLista;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         setLocationRelativeTo(null);
         tablaJugadores.setModel(dtm);
         tablaJugadores.addMouseListener(new java.awt.event.MouseAdapter(){
@@ -29,7 +33,7 @@ public class DlgEleccionMultiJugador extends javax.swing.JDialog {
                     if(numCelda<=numCelda2){
                         numCelda2 = numCelda2 + 1;
                     }
-                    DlgEscenarioMultiJugador escena = new DlgEscenarioMultiJugador(null, true, miLista, numCelda, numCelda2);
+                    DlgEscenarioMultiJugador escena = new DlgEscenarioMultiJugador(null, true, miLista, numCelda, numCelda2, archivos);
                     escena.setVisible(true);
                 }
             }

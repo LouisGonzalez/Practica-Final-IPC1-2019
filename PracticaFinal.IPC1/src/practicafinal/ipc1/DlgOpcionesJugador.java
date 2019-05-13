@@ -1,5 +1,7 @@
 package practicafinal.ipc1;
+import java.awt.Image;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -21,14 +23,17 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     Object [] fila;
     private DefaultTableModel modelMapa2;
     private double[] vida;
+    private Archivos archivos;
     private JPanel panelEnemigos;
     Nodo<NombreJugador> elemento;
     NombreJugador lista;
     Nodo2<NombreAuto> elemento2;
     NombreAuto nombre;
+    private ImageIcon fondo = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/menu.jpeg");
     
     
-    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, int[][] cajasComodin) {
+    
+    public DlgOpcionesJugador(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, JLabel[][] mapa, int posX, int posY, Icon autoTanque, Icon autoAvion, Icon cumbres, Icon mar, Icon campo, int[][] tipoTerreno, int x, int y, int[][] valores, int filas, int columnas, int i, int j, JLabel numAuto, Icon balaArriba, Icon balaAbajo, Icon balaIzquierda, Icon balaDerecha, NuevoEnemigo<Enemigo> enemigo, int[][] enemigos, int[][] ocupado, Icon torreta, Object[] fila, DefaultTableModel modelMapa2, double[] vida, JPanel panelEnemigos, JLabel enemigo1, JLabel enemigo2, JLabel enemigo3, JLabel enemigo4, JLabel vidaAuto, JLabel nivelAuto, JLabel ataqueAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, int[][] cajasComodin, Archivos archivos) {
         super(parent, modal);
         this.misAutos = misAutos;
         this.numCelda = numCelda;
@@ -73,11 +78,15 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         this.lista = lista;
         this.nombre = nombre;
         this.cajasComodin = cajasComodin;
+        this.archivos = archivos;
+        this.misAutos = archivos.leerArchivo();
         initComponents();
         setLocationRelativeTo(null);
         txt.setFont(new java.awt.Font("Tahoma", 0, 16));
         txt2.setFont(new java.awt.Font(null,0,11));
         txt3.setFont(new java.awt.Font(null,0, 11));
+        Icon menu = new ImageIcon(fondo.getImage().getScaledInstance(fondoMenu.getWidth(), fondoMenu.getHeight(), Image.SCALE_DEFAULT));                
+        fondoMenu.setIcon(menu);
     }
 
     @SuppressWarnings("unchecked")
@@ -91,18 +100,25 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
         dadoMov = new javax.swing.JButton();
         cambioAuto = new javax.swing.JButton();
         ataque = new javax.swing.JButton();
+        fondoMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt.setBackground(new java.awt.Color(255, 255, 255));
+        txt.setForeground(new java.awt.Color(255, 255, 255));
         txt.setText("BIENVENIDO AL MENU DE OPCIONES");
         panelOpciones.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 360, 40));
 
+        txt3.setBackground(new java.awt.Color(255, 255, 255));
+        txt3.setForeground(new java.awt.Color(255, 255, 255));
         txt3.setText("Si cierras el menu sin elegir alguna opcion el turno aun asi contara.");
         panelOpciones.add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 410, 10));
 
+        txt2.setBackground(new java.awt.Color(255, 255, 255));
+        txt2.setForeground(new java.awt.Color(255, 255, 255));
         txt2.setText("Elige con sabiduria.");
         panelOpciones.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 220, -1));
 
@@ -141,6 +157,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
             }
         });
         panelOpciones.add(ataque, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 75, 34));
+        panelOpciones.add(fondoMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 320));
 
         getContentPane().add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 320));
 
@@ -157,7 +174,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
 
     private void dadoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadoMovActionPerformed
         this.dispose();
-        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado, cajasComodin, vidaAuto);
+        DlgMovimientos movimientos = new DlgMovimientos(null, true, posX, posY, mapa, filas, columnas, i, j, autoTanque, valores, autoAvion, tipoTerreno, cumbres, mar, campo, misAutos, numAuto, numCelda, enemigos, torreta, ocupado, cajasComodin, vidaAuto, archivos);
         movimientos.setVisible(true);
     }//GEN-LAST:event_dadoMovActionPerformed
 
@@ -171,6 +188,7 @@ public class DlgOpcionesJugador extends javax.swing.JDialog {
     private javax.swing.JButton ataque;
     private javax.swing.JButton cambioAuto;
     private javax.swing.JButton dadoMov;
+    private javax.swing.JLabel fondoMenu;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JLabel txt;
     private javax.swing.JLabel txt2;

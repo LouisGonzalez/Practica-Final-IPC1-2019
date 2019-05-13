@@ -1,10 +1,13 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  * @param <T>
  */
-public class Nodo3<T> {
+public class Nodo3<T> implements Serializable{
     private T contenido;
     private Nodo3 siguiente;
     

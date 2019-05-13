@@ -12,14 +12,17 @@ public class DlgTienda extends javax.swing.JDialog {
     
     private int numCelda;
     private NuevoAvatar<NombreJugador> miLista;
+    private Archivos archivos;
     private ImageIcon tienda = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/tiendero.jpg");
     
-    public DlgTienda(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista) {
+    public DlgTienda(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista, Archivos archivos) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         this.numCelda = numCelda;
         this.miLista = miLista;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         Icon fotos = new ImageIcon(tienda.getImage().getScaledInstance(fondoTienda.getWidth(), fondoTienda.getHeight(), Image.SCALE_DEFAULT));
         fondoTienda.setIcon(fotos);
         try{
@@ -36,8 +39,8 @@ public class DlgTienda extends javax.swing.JDialog {
 
         panelTienda = new javax.swing.JPanel();
         txtTienda = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonArma = new javax.swing.JButton();
+        botonBot = new javax.swing.JButton();
         oro = new javax.swing.JLabel();
         fondoTienda = new javax.swing.JLabel();
         cantOro = new javax.swing.JLabel();
@@ -53,29 +56,29 @@ public class DlgTienda extends javax.swing.JDialog {
         txtTienda.setText("BIENVENIDO A LA TIENDA DE JUEGO");
         panelTienda.add(txtTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 320, 26));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Armas");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonArma.setBackground(new java.awt.Color(255, 255, 255));
+        botonArma.setForeground(new java.awt.Color(255, 255, 255));
+        botonArma.setText("Armas");
+        botonArma.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonArma.setContentAreaFilled(false);
+        botonArma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonArmaActionPerformed(evt);
             }
         });
-        panelTienda.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 135, 94, 41));
+        panelTienda.add(botonArma, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 135, 94, 41));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("BOTS");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonBot.setBackground(new java.awt.Color(255, 255, 255));
+        botonBot.setForeground(new java.awt.Color(255, 255, 255));
+        botonBot.setText("BOTS");
+        botonBot.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonBot.setContentAreaFilled(false);
+        botonBot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonBotActionPerformed(evt);
             }
         });
-        panelTienda.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 135, 94, 43));
+        panelTienda.add(botonBot, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 135, 94, 43));
 
         oro.setBackground(new java.awt.Color(255, 255, 255));
         oro.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,24 +96,26 @@ public class DlgTienda extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonArmaActionPerformed
         this.dispose();
-        DlgTiendaArmas armas = new DlgTiendaArmas(null, true, numCelda, miLista);
+        miLista = archivos.leerArchivo();
+        DlgTiendaArmas armas = new DlgTiendaArmas(null, true, numCelda, miLista, archivos);
         armas.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonArmaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonBotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBotActionPerformed
         this.dispose();
-        DlgTiendaBots bot = new DlgTiendaBots(null, true, numCelda, miLista);
+        miLista = archivos.leerArchivo();
+        DlgTiendaBots bot = new DlgTiendaBots(null, true, numCelda, miLista, archivos);
         bot.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonBotActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonArma;
+    private javax.swing.JButton botonBot;
     private javax.swing.JLabel cantOro;
     private javax.swing.JLabel fondoTienda;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel oro;
     private javax.swing.JPanel panelTienda;

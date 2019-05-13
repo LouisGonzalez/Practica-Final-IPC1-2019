@@ -7,13 +7,16 @@ import javax.swing.table.DefaultTableModel;
 public class MostrarAvatares extends javax.swing.JDialog {
                     
     private NuevoAvatar<NombreJugador> miLista;
+    private Archivos archivos;
     
-    public MostrarAvatares(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista){
+    public MostrarAvatares(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, NuevoAvatar<NombreJugador> miLista, Archivos archivos){
         super(parent, modal);
         initComponents();
         this.miLista = miLista;
+        this.archivos = archivos;
         setLocationRelativeTo(null);        
         mostrarLista.setModel(dtm);
+        this.miLista = this.archivos.leerArchivo();
         mostrarLista.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override                                                                                                                   
             public void mouseClicked(java.awt.event.MouseEvent e){                      
@@ -21,7 +24,7 @@ public class MostrarAvatares extends javax.swing.JDialog {
                     int fila = mostrarLista.rowAtPoint(e.getPoint());
                     int columna = mostrarLista.columnAtPoint(e.getPoint()); 
                     int numCelda = mostrarLista.rowAtPoint(e.getPoint());
-                    DlgMenuJugador menu = new DlgMenuJugador(null, true, dtm, fila, columna, miLista, numCelda);
+                    DlgMenuJugador menu = new DlgMenuJugador(null, true, dtm, fila, columna, miLista, numCelda, archivos);
                     menu.setVisible(true);                     
                 }
             }

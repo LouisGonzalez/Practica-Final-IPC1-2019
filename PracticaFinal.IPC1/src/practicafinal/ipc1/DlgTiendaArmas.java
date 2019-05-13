@@ -22,13 +22,16 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
     private int numCelda;
     private double costo, ataque, vida;
     private NuevoAvatar<NombreJugador> miLista;
+    private Archivos archivos;
     
-    public DlgTiendaArmas(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista) {
+    public DlgTiendaArmas(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista, Archivos archivos) {
         super(parent, modal);
         setLocationRelativeTo(null);
         initComponents();
         this.numCelda = numCelda;
         this.miLista = miLista;
+        this.archivos = archivos;
+        this.miLista = this.archivos.leerArchivo();
         Icon mp40 = new ImageIcon(arma1.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
         Icon awm = new ImageIcon(arma2.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
         Icon grooza = new ImageIcon(arma3.getImage().getScaledInstance(imagenArma.getWidth(), imagenArma.getHeight(), Image.SCALE_DEFAULT));
@@ -144,15 +147,17 @@ public class DlgTiendaArmas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comprarArmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comprarArmaActionPerformed
-        try {    
+        try { 
             Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
             NombreJugador agregar = elemento.obtenerContenido();
             if(agregar.getOro()>Double.parseDouble(mostrarCosto.getText())){
             Armas nueva = new Armas(listadoArmas.getSelectedItem().toString(), Double.parseDouble(mostrarAtaque.getText()));
             agregar.getMisArmas().insertarContenido(nueva);
+            archivos.guardarArchivos(miLista);
             JOptionPane.showMessageDialog(null, "Felicidades, su arma ha sido agregada con exito");
             vida = agregar.getOro() - Double.parseDouble(mostrarCosto.getText());
             agregar.setOro(vida);
+            archivos.guardarArchivos(miLista);
             } else{
                 JOptionPane.showMessageDialog(null, "Lo sentimos, no tienes el suficiente dinero como para hacer esta compra");
             }

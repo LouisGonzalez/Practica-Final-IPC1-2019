@@ -26,6 +26,7 @@ public class DisparoEnemAbajo extends TimerTask{
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
     private double valor;
+    private Archivos archivos;
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
@@ -44,6 +45,7 @@ public class DisparoEnemAbajo extends TimerTask{
                     valor = valor - 10;
                     vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
+                    archivos.guardarArchivos(miLista);
                     this.cancel();
                 } else if(valores[i][j]==2){
                     mapa[i][j].setIcon(autoAvion);
@@ -51,6 +53,7 @@ public class DisparoEnemAbajo extends TimerTask{
                     valor = valor - 10;
                     vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
+                    archivos.guardarArchivos(miLista);
                     this.cancel();               
                 }            
             }
@@ -59,7 +62,7 @@ public class DisparoEnemAbajo extends TimerTask{
         } 
     }
     
-    public void valores(int i, int j, int casillas, Icon bala, Icon autoTanque, Icon autoAvion, JLabel[][] mapa, int[][] valores, JLabel vidaAuto, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre){
+    public void valores(int i, int j, int casillas, Icon bala, Icon autoTanque, Icon autoAvion, JLabel[][] mapa, int[][] valores, JLabel vidaAuto, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, Archivos archivos){
         this.i = i;
         this.j = j;
         this.casillas = casillas;
@@ -76,6 +79,9 @@ public class DisparoEnemAbajo extends TimerTask{
         this.lista = lista;
         this.elemento2 = elemento2;
         this.nombre = nombre;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
+        
     }
 
     public int getVida() {

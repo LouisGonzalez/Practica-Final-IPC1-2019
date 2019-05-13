@@ -12,15 +12,19 @@ public class DlgMenuJugador extends javax.swing.JDialog {
     
     private NuevoAvatar<NombreJugador> miLista;  
     private int numCelda;
+    private Archivos archivos;
+
     private ImageIcon menu = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/menu.jpg");
     
     //clase que muestra las opciones variadas al jugador
-    public DlgMenuJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, int fila, int columna, NuevoAvatar<NombreJugador> miLista, int numCelda) {
+    public DlgMenuJugador(java.awt.Frame parent, boolean modal, DefaultTableModel dtm, int fila, int columna, NuevoAvatar<NombreJugador> miLista, int numCelda, Archivos archivos) {
         super(parent, modal);
         initComponents();
         this.numCelda = numCelda;
         this.miLista = miLista;
+        this.archivos = archivos;
         setLocationRelativeTo(null);
+        this.miLista = this.archivos.leerArchivo();
         Icon fotos = new ImageIcon(menu.getImage().getScaledInstance(contornoMenu.getWidth(), contornoMenu.getHeight(), Image.SCALE_DEFAULT));
         contornoMenu.setIcon(fotos);
         nombreJugador.setText("bienvenido "+dtm.getValueAt(fila, columna));
@@ -98,7 +102,8 @@ public class DlgMenuJugador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendaActionPerformed
-        DlgTienda tienda = new DlgTienda(null, true, numCelda, miLista);
+        miLista = archivos.leerArchivo();
+        DlgTienda tienda = new DlgTienda(null, true, numCelda, miLista, archivos);
         tienda.setVisible(true);
     }//GEN-LAST:event_tiendaActionPerformed
 
@@ -109,7 +114,7 @@ public class DlgMenuJugador extends javax.swing.JDialog {
             if(lista.getMiLista().obtenerCantidadElementos()<3){
                 JOptionPane.showMessageDialog(null, "Para empezar a jugar necesitas almenos 3 vehiculo iniciales");
             } else {
-                DlgTipoEscenario jugar = new DlgTipoEscenario(null, true, miLista, numCelda);
+                DlgTipoEscenario jugar = new DlgTipoEscenario(null, true, miLista, numCelda, archivos);
                 jugar.setVisible(true);
             }
         } catch(Exception e){         
@@ -117,12 +122,13 @@ public class DlgMenuJugador extends javax.swing.JDialog {
     }//GEN-LAST:event_juegoNuevoActionPerformed
 
     private void crearAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearAutosActionPerformed
-        DlgNuevoAuto nuevo = new DlgNuevoAuto(null, true, miLista, numCelda);
+        DlgNuevoAuto nuevo = new DlgNuevoAuto(null, true, miLista, numCelda, archivos);
         nuevo.setVisible(true);
 
     }//GEN-LAST:event_crearAutosActionPerformed
 
     private void verAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAutosActionPerformed
+        miLista = archivos.leerArchivo();
         DlgListaAutos autos = new DlgListaAutos(null, true, miLista, numCelda);
         autos.setVisible(true);
     }//GEN-LAST:event_verAutosActionPerformed

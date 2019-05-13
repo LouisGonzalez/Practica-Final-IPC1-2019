@@ -20,7 +20,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     
     private JLabel[][] mapa;
     private NuevoAvatar<NombreJugador> miLista;
-    private int[][] tipoTerreno, valoresJugador1, valoresJugador2, ocupado1, ocupado2, enemigos;
+    private int[][] tipoTerreno, valoresJugador1, valoresJugador2, ocupado1, ocupado2, enemigos, cajasComodin;
     private DefaultTableModel modelMapa1, modelMapa2;
     private int numCelda, numCelda2, filas, columnas, x, y;
     private int contTurnos = 0;
@@ -42,14 +42,17 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
     private String nombre1, nombre2;
+    private Archivos archivos;
     
-    public DlgPrimerEscenarioMult(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, int numCelda2, int filas, int columnas) {
+    public DlgPrimerEscenarioMult(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, int numCelda2, int filas, int columnas, Archivos archivos) {
         super(parent, modal);
         this.miLista = miLista;
         this.numCelda = numCelda;
         this.numCelda2 = numCelda2;
         this.filas = filas;
         this.columnas = columnas;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         initComponents();
         Icon cumbres = new ImageIcon(cumbre.getImage().getScaledInstance(segunda.getWidth(), segunda.getHeight(), Image.SCALE_DEFAULT));
         Icon mar = new ImageIcon(agua.getImage().getScaledInstance(tercera.getWidth(), tercera.getHeight(), Image.SCALE_DEFAULT));
@@ -78,12 +81,14 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         this.ocupado1 = new int[filas][columnas];
         this.ocupado2 = new int[filas][columnas];
         this.enemigos = new int[filas][columnas];
+        this.cajasComodin = new int[filas][columnas];
         tableroJuego.setLayout(new GridLayout(filas, columnas));
         for (x = 0; x < filas; x++) {    //doble for para la creacion de la matriz de labels
             for (y = 0; y < columnas; y++) {
                 valoresJugador1[x][y] = 0;
                 valoresJugador2[x][y] = 0;
                 enemigos[x][y] = 0;
+                cajasComodin[x][y] = 0;
                 JLabel matriz = new JLabel();   //se inicializa el label unitario y se le dan caracteristicas iniciales
                 matriz.setBounds(60*x,60*y,60,60);
                 matriz.setOpaque(true);
@@ -91,6 +96,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                 matriz.setBorder(borde);
                 mapa[x][y] = matriz;
                 pintarMapa(x, y, mapa, tipoTerreno);
+                cajitasComodin(mapa, filas, columnas);
                 Icon autoTanque = new ImageIcon(tanque.getImage().getScaledInstance(mapa[x][y].getWidth(), mapa[x][y].getHeight(), Image.SCALE_DEFAULT));
                 Icon autoAvion = new ImageIcon(avion.getImage().getScaledInstance(mapa[x][y].getWidth(), mapa[x][y].getHeight(), Image.SCALE_DEFAULT)); 
                 Icon balaArriba = new ImageIcon(bala1.getImage().getScaledInstance(mapa[x][y].getWidth(), mapa[x][y].getHeight(), Image.SCALE_DEFAULT));
@@ -131,7 +137,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                                         if(matriz==mapa[posX][posY] && valoresJugador1[posX][posY]==1 || valoresJugador1[posX][posY]==2){
                                             int i = posX;
                                             int j = posY;
-                                            DlgOpcionesMultiJugador jugador1 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador1, filas, columnas, i, j, numAuto1, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado1, vidaAuto1, nivelAuto1, ataqueAuto1, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador2, numCelda2, numAuto2, vidaAuto2);
+                                            DlgOpcionesMultiJugador jugador1 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador1, filas, columnas, i, j, numAuto1, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado2, vidaAuto1, nivelAuto1, ataqueAuto1, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador2, numCelda2, numAuto2, vidaAuto2, archivos, ocupado1);
                                             jugador1.setVisible(true);
                                         } else if (matriz==mapa[posX][posY] && ocupado1[posX][posY]==0 && ocupado2[posX][posY]==0){
                                             contTurnos = contTurnos-1; 
@@ -149,7 +155,7 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
                                         if(matriz==mapa[posX][posY] && valoresJugador2[posX][posY]==1 || valoresJugador2[posX][posY]==2){
                                             int i = posX;
                                             int j = posY;
-                                            DlgOpcionesMultiJugador jugador2 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda2, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador2, filas, columnas, i, j, numAuto2, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado2, vidaAuto2, nivelAuto2, ataqueAuto2, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador1, numCelda, numAuto1, vidaAuto1);
+                                            DlgOpcionesMultiJugador jugador2 = new DlgOpcionesMultiJugador(null, true, miLista, numCelda2, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valoresJugador2, filas, columnas, i, j, numAuto2, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigos, ocupado1, vidaAuto2, nivelAuto2, ataqueAuto2, elemento, lista, elemento2, nombre, modelMapa2, valoresJugador1, numCelda, numAuto1, vidaAuto1, archivos, ocupado2);
                                             jugador2.setVisible(true);
                                         } else if (matriz==mapa[posX][posY] && ocupado2[posX][posY]==0 && ocupado1[posX][posY]==0){
                                             contTurnos = contTurnos-1;
@@ -264,6 +270,20 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         }
     }
     
+    private void cajitasComodin(JLabel[][] mapa, int filas, int columnas){
+        int[] posXComodin = new int[filas + 2];
+        int[] posYComodin = new int[columnas + 2];
+        int[] guardarX = new int[filas +2];
+        int[] guardarY = new int[columnas + 2];
+        for(int i=0; i<=filas+1; i++){
+            posXComodin[i] = (int)(Math.random()*filas);
+            posYComodin[i] = (int)(Math.random()*columnas);
+            guardarX[i] = posXComodin[i];
+            guardarY[i] = posYComodin[i];
+            cajasComodin[guardarX[i]][guardarX[i]] = 1;
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -279,31 +299,30 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         tablaJugador1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaJugador2 = new javax.swing.JTable();
-        panelJugador1 = new javax.swing.JPanel();
-        numAuto1 = new javax.swing.JLabel();
-        vidaAuto1 = new javax.swing.JLabel();
-        nivelAuto1 = new javax.swing.JLabel();
-        ataqueAuto1 = new javax.swing.JLabel();
-        fondoAliado = new javax.swing.JLabel();
-        fondoAliado1 = new javax.swing.JLabel();
-        asdf = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        panelJugador2 = new javax.swing.JPanel();
+        txt = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txt3 = new javax.swing.JLabel();
+        turnoJugador = new javax.swing.JLabel();
+        panelAliado2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         numAuto2 = new javax.swing.JLabel();
         vidaAuto2 = new javax.swing.JLabel();
         nivelAuto2 = new javax.swing.JLabel();
         ataqueAuto2 = new javax.swing.JLabel();
         fondoEnemigo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txt = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        txt3 = new javax.swing.JLabel();
-        turnoJugador = new javax.swing.JLabel();
+        panelAliado1 = new javax.swing.JPanel();
+        asdf = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        numAuto1 = new javax.swing.JLabel();
+        vidaAuto1 = new javax.swing.JLabel();
+        nivelAuto1 = new javax.swing.JLabel();
+        ataqueAuto1 = new javax.swing.JLabel();
+        fondoAliado = new javax.swing.JLabel();
         fondoPantalla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -379,65 +398,6 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tablaJugador2);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 150, 160));
-
-        panelJugador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelJugador1.add(numAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 39, 26));
-        panelJugador1.add(vidaAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 44, 39, 27));
-        panelJugador1.add(nivelAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 77, 39, 26));
-        panelJugador1.add(ataqueAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 109, 39, 28));
-        panelJugador1.add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 160));
-        panelJugador1.add(fondoAliado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 160));
-
-        asdf.setBackground(new java.awt.Color(255, 255, 255));
-        asdf.setForeground(new java.awt.Color(255, 255, 255));
-        asdf.setText("Num Auto:");
-        panelJugador1.add(asdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, 10));
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Vida Total:");
-        panelJugador1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 10));
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nivel Actual:");
-        panelJugador1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, 10));
-
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ataque total");
-        panelJugador1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 10));
-
-        getContentPane().add(panelJugador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 170, 160));
-
-        panelJugador2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelJugador2.add(numAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 45, 32));
-        panelJugador2.add(vidaAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 45, 29));
-        panelJugador2.add(nivelAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 91, 45, 29));
-        panelJugador2.add(ataqueAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 126, 45, 22));
-        panelJugador2.add(fondoEnemigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 180, 150));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Num Auto:");
-        panelJugador2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 80, 10));
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Vida Total:");
-        panelJugador2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 10));
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nivel Actual:");
-        panelJugador2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, 10));
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Ataque total");
-        panelJugador2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, 10));
-
-        getContentPane().add(panelJugador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 360, 180, 160));
         getContentPane().add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, 40, 10));
 
         txt3.setText("Es el turno de :");
@@ -466,7 +426,89 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 530, 350, 40));
-        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 590));
+
+        panelAliado2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Num Auto:");
+        panelAliado2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 80, 10));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Vida Total:");
+        panelAliado2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Nivel Actual:");
+        panelAliado2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, 10));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Ataque total");
+        panelAliado2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, 10));
+
+        numAuto2.setBackground(new java.awt.Color(255, 255, 255));
+        numAuto2.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado2.add(numAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 45, 20));
+
+        vidaAuto2.setBackground(new java.awt.Color(255, 255, 255));
+        vidaAuto2.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado2.add(vidaAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 45, 20));
+
+        nivelAuto2.setBackground(new java.awt.Color(255, 255, 255));
+        nivelAuto2.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado2.add(nivelAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 45, 20));
+
+        ataqueAuto2.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueAuto2.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado2.add(ataqueAuto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 40, 20));
+        panelAliado2.add(fondoEnemigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 150));
+
+        getContentPane().add(panelAliado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 200, 150));
+
+        panelAliado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        asdf.setBackground(new java.awt.Color(255, 255, 255));
+        asdf.setForeground(new java.awt.Color(255, 255, 255));
+        asdf.setText("Num Auto:");
+        panelAliado1.add(asdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, 10));
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Vida Total:");
+        panelAliado1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, 10));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Nivel Actual:");
+        panelAliado1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, 10));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Ataque total");
+        panelAliado1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 10));
+
+        numAuto1.setBackground(new java.awt.Color(255, 255, 255));
+        numAuto1.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado1.add(numAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 20));
+
+        vidaAuto1.setBackground(new java.awt.Color(255, 255, 255));
+        vidaAuto1.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado1.add(vidaAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 40, 20));
+
+        nivelAuto1.setBackground(new java.awt.Color(255, 255, 255));
+        nivelAuto1.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado1.add(nivelAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 39, 20));
+
+        ataqueAuto1.setBackground(new java.awt.Color(255, 255, 255));
+        ataqueAuto1.setForeground(new java.awt.Color(255, 255, 255));
+        panelAliado1.add(ataqueAuto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 39, 20));
+        panelAliado1.add(fondoAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 150));
+
+        getContentPane().add(panelAliado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, -1, 150));
+        getContentPane().add(fondoPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -477,7 +519,6 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     private javax.swing.JLabel ataqueAuto1;
     private javax.swing.JLabel ataqueAuto2;
     private javax.swing.JLabel fondoAliado;
-    private javax.swing.JLabel fondoAliado1;
     private javax.swing.JLabel fondoEnemigo;
     private javax.swing.JLabel fondoPantalla;
     private javax.swing.JLabel jLabel1;
@@ -494,8 +535,8 @@ public class DlgPrimerEscenarioMult extends javax.swing.JDialog {
     private javax.swing.JLabel nivelAuto2;
     private javax.swing.JLabel numAuto1;
     private javax.swing.JLabel numAuto2;
-    private javax.swing.JPanel panelJugador1;
-    private javax.swing.JPanel panelJugador2;
+    private javax.swing.JPanel panelAliado1;
+    private javax.swing.JPanel panelAliado2;
     private javax.swing.JLabel primera;
     private javax.swing.JLabel segunda;
     public javax.swing.JTable tablaJugador1;

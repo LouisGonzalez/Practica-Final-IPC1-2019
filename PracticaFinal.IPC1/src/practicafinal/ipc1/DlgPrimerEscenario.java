@@ -53,8 +53,11 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
     private NombreJugador lista;
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
+    private Archivos archivos;
+    private double[] contEnemigos = new double[5];
+    private int destruidos;
     
-    public DlgPrimerEscenario(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, int filas, int columnas) {
+    public DlgPrimerEscenario(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> misAutos, int numCelda, int filas, int columnas, Archivos archivos) {
         super(parent, modal);
         initComponents();
         Icon cumbres = new ImageIcon(cumbre.getImage().getScaledInstance(segunda.getWidth(), segunda.getHeight(), Image.SCALE_DEFAULT));
@@ -67,14 +70,15 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         fondoEnemigo.setIcon(imagen2);
         this.numCelda = numCelda;
         this.misAutos = misAutos;
+        this.archivos = archivos;
         this.filas = filas;
         this.columnas = columnas;
+        this.misAutos = archivos.leerArchivo();
         fondo.setIcon(pantalla);
         primera.setIcon(campo);
         segunda.setIcon(cumbres);
         tercera.setIcon(mar);
         setLocationRelativeTo(null);
-        
         cargarEscenario(cumbres, mar, campo);
         cargarValores();
  
@@ -143,8 +147,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                         contadorTurnos++;
                                         
                                         contTurnos.setText(Integer.toString(contadorTurnos));
-                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, cajasComodin);
-                                        camibo.setVisible(true);
+                                        DlgOpcionesJugador camibo = new DlgOpcionesJugador(null, true, misAutos, numCelda, mapa, posX, posY, autoTanque, autoAvion, cumbres, mar, campo, tipoTerreno, x, y, valores, filas, columnas, i, j, numAuto, balaArriba, balaAbajo, balaIzquierda, balaDerecha, enemigo, enemigos, ocupado, torretaEnemigo, fila, modelMapa2, vida, panelEnemigos, enemigo1, enemigo2, enemigo3, enemigo4, vidaAuto, nivelAuto, ataqueAuto, elemento, lista, elemento2, nombre, cajasComodin, archivos);
+                                        camibo.setVisible(true);  
                                         disparoEnemigos(balaAbajo, balaArriba, balaIzquierda, balaDerecha, autoTanque, autoAvion, cumbres, mar, campo, torretaEnemigo);
                                     } else if(matriz == mapa[posX][posY] && valores[posX][posY]==0 && enemigos[posX][posY]==0){
                                         contadorTurnos++;
@@ -159,8 +163,9 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                         JOptionPane.showMessageDialog(null, "has clickado a un enemigo"+enemigos[posX][posY]);          
                                     }                                   
                                 }
+                                
                             }
-                        } if(Double.parseDouble(enemigo1.getText())<=0 && Double.parseDouble(enemigo2.getText())<=0 && Double.parseDouble(enemigo3.getText())<=0 && Double.parseDouble(enemigo4.getText())<=0){
+                        } if(Double.parseDouble(enemigo1.getText())<=0 && Double.parseDouble(enemigo2.getText())<=0 && Double.parseDouble(enemigo3.getText())<=0 && Double.parseDouble(enemigo4.getText())<=0 ){
                             try {
                                 int sumaxp = (int)(Math.random()*100)+1;
                                 int valor = Integer.parseInt(numAuto.getText());
@@ -172,35 +177,62 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                                 double ataque = nombre.getAtaque();
                                 int defensa = nombre.getArmadura();
                                 int experiencia = nombre.getExperiencia();
+                                int totalPartidas = lista.getTotalPartidas();
+                                int victoria = lista.getContPartidasGanadas();
+                                double oro = lista.getOro();
+                                int oroAleatorio = (int)(Math.random()*100)+1;
                                 JOptionPane.showMessageDialog(null, "FELICIDADES! Has ganado el juego");
+                                contEnemigos();
+                                totalPartidas = totalPartidas + 1;
+                                victoria = victoria + 1;
+                                oro = oro + oroAleatorio;
                                 experiencia = experiencia + sumaxp;
+                                lista.setContPartidasGanadas(victoria);
+                                lista.setTotalPartidas(totalPartidas);
+                                lista.setOro(oro);
                                 nombre.setExperiencia(experiencia);
+                                archivos.guardarArchivos(misAutos);
                                 if(experiencia>=100*nivel){
                                     nivel = nivel + 1;
                                     ataque = ataque + 3;
                                     defensa = defensa + 3;
                                     nombre.setNivel(nivel);
+                                    archivos.guardarArchivos(misAutos);
                                     nombre.setArmadura(defensa);
+                                    archivos.guardarArchivos(misAutos);
                                     nombre.setAtaque(ataque);
+                                    archivos.guardarArchivos(misAutos);
                                     JOptionPane.showMessageDialog(null, "Tus estadisticas han sido actualizadas");
                                     JOptionPane.showConfirmDialog(null, "Tu vehiculo ahora es de nivel "+nivel);
                                     JOptionPane.showMessageDialog(null, "Tu ataque ha aumentado a "+ataque);
                                     JOptionPane.showMessageDialog(null, "Ahora a tus enemigos les costara aun mas matarte, aumentas en defensa a "+defensa);
                                     
+                                        
                                 }
                                 dispose();
                             }catch(Exception ex){                                
                             }
+                            
                         }else if(Double.parseDouble(vidaAuto.getText())<=0){
                             try{
                                 int valor = Integer.parseInt(numAuto.getText());
                                 Nodo<NombreJugador> elemento = misAutos.obtenerElemento(numCelda);
                                 NombreJugador lista = elemento.obtenerContenido();
                                 Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(valor);
-                                NombreAuto nombre = elemento2.obtenerContenido();                                  
+                                NombreAuto nombre = elemento2.obtenerContenido();
+                                int destruido = nombre.getAutoDestruido();
+                                int perdida = lista.getContPartidasPerdidas();
+                                int totalPartidas = lista.getTotalPartidas();
                                 JOptionPane.showMessageDialog(null, "Los enemigos han podido contra ti, has perdido el juego :/");
                                 nombre.setVida(0);
+                                perdida = perdida + 1;
+                                totalPartidas = totalPartidas + 1;
+                                destruido = destruido + 1;
+                                nombre.setAutoDestruido(destruido);
+                                lista.setTotalPartidas(totalPartidas);
+                                lista.setContPartidasPerdidas(perdida);
                                 vidaAuto.setText(Integer.toString(0));
+                                archivos.guardarArchivos(misAutos);
                                 dispose();
                             } catch(Exception ex){
                             }
@@ -315,8 +347,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             case 0:
             
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo, 0, 1000);
@@ -324,8 +356,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda, 0, 1000);
@@ -337,8 +369,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             case 1:
                 
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo, 0, 1000);
@@ -346,8 +378,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda, 0, 1000);
@@ -356,8 +388,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo2, 0, 1000);
@@ -365,8 +397,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda2, 0, 1000);
@@ -378,8 +410,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             case 2:
                
                 if(aleatorio==1){
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo, 0, 1000);
@@ -387,8 +419,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda, 0, 1000);
@@ -397,8 +429,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo2, 0, 1000);
@@ -406,8 +438,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda2, 0, 1000);
@@ -416,8 +448,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha2, 1000, 1000);                   
                 }
                 if(aleatorio3==1){
-                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo3, 0, 1000);
@@ -425,8 +457,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo3, 1000, 1000);
                     timer.schedule(limpiarArriba3, 1000, 1000);                  
                 } else if(aleatorio3==2){
-                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda3, 0, 1000);
@@ -437,8 +469,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                 break;
             case 3:  
                 if(aleatorio==1){                
-                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba.valores(enemigos2.getGuardarX()[0]-1, enemigos2.getGuardarY()[0], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo.valores(enemigos2.getGuardarX()[0]+1, enemigos2.getGuardarY()[0], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo, 0, 1000);
@@ -446,8 +478,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo, 1000, 1000);
                     timer.schedule(limpiarArriba, 1000, 1000);                  
                 } else if(aleatorio==2){                
-                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha.valores(enemigos2.getGuardarX()[0], enemigos2.getGuardarY()[0]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda, 0, 1000);
@@ -456,8 +488,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha, 1000, 1000);                   
                 }
                 if(aleatorio2==1){
-                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba2.valores(enemigos2.getGuardarX()[1]-1, enemigos2.getGuardarY()[1], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo2.valores(enemigos2.getGuardarX()[1]+1, enemigos2.getGuardarY()[1], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo2, 0, 1000);
@@ -465,8 +497,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo2, 1000, 1000);
                     timer.schedule(limpiarArriba2, 1000, 1000);                  
                 } else if(aleatorio2==2){
-                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha2.valores(enemigos2.getGuardarX()[1], enemigos2.getGuardarY()[1]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda2, 0, 1000);
@@ -475,8 +507,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha2, 1000, 1000);                   
                 }
                 if(aleatorio3==1){
-                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba3.valores(enemigos2.getGuardarX()[2]-1, enemigos2.getGuardarY()[2], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo3.valores(enemigos2.getGuardarX()[2]+1, enemigos2.getGuardarY()[2], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo3, 0, 1000);
@@ -484,8 +516,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo3, 1000, 1000);
                     timer.schedule(limpiarArriba3, 1000, 1000);                  
                 } else if(aleatorio3==2){
-                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha3.valores(enemigos2.getGuardarX()[2], enemigos2.getGuardarY()[2]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda3, 0, 1000);
@@ -494,8 +526,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarDerecha3, 1000, 1000);                   
                 }
                 if(aleatorio4==1){
-                    abajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre);
-                    arriba4.valores(enemigos2.getGuardarX()[3]-1, enemigos2.getGuardarY()[3], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    abajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], filas, balaAbajo, autoTanque, autoAvion, mapa, valores, vidaAuto, misAutos, numCelda, numAuto, elemento, lista, elemento2, nombre, archivos);
+                    arriba4.valores(enemigos2.getGuardarX()[3]-1, enemigos2.getGuardarY()[3], mapa, balaArriba, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarArriba4.valores(enemigos2.getGuardarX()[3]-1, enemigos2.getGuardarY()[3], 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarAbajo4.valores(enemigos2.getGuardarX()[3]+1, enemigos2.getGuardarY()[3], filas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(abajo4, 0, 1000);
@@ -503,8 +535,8 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
                     timer.schedule(limpiarAbajo4, 1000, 1000);
                     timer.schedule(limpiarArriba4, 1000, 1000);                  
                 } else if(aleatorio4==2){
-                    derecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
-                    izquierda4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda);
+                    derecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, columnas, balaDerecha, autoTanque, autoAvion, mapa, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
+                    izquierda4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]-1, mapa, balaIzquierda, autoTanque, autoAvion, valores, vidaAuto, elemento, lista, elemento2, nombre, misAutos, numAuto, numCelda, archivos);
                     limpiarIzquierda4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]-1, 0, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     limpiarDerecha4.valores(enemigos2.getGuardarX()[3], enemigos2.getGuardarY()[3]+1, columnas, mapa, cumbres, mar, campo, tipoTerreno, enemigos, torretaEnemigo, autoTanque, autoAvion, valores, torreta);
                     timer.schedule(izquierda4, 0, 1000);
@@ -527,7 +559,54 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
             guardarY[i] = posYComodin[i];
             cajasComodin[guardarX[i]][guardarX[i]] = 1;
         }
-   }
+    }
+    
+    private void contEnemigos(){
+        try{
+        int valor = Integer.parseInt(numAuto.getText());
+        Nodo<NombreJugador> jugador = misAutos.obtenerElemento(numCelda);
+        NombreJugador nombre = jugador.obtenerContenido();
+        Nodo2<NombreAuto> auto = nombre.getMiLista().obtenerElemento(valor);
+        NombreAuto nombre2 = auto.obtenerContenido();
+        destruidos = nombre2.getEnemigosDestruidos();
+        contEnemigos[0] = Double.parseDouble(enemigo1.getText());
+        contEnemigos[1] = Double.parseDouble(enemigo2.getText());
+        contEnemigos[2] = Double.parseDouble(enemigo3.getText());
+        contEnemigos[3] = Double.parseDouble(enemigo4.getText());
+        
+        switch(enemigos2.getCantidad()){
+            case 0:
+                if(contEnemigos[0]<=0){
+                    destruidos = destruidos + 1;
+                    nombre2.setEnemigosDestruidos(destruidos);
+                    archivos.guardarArchivos(misAutos);
+                }
+                break;
+            case 1:
+                if(contEnemigos[0]<=0 && contEnemigos[1]<=0){
+                    destruidos = destruidos + 2;
+                    nombre2.setEnemigosDestruidos(destruidos);
+                    archivos.guardarArchivos(misAutos);
+                }
+                break;
+            case 2:
+                if(contEnemigos[0]<=0 && contEnemigos[1]<=0 && contEnemigos[2]<=0){
+                    destruidos = destruidos + 3;
+                    nombre2.setEnemigosDestruidos(destruidos);
+                    archivos.guardarArchivos(misAutos);
+                }
+                break;
+            case 3:
+                if(contEnemigos[0]<=0 && contEnemigos[1]<=0 && contEnemigos[2]<=0 && contEnemigos[3]<=0){
+                    destruidos = destruidos + 4;
+                    nombre2.setEnemigosDestruidos(destruidos);
+                    archivos.guardarArchivos(misAutos);
+                }
+        }
+        } catch(Exception e){
+            
+        } 
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -724,7 +803,7 @@ public class DlgPrimerEscenario extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Daño Actual");
         panelAliado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 155, -1, -1));
-        panelAliado.add(fondoAliado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 200, 180));
+        panelAliado.add(fondoAliado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -6, 200, 190));
 
         getContentPane().add(panelAliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 200, 190));
 

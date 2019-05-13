@@ -1,5 +1,7 @@
 package practicafinal.ipc1;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -9,23 +11,21 @@ import javax.swing.JOptionPane;
  */
 public class FrmNuevoAvatar extends javax.swing.JDialog {
     
-    protected NuevoAvatar<NombreJugador> miLista;
-    MenuPrincipal ver = new MenuPrincipal();
-    Archivos archivoJugador = new Archivos();
-    
-    
+    private NuevoAvatar<NombreJugador> miLista;
+    private Archivos archivoJugador;
     ImageIcon foto = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/robot-inteligencia-artificial3.jpg");    
     
-    public FrmNuevoAvatar(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista){
+    public FrmNuevoAvatar(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, Archivos archivoJugador){
         super(parent, modal);
         initComponents();
-        this.miLista = miLista;
         setLocationRelativeTo(null);
+        this.miLista = miLista;
+        this.archivoJugador = archivoJugador;
+        this.miLista = this.archivoJugador.leerArchivo();
         Icon fotos = new ImageIcon(foto.getImage().getScaledInstance(contornoGenesis.getWidth(), contornoGenesis.getHeight(), Image.SCALE_DEFAULT));
         contornoGenesis.setIcon(fotos);
-        this.miLista = archivoJugador.leerArchivo();
-        this.repaint();   
-    }
+        
+    }   
                                                                                 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,8 +80,9 @@ public class FrmNuevoAvatar extends javax.swing.JDialog {
         NombreJugador nombre = new NombreJugador(ingreseAvatar.getText(), miLista2, misArmas, misBots, 50, 0, 0, 0);       
         miLista.insertarContenido(nombre);
         archivoJugador.guardarArchivos(miLista);
-        ingreseAvatar.setText("");
         JOptionPane.showMessageDialog(null, "Su nuevo avatar ha sido guardado exitosamente");
+        ingreseAvatar.setText(""); 
+
     }//GEN-LAST:event_crearAvatarActionPerformed
     
     

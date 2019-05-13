@@ -13,12 +13,15 @@ public class DlgTipoEscenario extends javax.swing.JDialog {
     private int numCelda;
     private NuevoAvatar<NombreJugador> miLista;
     private ImageIcon fondos = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/cumbres.jpeg");
+    private Archivos archivos;
     
-    public DlgTipoEscenario(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda) {
+    public DlgTipoEscenario(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, Archivos archivos) {
         super(parent, modal);
         initComponents();
         this.numCelda = numCelda;
         this.miLista = miLista;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         setLocationRelativeTo(null);
         Icon fotos = new ImageIcon(fondos.getImage().getScaledInstance(fondo.getWidth(),fondo.getHeight(), Image.SCALE_DEFAULT));
         fondo.setIcon(fotos);
@@ -84,18 +87,18 @@ public class DlgTipoEscenario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dimension1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension1ActionPerformed
-        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 4);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 4, archivos);
         primero.setVisible(true);
     }//GEN-LAST:event_dimension1ActionPerformed
 
     private void dimension2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension2ActionPerformed
-        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 6);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 4, 6, archivos);
         primero.setVisible(true);
     
     }//GEN-LAST:event_dimension2ActionPerformed
 
     private void dimension3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dimension3ActionPerformed
-        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 8, 9);
+        DlgPrimerEscenario primero = new DlgPrimerEscenario(null, true, miLista, numCelda, 8, 9, archivos);
         primero.setVisible(true);
     }//GEN-LAST:event_dimension3ActionPerformed
 

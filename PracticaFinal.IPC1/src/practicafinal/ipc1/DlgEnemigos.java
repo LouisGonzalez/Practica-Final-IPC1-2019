@@ -128,7 +128,7 @@ public class DlgEnemigos extends javax.swing.JDialog {
             enemigo4.setText(Double.toString(vida[3]));
             JOptionPane.showMessageDialog(null, "Sus enemigos han sido agregados con exito, A PELEAR!!");
         } else {
-                JOptionPane.showMessageDialog(null, "Solo una vez se pueden instanciar vehiculos");
+                JOptionPane.showMessageDialog(null, "Solo una vez se pueden instanciar enemigos");
         }
     }//GEN-LAST:event_botonEnemigoActionPerformed
 

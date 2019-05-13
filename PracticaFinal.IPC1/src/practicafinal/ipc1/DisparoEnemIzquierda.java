@@ -22,6 +22,7 @@ public class DisparoEnemIzquierda extends TimerTask {
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
     private double valor;
+    private Archivos archivos;
     
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
@@ -55,7 +56,7 @@ public class DisparoEnemIzquierda extends TimerTask {
         }
     }
     
-    public void valores(int i, int j, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, int[][] valores, JLabel vidaAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, NuevoAvatar<NombreJugador> miLista, JLabel numAuto, int numCelda){
+    public void valores(int i, int j, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, int[][] valores, JLabel vidaAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, NuevoAvatar<NombreJugador> miLista, JLabel numAuto, int numCelda, Archivos archivos){
         this.i = i;
         this.j = j;
         this.mapa = mapa;
@@ -71,5 +72,7 @@ public class DisparoEnemIzquierda extends TimerTask {
         this.miLista = miLista;
         this.numAuto = numAuto;
         this.numCelda = numCelda;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
     }
 }

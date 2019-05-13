@@ -16,10 +16,15 @@ public class DlgTiendaBots extends javax.swing.JDialog {
     private double costo, ataque;
     private ImageIcon nuevo = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/bot.jpg");
     private ImageIcon imagen = new ImageIcon("/home/luisitopapurey/Escritorio/PRACTICA FINAL 201731766 2019/PracticaFinal.IPC1/src/practicafinal/ipc1/imagenes/bott.jpg");
+    private Archivos archivos;
     
-    public DlgTiendaBots(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista) {
+    public DlgTiendaBots(java.awt.Frame parent, boolean modal, int numCelda, NuevoAvatar<NombreJugador> miLista, Archivos archivos) {
         super(parent, modal);
         initComponents();
+        this.miLista = miLista;
+        this.numCelda = numCelda;
+        this.archivos = archivos;
+        this.miLista = this.archivos.leerArchivo();
         setLocationRelativeTo(null);
         Icon boto = new ImageIcon(imagen.getImage().getScaledInstance(fondoBot.getWidth(), fondoBot.getHeight(), Image.SCALE_DEFAULT));
         fondoBot.setIcon(boto);
@@ -29,8 +34,6 @@ public class DlgTiendaBots extends javax.swing.JDialog {
             oroJugador.setText(Double.toString(agregar.getOro()));
         } catch(Exception e){            
         }    
-        this.miLista = miLista;
-        this.numCelda = numCelda;
         Icon bot = new ImageIcon(nuevo.getImage().getScaledInstance(mostrarBot.getWidth(), mostrarBot.getHeight(), Image.SCALE_DEFAULT));
         mostrarBot.setIcon(bot);
     }
@@ -116,6 +119,7 @@ public class DlgTiendaBots extends javax.swing.JDialog {
             NombreJugador agregar = elemento.obtenerContenido();
             Bot nuevoBot = new Bot(mostrarBot.getText(), Double.parseDouble(ataqueBot.getText()));
             agregar.getMisBots().insertarContenido(nuevoBot);
+            archivos.guardarArchivos(miLista);
             JOptionPane.showMessageDialog(null, "Pathfinder a sido añadido a su lista de Pathfinders disponibles");
         } catch(Exception e){
         }

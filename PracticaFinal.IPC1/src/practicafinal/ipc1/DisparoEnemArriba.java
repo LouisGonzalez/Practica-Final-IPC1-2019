@@ -22,7 +22,7 @@ public class DisparoEnemArriba extends TimerTask {
     private Nodo2<NombreAuto> elemento2;
     private NombreAuto nombre;
     private double valor;
-    
+    private Archivos archivos;
     
     //HILO PARA EL RECORRIDO DEL DISPARO ENEMIGO
     @Override
@@ -41,6 +41,7 @@ public class DisparoEnemArriba extends TimerTask {
                     valor = valor - 10;
                     vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
+                    archivos.guardarArchivos(miLista);
                     this.cancel();
                 } else if(valores[i][j]==2){
                     mapa[i][j].setIcon(autoAvion);
@@ -48,6 +49,7 @@ public class DisparoEnemArriba extends TimerTask {
                     valor = valor - 10;
                     vidaAuto.setText(Double.toString(valor));
                     nombre.setVida(valor);
+                    archivos.guardarArchivos(miLista);
                     this.cancel();
                 }
             } i--;
@@ -55,7 +57,7 @@ public class DisparoEnemArriba extends TimerTask {
         }
     }
     
-    public void valores(int i, int j, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, int[][] valores, JLabel vidaAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, NuevoAvatar<NombreJugador> miLista, JLabel numAuto, int numCelda){
+    public void valores(int i, int j, JLabel[][] mapa, Icon bala, Icon autoTanque, Icon autoAvion, int[][] valores, JLabel vidaAuto, Nodo<NombreJugador> elemento, NombreJugador lista, Nodo2<NombreAuto> elemento2, NombreAuto nombre, NuevoAvatar<NombreJugador> miLista, JLabel numAuto, int numCelda, Archivos archivos){
         this.i = i;
         this.j = j;
         this.mapa = mapa;
@@ -71,5 +73,7 @@ public class DisparoEnemArriba extends TimerTask {
         this.miLista = miLista;
         this.numCelda = numCelda;
         this.numAuto = numAuto;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
     }
 }

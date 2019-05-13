@@ -1,9 +1,12 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  */
-public class Bot {
+public class Bot implements Serializable{
     private String nombre;
     private double ataque;
     

@@ -1,10 +1,13 @@
 package practicafinal.ipc1;
+
+import java.io.Serializable;
+
 /**
  *
  * @author luisGonzalez
  * @param <T>
  */
-public class NuevoAvatar<T> {
+public class NuevoAvatar<T> implements Serializable{
    private Nodo<T> primerElemento;
    private Nodo<T> ultimoElemento;
    private int cantidadElementos;

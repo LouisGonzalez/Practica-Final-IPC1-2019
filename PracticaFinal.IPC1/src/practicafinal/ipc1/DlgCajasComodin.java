@@ -15,8 +15,10 @@ public class DlgCajasComodin extends javax.swing.JDialog {
     private JLabel numAuto, vidaAuto;
     private int armadura, posX, posY;
     private int[][] cajaComodin;
+    private int contClicks = 0;
+    private Archivos archivos;
     
-    public DlgCajasComodin(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto, int posX, int posY, int[][] cajaComodin) {
+    public DlgCajasComodin(java.awt.Frame parent, boolean modal, NuevoAvatar<NombreJugador> miLista, int numCelda, JLabel numAuto, JLabel vidaAuto, int posX, int posY, int[][] cajaComodin, Archivos archivos) {
         super(parent, modal);
         this.miLista = miLista;
         this.numCelda = numCelda;
@@ -25,6 +27,8 @@ public class DlgCajasComodin extends javax.swing.JDialog {
         this.posX = posX;
         this.posY = posY;
         this.cajaComodin = cajaComodin;
+        this.archivos = archivos;
+        this.miLista = archivos.leerArchivo();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -40,10 +44,15 @@ public class DlgCajasComodin extends javax.swing.JDialog {
         gifDado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelComodin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt.setText("HAS CAIDO EN UNA CAJA DE LA BIENAVENTURANZA");
+        panelComodin.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 12, 332, 27));
 
         txt2.setText("Lanza los dados para saber tu suerte: ");
+        panelComodin.add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 57, 232, -1));
 
         resultadoCaja.setBackground(new java.awt.Color(255, 255, 255));
         resultadoCaja.setForeground(new java.awt.Color(255, 255, 255));
@@ -55,103 +64,64 @@ public class DlgCajasComodin extends javax.swing.JDialog {
                 resultadoCajaActionPerformed(evt);
             }
         });
+        panelComodin.add(resultadoCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 117, 135, 34));
 
         gifDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/practicafinal/ipc1/imagenes/dado-imagen-animada-0016.gif"))); // NOI18N
         gifDado.setPreferredSize(new java.awt.Dimension(72, 72));
+        panelComodin.add(gifDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 89, 97, 77));
 
-        javax.swing.GroupLayout panelComodinLayout = new javax.swing.GroupLayout(panelComodin);
-        panelComodin.setLayout(panelComodinLayout);
-        panelComodinLayout.setHorizontalGroup(
-            panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelComodinLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                    .addGroup(panelComodinLayout.createSequentialGroup()
-                        .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelComodinLayout.createSequentialGroup()
-                        .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(gifDado, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        panelComodinLayout.setVerticalGroup(
-            panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelComodinLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txt2)
-                .addGroup(panelComodinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelComodinLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(resultadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelComodinLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(gifDado, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(panelComodin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelComodin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(panelComodin, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 2, 400, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void resultadoCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadoCajaActionPerformed
-        try{   
-            //CAJAS COMODIN SEGUN LO QUE PIDE LA IMPLEMENTACION DEL JUEGO
-            int valor = Integer.parseInt(numAuto.getText());
-            Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
-            NombreJugador lista = elemento.obtenerContenido();
-            Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(valor);
-            NombreAuto nombre = elemento2.obtenerContenido();
-            vida = nombre.getVida();
-            armadura = nombre.getArmadura();
-            int aleatorio = (int)(Math.random()*3)+1;
-            switch(aleatorio){
-                // SEGUN EL VALOR DE ALETORIO LA CAJA LE BRINDA UNA SORPRESA AL JUGADOR
-                case 1:
-                    resultado = vida + (vida*0.25);
-                    if(resultado>=100){
-                        vidaAuto.setText(Double.toString(100));
-                        nombre.setVida(100);
+        contClicks++;
+        if(contClicks==1){
+            try{   
+                //CAJAS COMODIN SEGUN LO QUE PIDE LA IMPLEMENTACION DEL JUEGO
+                int valor = Integer.parseInt(numAuto.getText());
+                Nodo<NombreJugador> elemento = miLista.obtenerElemento(numCelda);
+                NombreJugador lista = elemento.obtenerContenido();
+                Nodo2<NombreAuto> elemento2 = lista.getMiLista().obtenerElemento(valor);
+                NombreAuto nombre = elemento2.obtenerContenido();
+                vida = nombre.getVida();
+                armadura = nombre.getArmadura();
+                int aleatorio = (int)(Math.random()*3)+1;
+                switch(aleatorio){
+                    // SEGUN EL VALOR DE ALETORIO LA CAJA LE BRINDA UNA SORPRESA AL JUGADOR
+                    case 1:
+                        JOptionPane.showMessageDialog(null, "FELICIDADES! Has ganado regeneracion de vida en un 25%");
+                        resultado = vida + (vida*0.25);
+                        if(resultado>=100){
+                            vidaAuto.setText(Double.toString(100));
+                            nombre.setVida(100);
+                            archivos.guardarArchivos(miLista);
+                            cajaComodin[posX][posY] = 0;
+                        } else if(resultado<100){
+                            vidaAuto.setText(Double.toString(resultado));
+                            nombre.setVida(resultado);
+                            archivos.guardarArchivos(miLista);
+                            cajaComodin[posX][posY] = 0;
+                        }
+                        break;
+                    case 2:
+                        armadura = armadura + 4;
+                        JOptionPane.showMessageDialog(null, "Has ganado un aumento de armadura en 4");
+                        nombre.setArmadura(armadura);
+                        archivos.guardarArchivos(miLista);
                         cajaComodin[posX][posY] = 0;
-                    } else if(resultado<100){
-                        vidaAuto.setText(Double.toString(resultado));
-                        nombre.setVida(resultado);
+                        break;
+                    case 3:
+                        JOptionPane.showMessageDialog(null, "Esta caja se encuentra vacia :(, suerte para la proxima");
                         cajaComodin[posX][posY] = 0;
-                    }
-                    break;
-                case 2:
-                    armadura = armadura + 4;
-                    JOptionPane.showMessageDialog(null, "Has ganado un aumento de armadura en 4");
-                    nombre.setArmadura(armadura);
-                    cajaComodin[posX][posY] = 0;
-                    break;
-                case 3:
-                    JOptionPane.showMessageDialog(null, "Esta caja se encuentra vacia :(, suerte para la proxima");
-                    cajaComodin[posX][posY] = 0;
-                    break;
-                
+                        archivos.guardarArchivos(miLista);
+                        break;              
+                }
+            }catch(Exception e){            
             }
-        }catch(Exception e){            
+        } else { 
+            JOptionPane.showMessageDialog(null, "Ya has abierto la caja, porfavor cierra y sigue jugando");
         }
     }//GEN-LAST:event_resultadoCajaActionPerformed
 
